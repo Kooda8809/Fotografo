@@ -98,7 +98,7 @@ export const WhyADP: React.FC = () => {
         {/* Bottom Editorial Strip */}
         <div className="mt-12 py-5 px-6 sm:px-8 border border-neutral-200 bg-white rounded-none flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3">
-            <span className="w-2 h-2 bg-emerald-500 rounded-none shrink-0" />
+            <span className="w-2 h-2 bg-black rounded-none shrink-0" />
             <span className="text-xs font-mono uppercase tracking-[0.16em] text-neutral-700">
               Estudio en C/ Rosalía de Castro 15, Actur (Zaragoza) · Exclusividad con Cita Previa
             </span>

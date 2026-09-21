@@ -253,9 +253,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                 <div className="space-y-3 max-w-md mx-auto pt-2">
                   <button
                     onClick={handleWhatsAppSend}
-                    className="w-full py-3.5 px-6 bg-[#25D366] text-black font-semibold text-xs uppercase tracking-wider rounded-none hover:brightness-105 transition-all flex items-center justify-center gap-2.5 shadow-md cursor-pointer"
+                    className="w-full py-3.5 px-6 bg-black text-white font-semibold text-xs uppercase tracking-wider rounded-none hover:bg-neutral-800 transition-all flex items-center justify-center gap-2.5 shadow-md cursor-pointer border border-black"
                   >
-                    <MessageSquare className="w-4 h-4 fill-black" />
+                    <MessageSquare className="w-4 h-4 text-white" />
                     <span>Enviar a WhatsApp (687 707 029)</span>
                   </button>
                   <button

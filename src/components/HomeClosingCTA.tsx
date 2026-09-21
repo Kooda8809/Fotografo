@@ -51,7 +51,7 @@ export const HomeClosingCTA: React.FC<HomeClosingCTAProps> = ({
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-none border border-neutral-700 bg-neutral-900/60 hover:bg-neutral-800 hover:border-neutral-500 text-white text-xs sm:text-sm font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-xs"
           >
-            <MessageCircle className="w-4 h-4 text-emerald-400" />
+            <MessageCircle className="w-4 h-4 text-white" />
             <span>Hablar por WhatsApp</span>
           </a>
         </div>

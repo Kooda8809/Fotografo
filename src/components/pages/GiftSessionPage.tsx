@@ -193,9 +193,6 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-black/75 backdrop-blur-sm text-[10px] font-mono uppercase tracking-widest text-white rounded-none">
-                      {mod.title}
-                    </div>
                   </div>
 
                   <div className="p-6 space-y-2.5">
@@ -373,9 +370,9 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
           <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full sm:w-auto">
             <button
               onClick={() => handleDirectWhatsAppGift()}
-              className="py-3.5 px-6 bg-[#25D366] text-black text-xs font-semibold uppercase tracking-wider rounded-none hover:brightness-105 transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer border border-[#25D366]"
+              className="py-3.5 px-6 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-none hover:bg-neutral-800 transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer border border-black"
             >
-              <MessageSquare className="w-4 h-4 fill-black" />
+              <MessageSquare className="w-4 h-4 text-white" />
               <span>Pedir por WhatsApp</span>
             </button>
 

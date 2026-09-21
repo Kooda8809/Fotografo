@@ -27,7 +27,7 @@ export const StudioMapSection: React.FC = () => {
         {/* Floating Atelier Badge (Top Left) */}
         <div className="absolute top-4 left-4 sm:left-8 p-2.5 sm:p-3 bg-white/95 backdrop-blur-md border border-neutral-200 rounded-none shadow-md text-xs font-mono pointer-events-none hidden sm:block select-none">
           <div className="font-semibold text-black tracking-wide flex items-center gap-2">
-            <span className="w-2 h-2 rounded-none bg-emerald-500 inline-block" />
+            <span className="w-2 h-2 rounded-none bg-black inline-block" />
             <span>Carlota Lagunas Fotografía</span>
           </div>
           <div className="text-neutral-500 text-[10px] mt-0.5">

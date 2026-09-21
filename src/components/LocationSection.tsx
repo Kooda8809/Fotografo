@@ -149,7 +149,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onOpenQuoteMod
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider rounded-none transition-colors cursor-pointer bg-white"
               >
-                <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+                <MessageSquare className="w-3.5 h-3.5 text-black" />
                 <span>WhatsApp Directo</span>
               </a>
             </div>
@@ -174,7 +174,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onOpenQuoteMod
 
               {/* Verified Pin Badge */}
               <div className="absolute bottom-4 right-4 p-2.5 bg-black text-white text-[10px] font-mono uppercase tracking-widest rounded-none shadow-md flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <ShieldCheck className="w-3.5 h-3.5 text-white" />
                 <span>Estudio Climatizado 28°C</span>
               </div>
             </div>

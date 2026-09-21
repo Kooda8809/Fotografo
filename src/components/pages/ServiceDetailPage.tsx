@@ -76,7 +76,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider rounded-none transition-colors cursor-pointer bg-white"
               >
-                <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+                <MessageSquare className="w-3.5 h-3.5 text-black" />
                 <span>WhatsApp (687 707 029)</span>
               </a>
             </div>
