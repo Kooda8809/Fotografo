@@ -214,18 +214,48 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
 
       </div>
 
-      {/* GIANT DISPLAY SIGNATURE SPANNING THE BOTTOM (MATCHING @JORDANSTUDIO REFERENCE) */}
-      <div className="w-full border-t border-neutral-200/80 pt-4 sm:pt-6 overflow-hidden select-none">
+      {/* GIANT INFINITE SLOW MARQUEE SIGNATURE (GLIDING TO THE LEFT) */}
+      <div className="w-full border-t border-neutral-200/80 pt-4 sm:pt-6 overflow-hidden select-none whitespace-nowrap">
         <a
           href="https://www.instagram.com/carlotalagunasfotografia/"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full text-center hover:opacity-85 transition-opacity"
-          aria-label="Instagram Carlota Lagunas"
+          className="group block overflow-hidden py-1 cursor-pointer"
+          aria-label="Instagram @carlotalagunasfotografia"
         >
-          <span className="font-sans font-black tracking-tighter text-[12.5vw] sm:text-[13.8vw] leading-none text-black block uppercase whitespace-nowrap">
-            @CARLOTALAGUNAS
-          </span>
+          <div className="animate-marquee-slow flex items-center">
+            {/* Loop Segment 1 */}
+            <div className="flex items-center shrink-0">
+              <span className="font-sans font-black tracking-tighter text-[11vw] sm:text-[12.5vw] leading-none text-black block uppercase pr-8 sm:pr-14 group-hover:text-neutral-700 transition-colors">
+                @CARLOTALAGUNAS
+              </span>
+              <span className="text-[6vw] font-serif text-neutral-300 font-light pr-8 sm:pr-14">
+                ✦
+              </span>
+              <span className="font-sans font-black tracking-tighter text-[11vw] sm:text-[12.5vw] leading-none text-black block uppercase pr-8 sm:pr-14 group-hover:text-neutral-700 transition-colors">
+                @CARLOTALAGUNAS
+              </span>
+              <span className="text-[6vw] font-serif text-neutral-300 font-light pr-8 sm:pr-14">
+                ✦
+              </span>
+            </div>
+
+            {/* Loop Segment 2 (Identical clone for continuous seamless loop) */}
+            <div className="flex items-center shrink-0">
+              <span className="font-sans font-black tracking-tighter text-[11vw] sm:text-[12.5vw] leading-none text-black block uppercase pr-8 sm:pr-14 group-hover:text-neutral-700 transition-colors">
+                @CARLOTALAGUNAS
+              </span>
+              <span className="text-[6vw] font-serif text-neutral-300 font-light pr-8 sm:pr-14">
+                ✦
+              </span>
+              <span className="font-sans font-black tracking-tighter text-[11vw] sm:text-[12.5vw] leading-none text-black block uppercase pr-8 sm:pr-14 group-hover:text-neutral-700 transition-colors">
+                @CARLOTALAGUNAS
+              </span>
+              <span className="text-[6vw] font-serif text-neutral-300 font-light pr-8 sm:pr-14">
+                ✦
+              </span>
+            </div>
+          </div>
         </a>
       </div>
     </footer>

@@ -36,6 +36,27 @@ p, span, a, button, input, textarea, select, label, .font-sans, .font-mono {
   scrollbar-width: none;
 }
 
+/* Infinite slow marquee for footer signature */
+@keyframes marquee-slow {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-slow 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}
+
 /* Reduced motion respect */
 @media (prefers-reduced-motion: reduce) {
   * {
