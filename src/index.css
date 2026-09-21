@@ -2,19 +2,29 @@
 
 @theme {
   --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-editorial: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Montserrat", sans-serif;
   --color-warm-dark: #0f0f10;
   --color-warm-surface: #171718;
   --color-warm-border: rgba(255, 255, 255, 0.08);
 }
 
 :root {
-  font-family: var(--font-sans);
-  color-scheme: dark;
+  font-family: "Montserrat", sans-serif;
+  color-scheme: light dark;
 }
 
-h1, h2, h3, .font-editorial {
-  font-family: var(--font-serif);
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .font-editorial, .font-serif {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+p, span, a, button, input, textarea, select, label, .font-sans, .font-mono {
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Hide scrollbar for gallery filters while preserving scrollability */
