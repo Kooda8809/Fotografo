@@ -69,7 +69,7 @@ export const QuotePage: React.FC = () => {
         </div>
 
         {/* Full Form Card */}
-        <div className="p-6 sm:p-12 rounded-sm bg-neutral-50/80 border border-neutral-200 shadow-sm">
+        <div className="p-6 sm:p-12 rounded-none bg-neutral-50/80 border border-neutral-200 shadow-sm">
           {!submitted ? (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -85,7 +85,7 @@ export const QuotePage: React.FC = () => {
                     placeholder="Tu nombre completo"
                     value={formData.nombre}
                     onChange={handleChange}
-                    className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
+                    className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
 
@@ -101,7 +101,7 @@ export const QuotePage: React.FC = () => {
                     placeholder="+34 600 000 000"
                     value={formData.telefono}
                     onChange={handleChange}
-                    className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
+                    className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
 
@@ -117,7 +117,7 @@ export const QuotePage: React.FC = () => {
                     placeholder="ejemplo@correo.es"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
+                    className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
 
@@ -133,7 +133,7 @@ export const QuotePage: React.FC = () => {
                     placeholder="Ej. Zaragoza, Utebo, Cuarte..."
                     value={formData.ubicacion}
                     onChange={handleChange}
-                    className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
+                    className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
                   />
                 </div>
 
@@ -147,7 +147,7 @@ export const QuotePage: React.FC = () => {
                     required
                     value={formData.servicio}
                     onChange={handleChange}
-                    className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black focus:outline-none focus:border-black transition-colors cursor-pointer"
+                    className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black focus:outline-none focus:border-black transition-colors cursor-pointer"
                   >
                     <option value="">Selecciona el tipo de sesión</option>
                     <option value="Sesión Embarazo">Sesión Embarazo</option>
@@ -174,7 +174,7 @@ export const QuotePage: React.FC = () => {
                   placeholder="Ej. Finales de mayo, semana 30 de embarazo, o fecha de cumpleaños"
                   value={formData.fechaAproximada}
                   onChange={handleChange}
-                  className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
+                  className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
                 />
               </div>
 
@@ -189,14 +189,14 @@ export const QuotePage: React.FC = () => {
                   placeholder="Semana de gestación, edad de los niños, sesión en estudio o exterior, dudas sobre vestuario o atrezzo..."
                   value={formData.detalles}
                   onChange={handleChange}
-                  className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors resize-none"
+                  className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors resize-none"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-4 bg-black text-white font-semibold text-xs uppercase tracking-[0.18em] rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                  className="w-full py-4 bg-black text-white font-semibold text-xs uppercase tracking-[0.18em] rounded-none hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2 shadow-md cursor-pointer border border-black"
                 >
                   <span>Enviar Consulta</span>
                   <Send className="w-3.5 h-3.5" />
@@ -210,7 +210,7 @@ export const QuotePage: React.FC = () => {
             </form>
           ) : (
             <div className="text-center py-10 space-y-6">
-              <div className="w-14 h-14 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center mx-auto text-black">
+              <div className="w-14 h-14 rounded-none bg-neutral-100 border border-neutral-200 flex items-center justify-center mx-auto text-black">
                 <Check className="w-7 h-7" />
               </div>
               <div className="space-y-2">
@@ -224,14 +224,14 @@ export const QuotePage: React.FC = () => {
               <div className="space-y-3 max-w-md mx-auto pt-2">
                 <button
                   onClick={handleWhatsAppSend}
-                  className="w-full py-3.5 px-6 bg-[#25D366] text-black font-semibold text-xs uppercase tracking-wider rounded-full hover:brightness-105 transition-all flex items-center justify-center gap-2.5 shadow-md cursor-pointer"
+                  className="w-full py-3.5 px-6 bg-[#25D366] text-black font-semibold text-xs uppercase tracking-wider rounded-none hover:brightness-105 transition-all flex items-center justify-center gap-2.5 shadow-md cursor-pointer border border-[#25D366]"
                 >
                   <MessageSquare className="w-4 h-4 fill-black" />
                   <span>Enviar por WhatsApp a Carlota (687 707 029)</span>
                 </button>
                 <button
                   onClick={handleEmailSend}
-                  className="w-full py-3.5 px-6 bg-white border border-neutral-300 text-black font-medium text-xs uppercase tracking-wider rounded-full hover:bg-neutral-100 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                  className="w-full py-3.5 px-6 bg-white border border-neutral-300 text-black font-medium text-xs uppercase tracking-wider rounded-none hover:bg-neutral-100 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
                 >
                   <Mail className="w-4 h-4" />
                   <span>Enviar por Correo (info@carlotalagunas.com)</span>

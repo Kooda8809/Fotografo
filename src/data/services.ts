@@ -15,7 +15,7 @@ export const servicesList: ServiceItem[] = [
     ],
     idealFor: 'Futuras mamás y familias que desean inmortalizar la dulce espera con delicadeza, calma y naturalidad.',
     accent: '01',
-    heroImage: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1600&q=85',
+    heroImage: '/images/real/session-16.webp',
     features: [
       'Iluminación suave y favorecedora que realza la silueta maternal',
       'Entorno privado, relajado y climatizado para tu máximo confort',
@@ -37,7 +37,7 @@ export const servicesList: ServiceItem[] = [
     ],
     idealFor: 'Papás y mamás que desean congelar los detalles irrepetibles de los primeros días de su bebé.',
     accent: '02',
-    heroImage: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1600&q=85',
+    heroImage: '/images/real/session-20.webp',
     features: [
       'Fotógrafa certificada en seguridad postural y fisiología neonatal',
       'Máxima higiene y desinfección meticulosa antes de cada sesión',
@@ -59,7 +59,7 @@ export const servicesList: ServiceItem[] = [
     ],
     idealFor: 'Familias que celebran el primer año de vida del bebé y buscan un recuerdo lleno de risas y color.',
     accent: '03',
-    heroImage: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=85',
+    heroImage: '/images/real/session-21.webp',
     features: [
       'Expresiones espontáneas de sorpresa, juego y descubrimiento sensorial',
       'Escenarios seguros, higiénicos y diseñados a medida',
@@ -81,7 +81,7 @@ export const servicesList: ServiceItem[] = [
     ],
     idealFor: 'Niños a partir de los 6 meses, cuando ya se sientan solitos, gatean o dan sus primeros pasos.',
     accent: '04',
-    heroImage: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1600&q=85',
+    heroImage: '/images/real/session-22.webp',
     features: [
       'Miradas sinceras y sonrisas naturales que reflejan su esencia',
       'Ambiente lúdico donde los peques no sienten que posan para una cámara',
@@ -103,7 +103,7 @@ export const servicesList: ServiceItem[] = [
     ],
     idealFor: 'Familias completas que desean guardar una cápsula del tiempo de su momento presente de felicidad.',
     accent: '05',
-    heroImage: 'https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?auto=format&fit=crop&w=1600&q=85',
+    heroImage: '/images/real/session-24.webp',
     features: [
       'Conexión emocional y momentos espontáneos entre padres e hijos',
       'Luz dorada de atardecer en exteriores o luz pura y minimalista en estudio',
@@ -125,7 +125,7 @@ export const servicesList: ServiceItem[] = [
     ],
     idealFor: 'Niños y niñas que celebran su Primera Comunión y familias que buscan un reportaje con estilo actual.',
     accent: '06',
-    heroImage: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1600&q=85',
+    heroImage: '/images/real/session-25.webp',
     features: [
       'Enfoque fresco donde los niños disfrutan y se sienten ellos mismos',
       'Álbumes digitales encuadernados en tejidos naturales con grabado en portada',
@@ -147,7 +147,7 @@ export const servicesList: ServiceItem[] = [
     ],
     idealFor: 'Familias que buscan una pieza artística exclusiva de colección para presidir el salón de su hogar.',
     accent: '07',
-    heroImage: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1600&q=85',
+    heroImage: '/images/real/session-26.webp',
     features: [
       'Mirada profunda y estética de pintura atemporal que trasciende modas',
       'Dirección artística personalizada según la fisionomía y carácter del niño/a',

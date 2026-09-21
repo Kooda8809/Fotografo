@@ -76,6 +76,12 @@ export default function App() {
     if (target === '/sobre-adp') {
       target = '/sobre-mi';
     }
+    if (target === '/galeria') {
+      target = '/portfolio';
+    }
+    if (target === '/tarjetas-regalo') {
+      target = '/regalar-sesion';
+    }
 
     // Check if target is a known anchor or route
     const isServiceSlug = servicesList.some((s) => `/${s.slug}` === target);

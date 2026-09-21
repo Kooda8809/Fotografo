@@ -8,12 +8,12 @@ export const featuredProjects: ProjectItem[] = [
     category: 'Newborn · Recién Nacidos',
     location: 'Estudio Actur, Zaragoza',
     year: '2025',
-    coverImage: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1600&q=85',
+    coverImage: '/images/real/session-20.webp',
     gallery: [
-      'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1600&q=85'
+      '/images/real/session-20.webp',
+      '/images/real/session-27.webp',
+      '/images/real/session-28.webp',
+      '/images/real/session-29.webp'
     ],
     summary: 'Reportaje íntimo y pausado para el pequeño Mateo durante sus primeros diez días de vida junto a sus ilusionados papás.',
     approach: 'Sesión de 3 horas respetando tiempos de lactancia y sueño, con temperatura ambiental de 28°C y atrezzo confeccionado en fibras orgánicas.',
@@ -30,12 +30,12 @@ export const featuredProjects: ProjectItem[] = [
     category: 'Embarazo · Maternidad',
     location: 'Sotos del Ebro, Zaragoza',
     year: '2025',
-    coverImage: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1600&q=85',
+    coverImage: '/images/real/session-16.webp',
     gallery: [
-      'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=1600&q=85'
+      '/images/real/session-16.webp',
+      '/images/real/session-30.webp',
+      '/images/real/session-31.webp',
+      '/images/real/session-32.webp'
     ],
     summary: 'Sesión al aire libre en la semana 31 de gestación aprovechando la cálida caída del sol sobre la ribera aragonesa.',
     approach: 'Composiciones naturales y espontáneas con vestido vaporoso del estudio y participación del futuro papá y hermanito mayor.',
@@ -52,12 +52,12 @@ export const featuredProjects: ProjectItem[] = [
     category: 'Smash Cake · Primer Cumpleaños',
     location: 'Estudio Actur, Zaragoza',
     year: '2025',
-    coverImage: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=85',
+    coverImage: '/images/real/session-21.webp',
     gallery: [
-      'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?auto=format&fit=crop&w=1600&q=85'
+      '/images/real/session-21.webp',
+      '/images/real/session-33.webp',
+      '/images/real/session-34.webp',
+      '/images/real/session-35.webp'
     ],
     summary: 'Celebración sensorial y divertidísima para conmemorar el primer año del pequeño Martín con tarta artesanal y bañera vintage.',
     approach: 'Escenario decorado en tonos crudo y eucalipto, dejando al pequeño experimentar con libertad sus primeras texturas dulces.',
@@ -74,12 +74,12 @@ export const featuredProjects: ProjectItem[] = [
     category: 'Comuniones · Exteriores',
     location: 'Parque José Antonio Labordeta, Zaragoza',
     year: '2025',
-    coverImage: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1600&q=85',
+    coverImage: '/images/real/session-25.webp',
     gallery: [
-      'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1471286174890-9c112ffca56a?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1600&q=85',
-      'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1600&q=85'
+      '/images/real/session-25.webp',
+      '/images/real/session-36.webp',
+      '/images/real/session-37.webp',
+      '/images/real/session-38.webp'
     ],
     summary: 'Reportaje moderno y fresco que huye de convencionalismos, captando la alegría genuina de Sofía en su gran año.',
     approach: 'Sesión combinada entre tomas de vestido ceremonial y cambio de vestuario informal bajo la luz dorada de primavera.',

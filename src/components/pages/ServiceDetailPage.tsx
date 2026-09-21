@@ -64,7 +64,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <button
                 onClick={() => onOpenQuoteModal(service.title)}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white text-xs uppercase tracking-[0.16em] font-semibold rounded-full hover:bg-neutral-800 transition-colors shadow-md cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white text-xs uppercase tracking-[0.16em] font-semibold rounded-none hover:bg-neutral-800 transition-colors shadow-md cursor-pointer border border-black"
               >
                 <span>Consultar Disponibilidad</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -74,7 +74,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                 href={`https://wa.me/34687707029?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider rounded-full transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider rounded-none transition-colors cursor-pointer bg-white"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
                 <span>WhatsApp (687 707 029)</span>
@@ -84,7 +84,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
 
           {/* Hero Feature Image */}
           <div className="lg:col-span-5">
-            <div className="relative aspect-[4/3] rounded-sm overflow-hidden bg-neutral-900 border border-neutral-200 shadow-xl group">
+            <div className="relative aspect-[4/3] rounded-none overflow-hidden bg-neutral-900 border border-neutral-200 shadow-xl group">
               <img
                 src={service.heroImage}
                 alt={`${service.title} en Zaragoza por Carlota Lagunas Fotografía`}
@@ -107,7 +107,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
             </h2>
             <div className="space-y-3">
               {service.details.map((detail, idx) => (
-                <div key={idx} className="p-4 rounded-sm bg-neutral-50 border border-neutral-200 flex items-start gap-3.5">
+                <div key={idx} className="p-4 rounded-none bg-neutral-50 border border-neutral-200 flex items-start gap-3.5">
                   <CheckCircle2 className="w-4 h-4 text-black shrink-0 mt-0.5" />
                   <span className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-light">{detail}</span>
                 </div>
@@ -121,8 +121,8 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
             </h2>
             <div className="space-y-3">
               {service.features.map((feature, idx) => (
-                <div key={idx} className="p-4 rounded-sm bg-neutral-50 border border-neutral-200 flex items-start gap-3.5">
-                  <span className="w-2 h-2 rounded-full bg-black shrink-0 mt-2" />
+                <div key={idx} className="p-4 rounded-none bg-neutral-50 border border-neutral-200 flex items-start gap-3.5">
+                  <span className="w-2 h-2 rounded-none bg-black shrink-0 mt-2" />
                   <span className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-light">{feature}</span>
                 </div>
               ))}
@@ -156,7 +156,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                 <div
                   key={photo.id}
                   onClick={() => onOpenLightbox(relatedPhotos, i)}
-                  className="group relative aspect-[4/3] rounded-sm overflow-hidden bg-neutral-900 border border-neutral-200 shadow-sm cursor-pointer"
+                  className="group relative aspect-[4/3] rounded-none overflow-hidden bg-neutral-900 border border-neutral-200 shadow-sm cursor-pointer"
                 >
                   <img
                     src={photo.imageUrl}
@@ -186,7 +186,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                 <button
                   key={s.slug}
                   onClick={() => onNavigate(s.slug)}
-                  className="px-4 py-2 rounded-full bg-neutral-100 hover:bg-black hover:text-white border border-neutral-200 text-xs font-mono tracking-wider uppercase transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-none bg-neutral-100 hover:bg-black hover:text-white border border-neutral-200 text-xs font-mono tracking-wider uppercase transition-colors cursor-pointer"
                 >
                   {s.shortTitle}
                 </button>

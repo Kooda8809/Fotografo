@@ -51,7 +51,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
               className="group flex flex-col justify-between border-b border-neutral-200 pb-10"
             >
               <div
-                className="relative overflow-hidden aspect-[16/10] bg-neutral-100 rounded-sm cursor-pointer mb-6 border border-neutral-200 shadow-sm hover:shadow-xl transition-shadow duration-300"
+                className="relative overflow-hidden aspect-[16/10] bg-neutral-100 rounded-none cursor-pointer mb-6 border border-neutral-200 shadow-sm hover:shadow-xl transition-shadow duration-300"
                 onClick={() => openProjectModal(project)}
               >
                 <img
@@ -62,7 +62,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-between text-white pointer-events-none">
                   <div className="flex justify-end">
-                    <span className="p-2 rounded-full bg-white/20 backdrop-blur-sm text-white">
+                    <span className="p-2 rounded-none bg-white/20 backdrop-blur-sm text-white">
                       <Images className="w-4 h-4" />
                     </span>
                   </div>
@@ -73,37 +73,30 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center justify-between text-xs font-mono text-neutral-500 uppercase tracking-wider">
-                  <span>{project.category} · {project.year}</span>
-                  <span className="flex items-center gap-1 text-neutral-600">
-                    <MapPin className="w-3.5 h-3.5" />
-                    {project.location}
-                  </span>
+                <div className="flex items-baseline justify-between text-xs font-mono text-neutral-400 uppercase tracking-wider">
+                  <span>{project.category}</span>
+                  <span>{project.location} · {project.year}</span>
                 </div>
 
                 <h3
+                  className="font-editorial text-2xl sm:text-3xl text-black font-normal hover:text-neutral-700 transition-colors cursor-pointer leading-tight"
                   onClick={() => openProjectModal(project)}
-                  className="font-editorial text-2xl sm:text-3xl text-black font-normal hover:text-neutral-700 transition-colors cursor-pointer"
                 >
                   {project.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed line-clamp-3">
-                  {project.summary}
+                <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed line-clamp-2">
+                  {project.subtitle}
                 </p>
 
-                <div className="pt-2 flex items-center justify-between">
+                <div className="pt-2">
                   <button
                     onClick={() => openProjectModal(project)}
-                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-mono text-black hover:text-neutral-600 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-black hover:text-neutral-600 transition-colors cursor-pointer group-hover:underline underline-offset-4"
                   >
-                    <span>Ver Reportaje Completo</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    <span>Explorar reportaje completo</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
-
-                  <span className="text-[11px] font-mono text-neutral-500">
-                    {project.gallery.length} tomas · {project.location}
-                  </span>
                 </div>
               </div>
             </article>
@@ -111,27 +104,23 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
         </div>
       </div>
 
-      {/* Full Project Detail Modal in White Theme */}
+      {/* Project Detail Modal */}
       {activeProject && (
         <div
           role="dialog"
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 lg:p-10 overflow-y-auto animate-in fade-in duration-200"
         >
-          <div className="bg-white border border-neutral-200 rounded-sm w-full max-w-5xl max-h-[90vh] overflow-y-auto p-6 sm:p-10 text-neutral-900 shadow-2xl relative space-y-8">
+          <div className="bg-white border border-neutral-200 rounded-none w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 sm:p-10 shadow-2xl relative space-y-8 text-neutral-900">
             {/* Modal Header */}
             <div className="flex items-start justify-between border-b border-neutral-200 pb-6">
-              <div className="space-y-2 max-w-2xl">
-                <div className="flex items-center gap-3 text-xs font-mono text-neutral-500 uppercase tracking-widest">
-                  <span>{activeProject.category}</span>
-                  <span>·</span>
-                  <span>{activeProject.location}</span>
-                  <span>·</span>
-                  <span>{activeProject.year}</span>
+              <div className="space-y-1">
+                <div className="text-xs font-mono uppercase tracking-widest text-neutral-400">
+                  Reportaje Completo · Zaragoza
                 </div>
-                <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl text-black font-normal">
+                <h3 className="font-editorial text-3xl sm:text-4xl text-black font-normal">
                   {activeProject.title}
-                </h2>
+                </h3>
                 <p className="text-sm text-neutral-500 font-light">
                   {activeProject.subtitle}
                 </p>
@@ -139,7 +128,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
 
               <button
                 onClick={closeProjectModal}
-                className="p-2.5 rounded-full bg-neutral-100 text-neutral-600 hover:text-black hover:bg-neutral-200 transition-colors focus:outline-none cursor-pointer"
+                className="p-2.5 rounded-none bg-neutral-100 text-neutral-600 hover:text-black hover:bg-neutral-200 transition-colors focus:outline-none cursor-pointer border border-neutral-200"
                 aria-label="Cerrar reportaje"
               >
                 <X className="w-5 h-5" />
@@ -147,7 +136,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
             </div>
 
             {/* Scope / Details Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 rounded-sm bg-neutral-50 border border-neutral-200 text-xs font-mono">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 rounded-none bg-neutral-50 border border-neutral-200 text-xs font-mono">
               <div>
                 <span className="text-neutral-500 block uppercase tracking-wider mb-1">Localización</span>
                 <span className="text-neutral-900 font-medium">{activeProject.location}</span>
@@ -182,7 +171,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                 </div>
               </div>
 
-              <div className="lg:col-span-4 p-6 rounded-sm bg-neutral-50 border border-neutral-200 space-y-4">
+              <div className="lg:col-span-4 p-6 rounded-none bg-neutral-50 border border-neutral-200 space-y-4">
                 <h4 className="font-editorial text-lg text-black font-normal">
                   ¿Te gustaría un recuerdo así?
                 </h4>
@@ -194,7 +183,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                     closeProjectModal();
                     onOpenQuoteModal(`Sesión similar a: ${activeProject.title}`);
                   }}
-                  className="w-full py-3 px-4 bg-black text-white hover:bg-neutral-800 text-xs font-semibold uppercase tracking-wider rounded-full transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                  className="w-full py-3 px-4 bg-black text-white hover:bg-neutral-800 text-xs font-semibold uppercase tracking-wider rounded-none transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm border border-black"
                 >
                   <span>Consultar Disponibilidad</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -220,7 +209,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                     onClick={() => {
                       onOpenLightboxWithUrls(activeProject.gallery, i);
                     }}
-                    className="relative aspect-[16/10] bg-neutral-100 rounded-sm overflow-hidden cursor-pointer group border border-neutral-200 shadow-sm"
+                    className="relative aspect-[16/10] bg-neutral-100 rounded-none overflow-hidden cursor-pointer group border border-neutral-200 shadow-sm"
                   >
                     <img
                       src={imgUrl}
@@ -229,7 +218,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                      <span className="text-xs font-mono uppercase tracking-widest px-3 py-1 bg-black/60 rounded-full">
+                      <span className="text-xs font-mono uppercase tracking-widest px-3 py-1 bg-black/60 rounded-none">
                         Ampliar #{i + 1}
                       </span>
                     </div>

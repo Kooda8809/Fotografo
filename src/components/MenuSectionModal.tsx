@@ -51,7 +51,7 @@ export const MenuSectionModal: React.FC<MenuSectionModalProps> = ({
         <div className="flex items-center gap-4">
           <button
             onClick={() => onOpenQuoteModal()}
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black text-white text-xs font-semibold uppercase tracking-[0.16em] hover:bg-neutral-800 transition-colors shadow-sm cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-none bg-black text-white text-xs font-semibold uppercase tracking-[0.16em] hover:bg-neutral-800 transition-colors shadow-sm cursor-pointer border border-black"
           >
             <span>Disponibilidad</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -59,7 +59,7 @@ export const MenuSectionModal: React.FC<MenuSectionModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-2.5 rounded-full bg-neutral-100 text-black hover:bg-neutral-200 transition-colors focus:outline-none flex items-center gap-1.5 text-xs font-mono tracking-wider uppercase cursor-pointer"
+            className="p-2.5 rounded-none bg-neutral-100 text-black hover:bg-neutral-200 transition-colors focus:outline-none flex items-center gap-1.5 text-xs font-mono tracking-wider uppercase cursor-pointer border border-neutral-200"
             aria-label="Cerrar sección"
           >
             <span>Cerrar</span>

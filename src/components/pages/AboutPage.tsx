@@ -39,9 +39,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal, onNaviga
           
           {/* Portrait Column */}
           <div className="lg:col-span-5 relative">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-neutral-100 shadow-xl border border-neutral-200 group">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-none bg-neutral-100 shadow-xl border border-neutral-200 group">
               <img
-                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=85"
+                src="/images/real/carlota-perfil.webp"
                 alt="Carlota Lagunas - Fotógrafa Infantil y Familiar en Zaragoza"
                 className="w-full h-full object-cover filter contrast-[1.04] brightness-98 group-hover:scale-105 transition-transform duration-700 ease-out"
               />
@@ -83,7 +83,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal, onNaviga
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <button
                 onClick={() => onOpenQuoteModal('Sesión Infantil / Familiar')}
-                className="inline-flex items-center gap-2.5 px-8 py-4 bg-black text-white text-xs font-semibold uppercase tracking-[0.16em] rounded-full hover:bg-neutral-800 transition-colors shadow-md cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-8 py-4 bg-black text-white text-xs font-semibold uppercase tracking-[0.16em] rounded-none hover:bg-neutral-800 transition-colors shadow-md cursor-pointer border border-black"
               >
                 <span>Consultar Disponibilidad</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -91,7 +91,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal, onNaviga
 
               <button
                 onClick={() => onNavigate('portfolio')}
-                className="inline-flex items-center gap-2 px-7 py-4 border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider rounded-full transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-7 py-4 border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider rounded-none transition-colors cursor-pointer bg-white"
               >
                 <span>Ver Galería</span>
               </button>
@@ -114,9 +114,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal, onNaviga
             {pillars.map((item, i) => (
               <div
                 key={i}
-                className="p-6 sm:p-8 bg-neutral-50/80 border border-neutral-200 rounded-sm space-y-4 hover:border-black transition-colors shadow-xs"
+                className="p-6 sm:p-8 bg-neutral-50/80 border border-neutral-200 rounded-none space-y-4 hover:border-black transition-colors shadow-xs"
               >
-                <div className="p-3 w-fit rounded-full bg-white border border-neutral-200 shadow-2xs">
+                <div className="p-3 w-fit rounded-none bg-white border border-neutral-200 shadow-2xs">
                   {item.icon}
                 </div>
                 <h3 className="font-editorial text-xl text-black font-normal">
@@ -131,7 +131,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal, onNaviga
         </div>
 
         {/* Studio Location Badge */}
-        <div className="p-8 sm:p-12 rounded-sm bg-neutral-50 border border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="p-8 sm:p-12 rounded-none bg-neutral-50 border border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 text-xs font-mono uppercase tracking-widest text-neutral-500">
               <MapPin className="w-4 h-4 text-black" />
@@ -149,7 +149,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuoteModal, onNaviga
             href="https://wa.me/34687707029?text=Hola%20Carlota,%20me%20gustar%C3%ADa%20consultar%20tu%20disponibilidad"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-colors shadow-sm cursor-pointer whitespace-nowrap"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-none hover:bg-neutral-800 transition-colors shadow-sm cursor-pointer whitespace-nowrap border border-black"
           >
             <span>WhatsApp Directo (687 707 029)</span>
             <ArrowUpRight className="w-3.5 h-3.5" />

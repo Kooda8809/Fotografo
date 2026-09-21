@@ -15,7 +15,7 @@ export interface PhotoItem {
   category: Exclude<CategoryType, 'Todos'>;
   location: string;
   imageUrl: string;
-  aspectRatio: 'aspect-[4/5]' | 'aspect-[16/10]' | 'aspect-[1/1]' | 'aspect-[3/4]' | 'aspect-[16/9]';
+  aspectRatio: string;
   description: string;
   year?: string;
 }

@@ -11,7 +11,7 @@ export const NotFoundView: React.FC<NotFoundViewProps> = ({ onBackToHome }) => {
       id="not-found-screen"
       className="min-h-screen bg-white text-black flex flex-col items-center justify-center p-6 text-center space-y-8 select-none"
     >
-      <div className="w-16 h-16 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-black">
+      <div className="w-16 h-16 rounded-none bg-neutral-100 border border-neutral-200 flex items-center justify-center text-black">
         <Camera className="w-8 h-8 stroke-[1.2]" />
       </div>
 
@@ -30,7 +30,7 @@ export const NotFoundView: React.FC<NotFoundViewProps> = ({ onBackToHome }) => {
       <div>
         <button
           onClick={onBackToHome}
-          className="inline-flex items-center gap-2 px-8 py-3.5 bg-black text-white text-xs uppercase tracking-[0.18em] font-semibold rounded-full hover:bg-neutral-800 transition-colors shadow-lg cursor-pointer"
+          className="inline-flex items-center gap-2 px-8 py-3.5 bg-black text-white text-xs uppercase tracking-[0.18em] font-semibold rounded-none hover:bg-neutral-800 transition-colors shadow-lg cursor-pointer border border-black"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Volver al Inicio</span>

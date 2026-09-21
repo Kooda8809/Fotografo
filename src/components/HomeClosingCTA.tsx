@@ -38,7 +38,7 @@ export const HomeClosingCTA: React.FC<HomeClosingCTAProps> = ({
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-2">
           <button
             onClick={onOpenQuoteModal}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white text-black text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] rounded-full hover:bg-neutral-200 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white text-black text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] rounded-none hover:bg-neutral-200 transition-all duration-300 shadow-xs cursor-pointer border border-white"
           >
             <Calendar className="w-4 h-4 text-black" />
             <span>Consultar Disponibilidad</span>
@@ -49,7 +49,7 @@ export const HomeClosingCTA: React.FC<HomeClosingCTAProps> = ({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full border border-neutral-700 bg-neutral-900/60 hover:bg-neutral-800 hover:border-neutral-500 text-white text-xs sm:text-sm font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-sm"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-none border border-neutral-700 bg-neutral-900/60 hover:bg-neutral-800 hover:border-neutral-500 text-white text-xs sm:text-sm font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-xs"
           >
             <MessageCircle className="w-4 h-4 text-emerald-400" />
             <span>Hablar por WhatsApp</span>
@@ -69,7 +69,7 @@ export const HomeClosingCTA: React.FC<HomeClosingCTAProps> = ({
         {/* Value Highlights Grid */}
         <div className="pt-10 sm:pt-14 border-t border-neutral-800/80 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-left">
           <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-full bg-neutral-900 border border-neutral-800 shrink-0 mt-0.5">
+            <div className="p-2.5 rounded-none bg-neutral-900 border border-neutral-800 shrink-0 mt-0.5">
               <ShieldCheck className="w-4 h-4 text-neutral-300" />
             </div>
             <div className="space-y-1">
@@ -83,7 +83,7 @@ export const HomeClosingCTA: React.FC<HomeClosingCTAProps> = ({
           </div>
 
           <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-full bg-neutral-900 border border-neutral-800 shrink-0 mt-0.5">
+            <div className="p-2.5 rounded-none bg-neutral-900 border border-neutral-800 shrink-0 mt-0.5">
               <MapPin className="w-4 h-4 text-neutral-300" />
             </div>
             <div className="space-y-1">
@@ -97,7 +97,7 @@ export const HomeClosingCTA: React.FC<HomeClosingCTAProps> = ({
           </div>
 
           <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-full bg-neutral-900 border border-neutral-800 shrink-0 mt-0.5">
+            <div className="p-2.5 rounded-none bg-neutral-900 border border-neutral-800 shrink-0 mt-0.5">
               <Heart className="w-4 h-4 text-neutral-300" />
             </div>
             <div className="space-y-1">

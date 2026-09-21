@@ -14,7 +14,7 @@ export const PricingNotice: React.FC<PricingNoticeProps> = ({ onOpenQuoteModal, 
       aria-label="Tarifas transparentes y packs para sesiones infantiles y familiares"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="p-8 sm:p-12 lg:p-16 bg-neutral-50/80 border border-neutral-200 rounded-sm relative overflow-hidden shadow-sm">
+        <div className="p-8 sm:p-12 lg:p-16 bg-neutral-50/80 border border-neutral-200 rounded-none relative overflow-hidden shadow-xs">
           <div className="max-w-3xl space-y-6">
 
             <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl text-black font-normal leading-tight">
@@ -44,7 +44,7 @@ export const PricingNotice: React.FC<PricingNoticeProps> = ({ onOpenQuoteModal, 
               {onNavigatePricing && (
                 <button
                   onClick={onNavigatePricing}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] hover:bg-neutral-800 transition-colors rounded-full shadow-md cursor-pointer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] hover:bg-neutral-800 transition-colors rounded-none shadow-xs cursor-pointer"
                 >
                   <span>Ver Tarifas Detalladas</span>
                   <ArrowUpRight className="w-4 h-4" />
@@ -53,7 +53,7 @@ export const PricingNotice: React.FC<PricingNoticeProps> = ({ onOpenQuoteModal, 
 
               <button
                 onClick={onOpenQuoteModal}
-                className="inline-flex items-center gap-2 px-8 py-4 border border-neutral-300 hover:border-black text-black text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] hover:bg-neutral-100 transition-colors rounded-full shadow-sm cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 border border-neutral-300 hover:border-black text-black text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] hover:bg-neutral-100 transition-colors rounded-none shadow-2xs cursor-pointer"
               >
                 <span>Consultar Disponibilidad</span>
               </button>
@@ -62,7 +62,7 @@ export const PricingNotice: React.FC<PricingNoticeProps> = ({ onOpenQuoteModal, 
                 href="https://wa.me/34687707029?text=Hola%20Carlota,%20me%20gustar%C3%ADa%20consultar%20tarifas%20y%20fechas%20para%20una%20sesi%C3%B3n%20en%20Zaragoza"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider rounded-full transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider rounded-none transition-colors cursor-pointer bg-white"
               >
                 <span>WhatsApp (687 707 029)</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />

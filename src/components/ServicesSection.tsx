@@ -150,7 +150,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     >
                       <span>{service.shortTitle || service.title}</span>
                       {isExactActive && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-black shrink-0 animate-pulse" />
+                        <span className="w-1.5 h-1.5 rounded-none bg-black shrink-0" />
                       )}
                     </button>
                   </div>
@@ -163,7 +163,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               {onNavigate && (
                 <button
                   onClick={() => onNavigate(activeService.slug)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-none border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer bg-white"
                 >
                   <span>Detalles</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -172,7 +172,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
               <button
                 onClick={() => onOpenQuoteModal(activeService.title)}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black hover:bg-neutral-800 text-white text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-none bg-black hover:bg-neutral-800 text-white text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-xs cursor-pointer border border-black"
               >
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Consultar Cita</span>
@@ -210,7 +210,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   <div
                     key={service.id}
                     onClick={() => handleSelectService(idx)}
-                    className={`absolute aspect-square w-56 sm:w-64 lg:w-72 rounded-3xl overflow-hidden cursor-pointer transition-shadow duration-300 ease-out ${
+                    className={`absolute aspect-square w-56 sm:w-64 lg:w-72 rounded-none overflow-hidden cursor-pointer transition-shadow duration-300 ease-out ${
                       isCurrent
                         ? 'border border-neutral-200/90 shadow-2xl shadow-neutral-950/25 ring-1 ring-black/5'
                         : 'border border-neutral-200/60 shadow-lg shadow-neutral-900/10 hover:opacity-90'

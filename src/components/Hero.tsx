@@ -81,13 +81,13 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={onScrollToPortfolio}
-              className="px-5 py-2.5 rounded-full bg-black text-white text-xs font-semibold uppercase tracking-wider hover:bg-neutral-800 transition-colors shadow-md cursor-pointer"
+              className="px-5 py-2.5 rounded-none bg-black text-white text-xs font-semibold uppercase tracking-wider hover:bg-neutral-800 transition-colors shadow-md cursor-pointer border border-black"
             >
               Ver Galería
             </button>
             <button
               onClick={onOpenQuoteModal}
-              className="px-5 py-2.5 rounded-full bg-white border border-neutral-300 text-black text-xs font-semibold uppercase tracking-wider hover:bg-neutral-50 transition-colors shadow-xs cursor-pointer"
+              className="px-5 py-2.5 rounded-none bg-white border border-neutral-300 text-black text-xs font-semibold uppercase tracking-wider hover:bg-neutral-50 transition-colors shadow-xs cursor-pointer"
             >
               Consultar Disponibilidad
             </button>
@@ -105,7 +105,7 @@ export const Hero: React.FC<HeroProps> = ({
               <div
                 key={photo.id}
                 onClick={() => onPhotoClick ? onPhotoClick(portfolioPhotos, idx) : onScrollToPortfolio()}
-                className={`group shrink-0 cursor-pointer overflow-hidden rounded-sm transition-all duration-500 relative bg-neutral-100 ${
+                className={`group shrink-0 cursor-pointer overflow-hidden rounded-none transition-all duration-500 relative bg-neutral-100 ${
                   idx === 0
                     ? 'w-[38vw] sm:w-[26vw] max-w-[360px] h-[32vh] sm:h-[38vh]'
                     : idx === 1

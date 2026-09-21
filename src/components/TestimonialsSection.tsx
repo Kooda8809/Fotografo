@@ -27,7 +27,7 @@ export const TestimonialsSection: React.FC = () => {
           {TESTIMONIALS.map((t, idx) => (
             <div
               key={idx}
-              className="p-8 bg-white border border-neutral-200 rounded-sm flex flex-col justify-between space-y-6 shadow-xs hover:border-black transition-colors"
+              className="p-8 bg-white border border-neutral-200 rounded-none flex flex-col justify-between space-y-6 shadow-xs hover:border-black transition-colors"
             >
               <div className="space-y-4">
                 {/* 5 Stars */}

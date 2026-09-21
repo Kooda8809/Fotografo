@@ -6,7 +6,7 @@ export const blogPosts: BlogPostItem[] = [
     title: 'Cómo preparar tu sesión newborn en Zaragoza: consejos y seguridad',
     category: 'Newborn',
     readTime: '4 min de lectura',
-    image: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/real/session-20.webp',
     excerpt: 'La temperatura del estudio, los tiempos de sueño y las tomas de leche son factores decisivos para que los primeros 15 días del bebé sean una experiencia tranquila y mágica.',
     content: [
       'La llegada de un recién nacido es uno de los momentos más intensos y conmovedores en la vida de una familia. Para inmortalizar esos primeros días irrepetibles, la sesión de fotografía newborn debe prepararse con sumo mimo y tranquilidad.',
@@ -20,10 +20,10 @@ export const blogPosts: BlogPostItem[] = [
     title: 'Cuándo hacer la sesión de embarazo: el momento ideal para tu recuerdo',
     category: 'Embarazo',
     readTime: '5 min de lectura',
-    image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/real/session-16.webp',
     excerpt: 'Descubre por qué entre las semanas 28 y 32 de gestación se produce el equilibrio perfecto entre la redondez de la barriguita y tu bienestar físico.',
     content: [
-      'El embarazo es una etapa de transformación única, cargada de ilusión y emociones compartidas. Muchas futuras mamás se preguntan en qué mes o semana es conveniente concertar la cita para su reportaje de maternidad.',
+      'El embarazo es uma etapa de transformación única, cargada de ilusión y emociones compartidas. Muchas futuras mamás se preguntan en qué mes o semana es conveniente concertar la cita para su reportaje de maternidad.',
       'La recomendación profesional es agendar la sesión entre las semanas 28 y 32 de gestación. En este periodo la tripita ya luce una forma redonda y bien definida, mientras que la mamá suele conservar una energía excelente y movilidad cómoda para disfrutar de la experiencia.',
       'Tanto si prefieres la intimidad cálida y minimalista de nuestro estudio en Zaragoza como la magia de la luz dorada al atardecer en los Sotos del Ebro o el Parque del Agua, te guiaremos en cada postura para que te sientas hermosa y relajada.',
       'Además, ponemos a tu disposición una cuidada colección de vestidos vaporosos, kimonos y tejidos nobles, y por supuesto animamos a la pareja y a los hermanitos mayores a sumarse para crear recuerdos familiares eternos.'
@@ -34,7 +34,7 @@ export const blogPosts: BlogPostItem[] = [
     title: 'Por qué celebrar el primer cumpleaños con una sesión Smash Cake',
     category: 'Smash Cake',
     readTime: '4 min de lectura',
-    image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/real/session-21.webp',
     excerpt: 'Risas, texturas y sorpresa: una divertida fiesta sensorial donde el bebé experimenta con su tarta de cumpleaños y termina con un relajante baño de burbujas.',
     content: [
       'Cumplir el primer añito de vida es un hito irrepetible tanto para el pequeño como para toda la familia. La sesión Smash Cake se ha convertido en una de las tradiciones más queridas para festejar esta fecha tan especial.',
@@ -48,7 +48,7 @@ export const blogPosts: BlogPostItem[] = [
     title: 'Guía para un reportaje de Primera Comunión natural y moderno',
     category: 'Comuniones',
     readTime: '5 min de lectura',
-    image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/real/session-25.webp',
     excerpt: 'Atrás quedaron los posados rígidos y forzados: hoy los reportajes de comunión celebran la alegría, la personalidad y la frescura de los niños.',
     content: [
       'La Primera Comunión es uno de los acontecimientos más esperados por los peques y sus familias. Sin embargo, el concepto de la fotografía de comunión ha evolucionado profundamente hacia un estilo moderno, luminoso y espontáneo.',
@@ -62,7 +62,7 @@ export const blogPosts: BlogPostItem[] = [
     title: 'El valor incalculable de la fotografía familiar: recuerdos que perduran',
     category: 'Familia',
     readTime: '4 min de lectura',
-    image: 'https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/real/session-24.webp',
     excerpt: 'Los niños crecen a un ritmo vertiginoso. Un reportaje familiar profesional es el mejor legado visual que puedes regalar a las futuras generaciones.',
     content: [
       'Vivimos en una época en la que tomamos cientos de fotos con el teléfono móvil cada mes, pero rara vez estamos todos juntos en el encuadre o nos tomamos el tiempo de imprimir esos instantes sobre papel de calidad.',

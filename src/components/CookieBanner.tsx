@@ -51,7 +51,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenCookiesPolicy 
               <ShieldCheck className="w-4 h-4 text-black shrink-0" />
               <span>Privacidad y Cookies</span>
             </span>
-            <span className="text-[10px] uppercase font-mono tracking-widest text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-full border border-neutral-200">
+            <span className="text-[10px] uppercase font-mono tracking-widest text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-none border border-neutral-200">
               UE · RGPD
             </span>
           </div>
@@ -71,13 +71,13 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenCookiesPolicy 
         <div className="flex items-center gap-3 shrink-0 w-full md:w-auto">
           <button
             onClick={handleDecline}
-            className="flex-1 md:flex-initial py-2.5 px-4 rounded-full border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer text-center"
+            className="flex-1 md:flex-initial py-2.5 px-4 rounded-none border border-neutral-300 hover:border-black text-black text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer text-center bg-white"
           >
             Solo Esenciales
           </button>
           <button
             onClick={handleAccept}
-            className="flex-1 md:flex-initial py-2.5 px-6 rounded-full bg-black hover:bg-neutral-800 text-white text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm cursor-pointer text-center"
+            className="flex-1 md:flex-initial py-2.5 px-6 rounded-none bg-black hover:bg-neutral-800 text-white text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm cursor-pointer text-center border border-black"
           >
             Aceptar
           </button>

@@ -74,11 +74,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
       aria-modal="true"
       className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
     >
-      <div className="bg-white border border-neutral-200 rounded-sm w-full max-w-2xl max-h-[92vh] overflow-y-auto p-6 sm:p-10 shadow-2xl relative text-neutral-900">
+      <div className="bg-white border border-neutral-200 rounded-none w-full max-w-2xl max-h-[92vh] overflow-y-auto p-6 sm:p-10 shadow-2xl relative text-neutral-900">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 text-neutral-500 hover:text-black bg-neutral-100 hover:bg-neutral-200 rounded-full transition-colors focus:outline-none cursor-pointer"
+          className="absolute top-6 right-6 p-2 text-neutral-500 hover:text-black bg-neutral-100 hover:bg-neutral-200 rounded-none transition-colors focus:outline-none cursor-pointer"
           aria-label="Cerrar ventana"
         >
           <X className="w-5 h-5" />
@@ -108,7 +108,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   placeholder="Tu nombre y apellidos"
                   value={formData.nombre}
                   onChange={handleChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-sm px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-none px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
                 />
               </div>
 
@@ -124,7 +124,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   placeholder="+34 600 000 000"
                   value={formData.telefono}
                   onChange={handleChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-sm px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-none px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
                 />
               </div>
 
@@ -140,7 +140,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   placeholder="tu@correo.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-sm px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-none px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
                 />
               </div>
 
@@ -156,7 +156,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   placeholder="Zaragoza, Utebo, Cuarte..."
                   value={formData.ubicacion}
                   onChange={handleChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-sm px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-none px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
                 />
               </div>
 
@@ -170,7 +170,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   required
                   value={formData.servicio}
                   onChange={handleChange}
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-sm px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black focus:bg-white cursor-pointer"
+                  className="w-full bg-neutral-50 border border-neutral-200 rounded-none px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black focus:bg-white cursor-pointer"
                 >
                   <option value="">Selecciona sesión</option>
                   <option value="Sesión Embarazo">Sesión Embarazo</option>
@@ -197,7 +197,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 placeholder="Ej. FPP en mayo, cumpleaños el 12 de junio, o mes de preferencia"
                 value={formData.fechaAproximada}
                 onChange={handleChange}
-                className="w-full bg-neutral-50 border border-neutral-200 rounded-sm px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
+                className="w-full bg-neutral-50 border border-neutral-200 rounded-none px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white"
               />
             </div>
 
@@ -212,14 +212,14 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 placeholder="Semana de gestación, edad de los niños, sesión en estudio o exterior, dudas sobre vestuario..."
                 value={formData.detalles}
                 onChange={handleChange}
-                className="w-full bg-neutral-50 border border-neutral-200 rounded-sm px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white resize-none"
+                className="w-full bg-neutral-50 border border-neutral-200 rounded-none px-3.5 py-2.5 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black focus:bg-white resize-none"
               />
             </div>
 
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-3.5 bg-black text-white font-semibold text-xs uppercase tracking-[0.18em] rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                className="w-full py-3.5 bg-black text-white font-semibold text-xs uppercase tracking-[0.18em] rounded-none hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer border border-black"
               >
                 <span>Consultar Disponibilidad</span>
                 <Send className="w-3.5 h-3.5" />
@@ -233,7 +233,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
           </form>
         ) : (
           <div className="text-center py-8 space-y-6">
-            <div className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center mx-auto text-black">
+            <div className="w-12 h-12 rounded-none bg-neutral-100 border border-neutral-200 flex items-center justify-center mx-auto text-black">
               <Check className="w-6 h-6" />
             </div>
 
@@ -249,7 +249,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             <div className="space-y-3 max-w-md mx-auto pt-2">
               <button
                 onClick={handleWhatsAppSend}
-                className="w-full py-3.5 px-6 bg-[#25D366] text-black font-semibold text-xs uppercase tracking-wider rounded-full hover:brightness-105 transition-all flex items-center justify-center gap-2.5 shadow-md cursor-pointer"
+                className="w-full py-3.5 px-6 bg-[#25D366] text-black font-semibold text-xs uppercase tracking-wider rounded-none hover:brightness-105 transition-all flex items-center justify-center gap-2.5 shadow-xs cursor-pointer border border-[#25D366]"
               >
                 <MessageSquare className="w-4 h-4 fill-black" />
                 <span>Enviar por WhatsApp a Carlota (687 707 029)</span>
@@ -257,7 +257,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
               <button
                 onClick={handleEmailSend}
-                className="w-full py-3.5 px-6 bg-neutral-100 border border-neutral-200 text-black font-medium text-xs uppercase tracking-wider rounded-full hover:bg-neutral-200 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                className="w-full py-3.5 px-6 bg-neutral-100 border border-neutral-200 text-black font-medium text-xs uppercase tracking-wider rounded-none hover:bg-neutral-200 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
               >
                 <Mail className="w-4 h-4" />
                 <span>Enviar por Correo Electrónico</span>

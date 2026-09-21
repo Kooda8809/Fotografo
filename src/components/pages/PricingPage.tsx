@@ -45,14 +45,14 @@ export const PricingPage: React.FC<PricingPageProps> = ({
             {PRICING_EMBARAZO.map((pack) => (
               <div
                 key={pack.id}
-                className={`relative flex flex-col justify-between p-8 rounded-sm border transition-all duration-300 ${
+                className={`relative flex flex-col justify-between p-8 rounded-none border transition-all duration-300 ${
                   pack.highlight
                     ? 'border-black bg-neutral-50 shadow-md ring-1 ring-black'
                     : 'border-neutral-200 bg-white hover:border-neutral-400'
                 }`}
               >
                 {pack.highlight && (
-                  <div className="absolute -top-3 left-6 px-3 py-1 bg-black text-white text-[10px] font-mono uppercase tracking-widest rounded-full">
+                  <div className="absolute -top-3 left-6 px-3 py-1 bg-black text-white text-[10px] font-mono uppercase tracking-widest rounded-none">
                     Más Elegido
                   </div>
                 )}
@@ -80,10 +80,10 @@ export const PricingPage: React.FC<PricingPageProps> = ({
                 <div className="pt-8">
                   <button
                     onClick={onOpenQuoteModal}
-                    className={`w-full py-3.5 text-xs font-semibold uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    className={`w-full py-3.5 text-xs font-semibold uppercase tracking-wider rounded-none transition-all flex items-center justify-center gap-2 cursor-pointer border ${
                       pack.highlight
-                        ? 'bg-black text-white hover:bg-neutral-800'
-                        : 'bg-neutral-100 text-black hover:bg-neutral-200'
+                        ? 'bg-black text-white hover:bg-neutral-800 border-black'
+                        : 'bg-neutral-100 text-black hover:bg-neutral-200 border-neutral-200'
                     }`}
                   >
                     <span>Reservar Fecha</span>
@@ -113,14 +113,14 @@ export const PricingPage: React.FC<PricingPageProps> = ({
             {PRICING_NEWBORN.map((pack) => (
               <div
                 key={pack.id}
-                className={`relative flex flex-col justify-between p-8 rounded-sm border transition-all duration-300 ${
+                className={`relative flex flex-col justify-between p-8 rounded-none border transition-all duration-300 ${
                   pack.highlight
                     ? 'border-black bg-neutral-50 shadow-md ring-1 ring-black'
                     : 'border-neutral-200 bg-white hover:border-neutral-400'
                 }`}
               >
                 {pack.highlight && (
-                  <div className="absolute -top-3 left-6 px-3 py-1 bg-black text-white text-[10px] font-mono uppercase tracking-widest rounded-full">
+                  <div className="absolute -top-3 left-6 px-3 py-1 bg-black text-white text-[10px] font-mono uppercase tracking-widest rounded-none">
                     Recomendado Familias
                   </div>
                 )}
@@ -148,10 +148,10 @@ export const PricingPage: React.FC<PricingPageProps> = ({
                 <div className="pt-8">
                   <button
                     onClick={onOpenQuoteModal}
-                    className={`w-full py-3.5 text-xs font-semibold uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    className={`w-full py-3.5 text-xs font-semibold uppercase tracking-wider rounded-none transition-all flex items-center justify-center gap-2 cursor-pointer border ${
                       pack.highlight
-                        ? 'bg-black text-white hover:bg-neutral-800'
-                        : 'bg-neutral-100 text-black hover:bg-neutral-200'
+                        ? 'bg-black text-white hover:bg-neutral-800 border-black'
+                        : 'bg-neutral-100 text-black hover:bg-neutral-200 border-neutral-200'
                     }`}
                   >
                     <span>Reservar Fecha</span>
@@ -164,7 +164,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({
         </section>
 
         {/* Caja Marco Addon Banner */}
-        <div className="p-8 sm:p-10 rounded-sm bg-neutral-50 border border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="p-8 sm:p-10 rounded-none bg-neutral-50 border border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-600">
               <Sparkles className="w-4 h-4 text-black" />
@@ -180,7 +180,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({
           <div className="shrink-0">
             <button
               onClick={onNavigateContact}
-              className="py-3 px-6 bg-white border border-neutral-300 text-black text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-100 transition-colors shadow-xs cursor-pointer"
+              className="py-3 px-6 bg-white border border-neutral-300 text-black text-xs font-semibold uppercase tracking-wider rounded-none hover:bg-neutral-100 transition-colors shadow-xs cursor-pointer"
             >
               Consultar detalles
             </button>
@@ -205,7 +205,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({
         </div>
 
         {/* Banner otras sesiones */}
-        <div className="p-8 sm:p-12 rounded-sm bg-black text-white flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        <div className="p-8 sm:p-12 rounded-none bg-black text-white flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="space-y-2 max-w-xl">
             <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
               SMASH CAKE · INFANTIL · FAMILIA · COMUNIONES · FINE ART
@@ -220,7 +220,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <button
               onClick={onNavigateContact}
-              className="py-3.5 px-8 bg-white text-black text-xs font-semibold uppercase tracking-[0.16em] rounded-full hover:bg-neutral-200 transition-colors shadow-md cursor-pointer"
+              className="py-3.5 px-8 bg-white text-black text-xs font-semibold uppercase tracking-[0.16em] rounded-none hover:bg-neutral-200 transition-colors shadow-md cursor-pointer border border-white"
             >
               Contactar con Carlota
             </button>

@@ -86,9 +86,9 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="p-6 rounded-sm bg-neutral-50 border border-neutral-200 space-y-3">
+            <div className="p-6 rounded-none bg-neutral-50 border border-neutral-200 space-y-3">
               <span className="text-xs font-mono text-neutral-400">PASO 01</span>
-              <div className="w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-black">
+              <div className="w-10 h-10 rounded-none bg-white border border-neutral-200 flex items-center justify-center text-black">
                 <Gift className="w-5 h-5" />
               </div>
               <h3 className="font-editorial text-xl text-black">Elige la sesión</h3>
@@ -97,9 +97,9 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
               </p>
             </div>
 
-            <div className="p-6 rounded-sm bg-neutral-50 border border-neutral-200 space-y-3">
+            <div className="p-6 rounded-none bg-neutral-50 border border-neutral-200 space-y-3">
               <span className="text-xs font-mono text-neutral-400">PASO 02</span>
-              <div className="w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-black">
+              <div className="w-10 h-10 rounded-none bg-white border border-neutral-200 flex items-center justify-center text-black">
                 <Heart className="w-5 h-5" />
               </div>
               <h3 className="font-editorial text-xl text-black">Mensaje especial</h3>
@@ -108,9 +108,9 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
               </p>
             </div>
 
-            <div className="p-6 rounded-sm bg-neutral-50 border border-neutral-200 space-y-3">
+            <div className="p-6 rounded-none bg-neutral-50 border border-neutral-200 space-y-3">
               <span className="text-xs font-mono text-neutral-400">PASO 03</span>
-              <div className="w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-black">
+              <div className="w-10 h-10 rounded-none bg-white border border-neutral-200 flex items-center justify-center text-black">
                 <PackageCheck className="w-5 h-5" />
               </div>
               <h3 className="font-editorial text-xl text-black">Entrega bonita</h3>
@@ -119,9 +119,9 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
               </p>
             </div>
 
-            <div className="p-6 rounded-sm bg-neutral-50 border border-neutral-200 space-y-3">
+            <div className="p-6 rounded-none bg-neutral-50 border border-neutral-200 space-y-3">
               <span className="text-xs font-mono text-neutral-400">PASO 04</span>
-              <div className="w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-black">
+              <div className="w-10 h-10 rounded-none bg-white border border-neutral-200 flex items-center justify-center text-black">
                 <Calendar className="w-5 h-5" />
               </div>
               <h3 className="font-editorial text-xl text-black">Ellos eligen fecha</h3>
@@ -147,7 +147,7 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
             {GIFT_MODALITIES.map((mod, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-sm border border-neutral-200 bg-white hover:border-black transition-all flex flex-col justify-between space-y-6 group"
+                className="p-6 rounded-none border border-neutral-200 bg-white hover:border-black transition-all flex flex-col justify-between space-y-6 group"
               >
                 <div className="space-y-2">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">
@@ -163,7 +163,7 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
 
                 <button
                   onClick={() => handleDirectWhatsAppGift(mod.title)}
-                  className="w-full py-2.5 px-4 bg-neutral-50 border border-neutral-200 text-black text-[11px] font-semibold uppercase tracking-wider rounded-full hover:bg-black hover:text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="w-full py-2.5 px-4 bg-neutral-50 border border-neutral-200 text-black text-[11px] font-semibold uppercase tracking-wider rounded-none hover:bg-black hover:text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <span>Solicitar este bono</span>
                   <Send className="w-3 h-3" />
@@ -174,7 +174,7 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
         </div>
 
         {/* Banner CTA */}
-        <div className="p-8 sm:p-12 rounded-sm bg-neutral-900 text-white flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="p-8 sm:p-12 rounded-none bg-neutral-900 text-white flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-3 max-w-2xl">
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-400">
               <Sparkles className="w-4 h-4 text-white" />
@@ -191,14 +191,14 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <button
               onClick={() => handleDirectWhatsAppGift()}
-              className="py-3.5 px-6 bg-[#25D366] text-black text-xs font-semibold uppercase tracking-wider rounded-full hover:brightness-105 transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
+              className="py-3.5 px-6 bg-[#25D366] text-black text-xs font-semibold uppercase tracking-wider rounded-none hover:brightness-105 transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer border border-[#25D366]"
             >
               <MessageSquare className="w-4 h-4 fill-black" />
               <span>Pedir por WhatsApp</span>
             </button>
             <button
               onClick={onNavigateContact}
-              className="py-3.5 px-6 bg-white text-black text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-200 transition-all cursor-pointer"
+              className="py-3.5 px-6 bg-white text-black text-xs font-semibold uppercase tracking-wider rounded-none hover:bg-neutral-200 transition-all cursor-pointer border border-white"
             >
               Contactar por formulario
             </button>

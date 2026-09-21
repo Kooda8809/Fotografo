@@ -30,7 +30,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
           {blogPosts.map((post) => (
             <article
               key={post.slug}
-              className="group flex flex-col justify-between border border-neutral-200 rounded-sm overflow-hidden bg-neutral-50/50 hover:bg-white hover:border-black transition-all duration-300 shadow-2xs hover:shadow-xl"
+              className="group flex flex-col justify-between border border-neutral-200 rounded-none overflow-hidden bg-neutral-50/50 hover:bg-white hover:border-black transition-all duration-300 shadow-2xs hover:shadow-xl"
             >
               <div>
                 <div
@@ -43,7 +43,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-sm text-[10px] font-mono text-white uppercase tracking-wider">
+                  <div className="absolute top-3 left-3 px-2.5 py-1 rounded-none bg-black/70 backdrop-blur-sm text-[10px] font-mono text-white uppercase tracking-wider">
                     {post.category}
                   </div>
                 </div>
@@ -81,7 +81,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
         </div>
 
         {/* CTA Box */}
-        <div className="p-8 sm:p-12 rounded-sm bg-neutral-50 border border-neutral-200 text-center space-y-4">
+        <div className="p-8 sm:p-12 rounded-none bg-neutral-50 border border-neutral-200 text-center space-y-4">
           <h3 className="font-editorial text-2xl sm:text-3xl text-black font-normal">
             ¿Quieres preparar una sesión fotográfica para tu familia?
           </h3>
@@ -91,7 +91,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
           <div className="pt-2 flex justify-center gap-4">
             <button
               onClick={() => onOpenQuoteModal('Asesoría y Sesión')}
-              className="px-8 py-3.5 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-colors cursor-pointer"
+              className="px-8 py-3.5 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-none hover:bg-neutral-800 transition-colors cursor-pointer border border-black"
             >
               Consultar Disponibilidad
             </button>
@@ -107,7 +107,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 lg:p-10 overflow-y-auto animate-in fade-in duration-200"
         >
-          <div className="bg-white border border-neutral-200 rounded-sm w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 sm:p-12 shadow-2xl relative space-y-8 text-neutral-900">
+          <div className="bg-white border border-neutral-200 rounded-none w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 sm:p-12 shadow-2xl relative space-y-8 text-neutral-900">
             {/* Modal Header */}
             <div className="flex items-start justify-between border-b border-neutral-200 pb-6">
               <div className="space-y-2">
@@ -122,7 +122,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
               </div>
               <button
                 onClick={() => setSelectedPost(null)}
-                className="p-2.5 rounded-full bg-neutral-100 text-neutral-600 hover:text-black hover:bg-neutral-200 transition-colors focus:outline-none cursor-pointer"
+                className="p-2.5 rounded-none bg-neutral-100 text-neutral-600 hover:text-black hover:bg-neutral-200 transition-colors focus:outline-none cursor-pointer border border-neutral-200"
                 aria-label="Cerrar artículo"
               >
                 <X className="w-5 h-5" />
@@ -130,7 +130,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
             </div>
 
             {/* Article Image */}
-            <div className="relative aspect-[16/9] rounded-sm overflow-hidden bg-neutral-900">
+            <div className="relative aspect-[16/9] rounded-none overflow-hidden bg-neutral-900">
               <img
                 src={selectedPost.image}
                 alt={selectedPost.title}
@@ -155,7 +155,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenQuoteModal, onNavigate
                   setSelectedPost(null);
                   onOpenQuoteModal(`Sesión relacionada con: ${selectedPost.title}`);
                 }}
-                className="px-6 py-3 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-colors cursor-pointer"
+                className="px-6 py-3 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-none hover:bg-neutral-800 transition-colors cursor-pointer border border-black"
               >
                 Consultar Disponibilidad
               </button>

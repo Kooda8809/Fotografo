@@ -17,10 +17,10 @@ export const LegalModal: React.FC<LegalModalProps> = ({ docType, onClose }) => {
       aria-modal="true"
       className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
     >
-      <div className="bg-white border border-neutral-200 rounded-sm w-full max-w-3xl max-h-[85vh] overflow-y-auto p-6 sm:p-10 shadow-2xl relative text-neutral-700 font-light text-xs sm:text-sm leading-relaxed space-y-6">
+      <div className="bg-white border border-neutral-200 rounded-none w-full max-w-3xl max-h-[85vh] overflow-y-auto p-6 sm:p-10 shadow-2xl relative text-neutral-700 font-light text-xs sm:text-sm leading-relaxed space-y-6">
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 text-neutral-500 hover:text-black bg-neutral-100 hover:bg-neutral-200 rounded-full transition-colors focus:outline-none cursor-pointer"
+          className="absolute top-6 right-6 p-2 text-neutral-500 hover:text-black bg-neutral-100 hover:bg-neutral-200 rounded-none transition-colors focus:outline-none cursor-pointer border border-neutral-200"
           aria-label="Cerrar documento legal"
         >
           <X className="w-5 h-5" />
@@ -47,7 +47,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ docType, onClose }) => {
               Propiedad Intelectual e Industrial
             </h3>
             <p>
-              Todas las fotografías de bebés, familias y niños, textos, logotipos y diseños exhibidos en este sitio web son propiedad exclusiva de CARLOTA LAGUNAS FOTOGRAFIA SL y están protegidos por la legislación española e internacional sobre propiedad intelectual. Queda expresamente prohibida su copia, distribución, reproducción o uso comercial o publicitario no autorizado sin el consentimiento expreso y por escrito de su autora y de los tutores legales de los menores.
+              Todas las fotografías de bebés, familias y niños, textos, logotipos y designs exhibidos en este sitio web son propiedad exclusiva de CARLOTA LAGUNAS FOTOGRAFIA SL y están protegidos por la legislación española e internacional sobre propiedad intelectual. Queda expresamente prohibida su copia, distribución, reproducción o uso comercial o publicitario no autorizado sin el consentimiento expreso y por escrito de su autora y de los tutores legales de los menores.
             </p>
           </div>
         )}
@@ -105,7 +105,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ docType, onClose }) => {
         <div className="pt-4 border-t border-neutral-200 flex justify-end">
           <button
             onClick={onClose}
-            className="px-6 py-2.5 bg-black text-white text-xs uppercase tracking-wider font-semibold rounded-full hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="px-6 py-2.5 bg-black text-white text-xs uppercase tracking-wider font-semibold rounded-none hover:bg-neutral-800 transition-colors cursor-pointer border border-black"
           >
             Cerrar
           </button>

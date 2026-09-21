@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react';
 
 interface AboutADPProps {
@@ -7,23 +7,105 @@ interface AboutADPProps {
 }
 
 export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const [titleTransform, setTitleTransform] = useState({ x: 0, opacity: 1 });
+  const [bioTransform, setBioTransform] = useState({ x: 0, opacity: 1 });
+  const [photoTransform, setPhotoTransform] = useState({ y: 0, opacity: 1 });
+
+  useEffect(() => {
+    let ticking = false;
+
+    const updateScrollAnimation = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // 1. Entrance phase: from when section top touches bottom of viewport to when it is comfortably in view
+      const enterRange = windowHeight * 0.6;
+      const rawEnter = (windowHeight - rect.top) / enterRange;
+      const enterProgress = Math.min(Math.max(rawEnter, 0), 1);
+
+      // 2. Exit phase: when bottom of section scrolls out of the top of viewport
+      const exitRange = windowHeight * 0.45;
+      const rawExit = rect.bottom / exitRange;
+      const exitProgress = Math.min(Math.max(rawExit, 0), 1);
+
+      // Fast fade-in: reaches 100% opacity very early in the entrance (at 30% of enterRange)
+      const fadeIn = Math.min(enterProgress / 0.3, 1);
+      // Fade-out as section exits through the top
+      const fadeOut = exitProgress;
+      const opacity = Math.min(fadeIn, fadeOut);
+
+      // Slide to left for title:
+      // Starts shifted 150px to the right, glides left to 0px on enter, and continues slightly left (-50px) on exit
+      const titleSlideX = (1 - enterProgress) * 150 + (1 - exitProgress) * -50;
+
+      // Slide to left for bio text block (layered slightly for rich editorial depth)
+      const bioSlideX = (1 - enterProgress) * 100 + (1 - exitProgress) * -35;
+
+      // Photo elevation and opacity
+      const photoY = (1 - enterProgress) * 35 + (1 - exitProgress) * -25;
+
+      setTitleTransform({
+        x: titleSlideX,
+        opacity
+      });
+
+      setBioTransform({
+        x: bioSlideX,
+        opacity
+      });
+
+      setPhotoTransform({
+        y: photoY,
+        opacity
+      });
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollAnimation);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateScrollAnimation();
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="sobre-adp"
       className="relative py-24 sm:py-32 lg:py-36 bg-white text-black overflow-hidden border-t border-neutral-200"
       aria-label="Perfil profesional de Carlota Lagunas"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        
-
         {/* Main Grid: Portrait on Left, Bio on Right */}
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
           
           {/* Portrait Column (Left) */}
-          <div className="lg:col-span-5 relative z-0">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-neutral-100 shadow-xl border border-neutral-200 group">
+          <div
+            style={{
+              opacity: photoTransform.opacity,
+              transform: `translate3d(0, ${photoTransform.y}px, 0)`,
+              transition: 'transform 0.1s cubic-bezier(0, 0, 0.2, 1), opacity 0.1s linear',
+              willChange: 'transform, opacity'
+            }}
+            className="lg:col-span-5 relative z-0"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden rounded-none bg-neutral-100 shadow-xl border border-neutral-200 group">
               <img
-                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=85"
+                src="/images/real/carlota-perfil.webp"
                 alt="Carlota Lagunas - Fotografía Infantil y Familiar en Zaragoza"
                 loading="lazy"
                 className="w-full h-full object-cover object-center filter contrast-[1.04] brightness-98 group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -40,11 +122,19 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
             </div>
           </div>
 
-          {/* Typography & Editorial Bio Column (Right) */}
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-8">
+          {/* Typography & Editorial Bio Column (Right) - Slides to Left + Fast Fade In */}
+          <div className="lg:col-span-7 flex flex-col justify-center space-y-8 overflow-visible">
             
-            {/* NAME HEADER */}
-            <div className="relative z-10 lg:-ml-20 xl:-ml-28 pointer-events-none select-none">
+            {/* NAME HEADER - Slides to the left along with fast fade in */}
+            <div
+              style={{
+                opacity: titleTransform.opacity,
+                transform: `translate3d(${titleTransform.x}px, 0, 0)`,
+                transition: 'transform 0.1s cubic-bezier(0, 0, 0.2, 1), opacity 0.1s linear',
+                willChange: 'transform, opacity'
+              }}
+              className="relative z-10 lg:-ml-20 xl:-ml-28 pointer-events-none select-none"
+            >
               <h2 className="text-5xl sm:text-7xl lg:text-8xl font-sans tracking-tight flex flex-col">
                 <span className="font-light font-editorial text-neutral-900 drop-shadow-sm">
                   Carlota
@@ -55,11 +145,19 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
               </h2>
             </div>
 
-            {/* Circular CTA Button & Bio Text Block */}
-            <div className="flex flex-col sm:flex-row items-start gap-6 pt-2">
+            {/* Circular CTA Button & Bio Text Block - Slides to the left along with fast fade in */}
+            <div
+              style={{
+                opacity: bioTransform.opacity,
+                transform: `translate3d(${bioTransform.x}px, 0, 0)`,
+                transition: 'transform 0.1s cubic-bezier(0, 0, 0.2, 1), opacity 0.1s linear',
+                willChange: 'transform, opacity'
+              }}
+              className="flex flex-col sm:flex-row items-start gap-6 pt-2"
+            >
               <button
                 onClick={() => onNavigate ? onNavigate('sobre-mi') : onOpenQuoteModal()}
-                className="group shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white border border-neutral-300 hover:border-black hover:bg-black flex items-center justify-center transition-all duration-300 cursor-pointer focus:outline-none shadow-sm"
+                className="group shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-none bg-white border border-neutral-300 hover:border-black hover:bg-black flex items-center justify-center transition-all duration-300 cursor-pointer focus:outline-none shadow-xs"
                 aria-label="Conocer a Carlota Lagunas"
               >
                 <ArrowRight className="w-5 h-5 text-black group-hover:text-white transition-all duration-300 group-hover:translate-x-1" />
@@ -67,7 +165,7 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
 
               <div className="space-y-4 text-sm sm:text-base text-neutral-700 font-light leading-relaxed max-w-xl">
                 <p>
-                  Especializada en capturar con ternura, naturalidad y elegancia los momentos más puros e irrepetibles de la vida: la dulce espera del embarazo, los primeros días del recién nacido y el crecimiento feliz de tus hijos en Zaragoza.
+                  Especializada en capturar con ternura, naturalidad y elegancia los momentos más puros e irrepetibles de la vida: la dulce espera del embarazo, los primeiros días del recién nacido y el crecimiento feliz de tus hijos en Zaragoza.
                 </p>
                 <p className="text-neutral-500 text-xs sm:text-sm">
                   Desde nuestro estudio climatizado y adaptado en el Barrio del Actur, cuidamos la seguridad neonatal y trabajamos a su propio ritmo para que vuestra única preocupación sea disfrutar del momento en familia.
@@ -76,10 +174,18 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
             </div>
 
             {/* Bottom Actions & Availability Pill */}
-            <div className="pt-4 flex flex-wrap items-center gap-4 sm:gap-6 border-t border-neutral-200">
+            <div
+              style={{
+                opacity: bioTransform.opacity,
+                transform: `translate3d(${bioTransform.x}px, 0, 0)`,
+                transition: 'transform 0.1s cubic-bezier(0, 0, 0.2, 1), opacity 0.1s linear',
+                willChange: 'transform, opacity'
+              }}
+              className="pt-4 flex flex-wrap items-center gap-4 sm:gap-6 border-t border-neutral-200"
+            >
               <button
                 onClick={onOpenQuoteModal}
-                className="inline-flex items-center gap-2.5 px-6 py-3 bg-black text-white text-xs font-bold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-colors shadow-md cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-6 py-3 bg-black text-white text-xs font-bold uppercase tracking-wider rounded-none hover:bg-neutral-800 transition-colors shadow-xs cursor-pointer"
               >
                 <span>Consultar Disponibilidad</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -98,7 +204,6 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
           </div>
 
         </div>
-
       </div>
     </section>
   );

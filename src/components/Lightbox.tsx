@@ -103,6 +103,18 @@ export const Lightbox: React.FC<LightboxProps> = ({
     }
   };
 
+  // 5-thumbnail preview window matching user's visual identity attachment 2
+  const thumbnailIndices = React.useMemo(() => {
+    if (photos.length <= 5) {
+      return photos.map((_, i) => i);
+    }
+    const count = 5;
+    let start = currentIndex - Math.floor(count / 2);
+    if (start < 0) start = 0;
+    if (start + count > photos.length) start = photos.length - count;
+    return Array.from({ length: count }, (_, i) => start + i);
+  }, [photos, currentIndex]);
+
   if (!isOpen || !currentPhoto) return null;
 
   return (
@@ -117,9 +129,9 @@ export const Lightbox: React.FC<LightboxProps> = ({
       onTouchEnd={handleTouchEnd}
     >
       {/* Top Controls Bar */}
-      <div className="relative z-20 flex items-center justify-between px-6 py-4 sm:px-8 border-b border-white/5 bg-gradient-to-b from-black/60 to-transparent">
+      <div className="relative z-20 flex items-center justify-between px-6 py-3 sm:px-8 border-b border-white/5 bg-gradient-to-b from-black/60 to-transparent">
         <div className="flex items-baseline gap-3">
-          <span className="font-editorial text-lg text-white font-medium">ADP</span>
+          <span className="font-editorial text-lg text-white font-medium">Carlota Lagunas</span>
           <span className="text-[11px] uppercase tracking-[0.2em] text-neutral-400">
             {currentPhoto.category}
           </span>
@@ -158,7 +170,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
 
           <button
             onClick={onClose}
-            className="p-2 text-neutral-300 hover:text-white bg-white/5 hover:bg-white/15 rounded-full transition-colors focus:outline-none"
+            className="p-2 text-neutral-300 hover:text-white bg-white/5 hover:bg-white/15 rounded-none border border-white/20 transition-colors focus:outline-none cursor-pointer"
             aria-label="Cerrar visor"
           >
             <X className="w-5 h-5" />
@@ -167,44 +179,74 @@ export const Lightbox: React.FC<LightboxProps> = ({
       </div>
 
       {/* Main Image Stage */}
-      <div className="relative flex-1 flex items-center justify-center p-4 sm:p-8 md:p-12 overflow-hidden">
+      <div className="relative flex-1 flex items-center justify-center p-3 sm:p-6 md:p-8 overflow-hidden">
         {/* Navigation Previous Button */}
         <button
           onClick={handlePrev}
-          className="absolute left-2 sm:left-6 z-20 p-3 sm:p-4 text-white/70 hover:text-white bg-black/40 hover:bg-black/80 rounded-full transition-all backdrop-blur-sm focus:outline-none"
+          className="absolute left-2 sm:left-6 z-20 p-3 sm:p-4 text-white/70 hover:text-white bg-black/40 hover:bg-black/80 rounded-none border border-white/20 transition-all backdrop-blur-sm focus:outline-none cursor-pointer"
           aria-label="Fotografía anterior"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-        {/* The Photo */}
+        {/* The Photo with straight rectilinear corners (rounded-none) */}
         <div className="relative max-h-full max-w-full flex items-center justify-center">
           <img
             key={currentPhoto.id}
             src={currentPhoto.imageUrl}
             alt={currentPhoto.title}
-            className="max-h-[78vh] sm:max-h-[82vh] max-w-full w-auto h-auto object-contain rounded-sm shadow-2xl transition-opacity duration-300 ease-out"
+            className="max-h-[62vh] sm:max-h-[66vh] max-w-full w-auto h-auto object-contain rounded-none shadow-2xl transition-opacity duration-300 ease-out"
           />
         </div>
 
         {/* Navigation Next Button */}
         <button
           onClick={handleNext}
-          className="absolute right-2 sm:right-6 z-20 p-3 sm:p-4 text-white/70 hover:text-white bg-black/40 hover:bg-black/80 rounded-full transition-all backdrop-blur-sm focus:outline-none"
+          className="absolute right-2 sm:right-6 z-20 p-3 sm:p-4 text-white/70 hover:text-white bg-black/40 hover:bg-black/80 rounded-none border border-white/20 transition-all backdrop-blur-sm focus:outline-none cursor-pointer"
           aria-label="Fotografía siguiente"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
 
+      {/* 5-Thumbnail Strip with straight rectilinear corners */}
+      <div className="relative z-20 px-6 sm:px-8 pb-3 max-w-2xl w-full mx-auto">
+        <div className="grid grid-cols-5 gap-2.5 sm:gap-3.5">
+          {thumbnailIndices.map((idx) => {
+            const photo = photos[idx];
+            if (!photo) return null;
+            const isSelected = idx === currentIndex;
+            return (
+              <button
+                key={photo.id}
+                onClick={() => onNavigate(idx)}
+                className={`relative aspect-[4/3] rounded-none overflow-hidden cursor-pointer transition-all duration-200 border-2 ${
+                  isSelected
+                    ? 'border-white scale-105 shadow-xl opacity-100 ring-2 ring-white/30'
+                    : 'border-transparent opacity-50 hover:opacity-100 hover:scale-102'
+                }`}
+                aria-label={`Ver foto ${idx + 1}`}
+              >
+                <img
+                  src={photo.imageUrl}
+                  alt={photo.title}
+                  className="w-full h-full object-cover rounded-none"
+                  loading="lazy"
+                />
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Bottom Info Bar */}
       {showInfo && (
-        <div className="relative z-20 px-6 sm:px-8 py-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <div className="space-y-1 max-w-2xl">
-            <h2 className="font-editorial text-lg sm:text-xl text-white font-normal leading-tight">
+        <div className="relative z-20 px-6 sm:px-8 py-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+          <div className="space-y-0.5 max-w-2xl">
+            <h2 className="font-editorial text-base sm:text-lg text-white font-normal leading-tight">
               {currentPhoto.title}
             </h2>
-            <p className="text-neutral-400 font-sans text-xs sm:text-[13px] leading-relaxed">
+            <p className="text-neutral-400 font-sans text-xs leading-relaxed line-clamp-1">
               {currentPhoto.description}
             </p>
           </div>

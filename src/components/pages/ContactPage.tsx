@@ -81,15 +81,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Form Column */}
-          <div className="lg:col-span-6 p-6 sm:p-10 rounded-sm bg-neutral-50/80 border border-neutral-200 shadow-xs">
+          <div className="lg:col-span-6 p-7 sm:p-10 rounded-none bg-neutral-50/70 border border-neutral-200 shadow-xs">
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-1">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium">
+                    FORMULARIO DIRECTO
+                  </span>
                   <h2 className="font-editorial text-2xl sm:text-3xl text-black font-normal">
                     Consultar Disponibilidad
                   </h2>
                   <p className="text-xs text-neutral-500 font-light">
-                    Completa el formulario y te responderemos a la mayor brevedad.
+                    Completa el formulario y te responderemos personalmente en menos de 24-48 horas.
                   </p>
                 </div>
 
@@ -106,7 +109,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                       placeholder="Tu nombre completo"
                       value={formData.nombre}
                       onChange={handleChange}
-                      className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
+                      className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
                     />
                   </div>
 
@@ -122,7 +125,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                       placeholder="tu@correo.com"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
+                      className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
                     />
                   </div>
 
@@ -137,7 +140,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                       placeholder="+34 600 000 000"
                       value={formData.telefono || ''}
                       onChange={handleChange}
-                      className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
+                      className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors"
                     />
                   </div>
 
@@ -149,17 +152,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                     <select
                       value={tipoServicio}
                       onChange={(e) => setTipoServicio(e.target.value)}
-                      className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black focus:outline-none focus:border-black transition-colors cursor-pointer"
+                      className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black focus:outline-none focus:border-black transition-colors cursor-pointer"
                     >
                       <option value="">Selecciona el tipo de sesión</option>
-                      <option value="Sesión Embarazo">Sesión Embarazo</option>
                       <option value="Sesión Newborn (Recién Nacido)">Sesión Newborn (Recién Nacido)</option>
+                      <option value="Sesión Embarazo / Maternidad">Sesión Embarazo / Maternidad</option>
+                      <option value="Seguimiento de Bebés (4 a 10 meses)">Seguimiento de Bebés (4 a 10 meses)</option>
+                      <option value="Sesión Infantil">Sesión Infantil</option>
+                      <option value="Sesión Familiar">Sesión Familiar</option>
                       <option value="Sesión Smash Cake (Primer Cumpleaños)">Sesión Smash Cake (Primer Cumpleaños)</option>
-                      <option value="Fotografía Infantil">Fotografía Infantil</option>
-                      <option value="Fotografía Familiar">Fotografía Familiar</option>
                       <option value="Comuniones Zaragoza">Comuniones Zaragoza</option>
                       <option value="Retrato Fine Art">Retrato Fine Art</option>
-                      <option value="Tarjeta / Sesión de Regalo">Tarjeta / Sesión de Regalo</option>
+                      <option value="Tarjeta de Regalo">Tarjeta de Regalo</option>
                       <option value="Otra consulta">Otra consulta</option>
                     </select>
                   </div>
@@ -176,7 +180,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                       placeholder="Cuéntanos fecha prevista de parto, edad de los niños, preferencias o fechas deseadas..."
                       value={formData.mensaje}
                       onChange={handleChange}
-                      className="w-full bg-white border border-neutral-300 rounded-sm px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors resize-none"
+                      className="w-full bg-white border border-neutral-300 rounded-none px-4 py-3 text-sm text-black placeholder-neutral-400 focus:outline-none focus:border-black transition-colors resize-none"
                     />
                   </div>
 
@@ -189,14 +193,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                       required
                       checked={formData.aceptaPolitica}
                       onChange={handleChange}
-                      className="mt-1 w-4 h-4 rounded border-neutral-300 text-black focus:ring-black cursor-pointer"
+                      className="mt-1 w-4 h-4 rounded-none text-black border-neutral-300 focus:ring-0 focus:ring-offset-0 cursor-pointer"
                     />
                     <label htmlFor="aceptaPolitica" className="text-xs text-neutral-600 font-light leading-relaxed">
                       He leído y acepto la{' '}
                       <button
                         type="button"
                         onClick={onOpenPrivacyModal}
-                        className="underline hover:text-black font-normal inline"
+                        className="underline hover:text-black font-normal"
                       >
                         política de privacidad
                       </button>{' '}
@@ -208,7 +212,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full py-4 bg-black text-white font-semibold text-xs uppercase tracking-[0.18em] rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                    className="w-full py-4 bg-black text-white font-semibold text-xs uppercase tracking-[0.18em] rounded-none hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2 shadow-md cursor-pointer"
                   >
                     <span>ENVIAR CONSULTA</span>
                     <Send className="w-3.5 h-3.5" />
@@ -235,7 +239,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
               </form>
             ) : (
               <div className="text-center py-10 space-y-6">
-                <div className="w-14 h-14 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center mx-auto text-black">
+                <div className="w-14 h-14 rounded-none bg-black text-white flex items-center justify-center mx-auto">
                   <Check className="w-7 h-7" />
                 </div>
                 <div className="space-y-2">
@@ -249,14 +253,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                 <div className="space-y-3 max-w-md mx-auto pt-2">
                   <button
                     onClick={handleWhatsAppSend}
-                    className="w-full py-3.5 px-6 bg-[#25D366] text-black font-semibold text-xs uppercase tracking-wider rounded-full hover:brightness-105 transition-all flex items-center justify-center gap-2.5 shadow-md cursor-pointer"
+                    className="w-full py-3.5 px-6 bg-[#25D366] text-black font-semibold text-xs uppercase tracking-wider rounded-none hover:brightness-105 transition-all flex items-center justify-center gap-2.5 shadow-md cursor-pointer"
                   >
                     <MessageSquare className="w-4 h-4 fill-black" />
                     <span>Enviar a WhatsApp (687 707 029)</span>
                   </button>
                   <button
                     onClick={handleEmailSend}
-                    className="w-full py-3.5 px-6 bg-neutral-100 border border-neutral-300 text-black font-medium text-xs uppercase tracking-wider rounded-full hover:bg-neutral-200 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                    className="w-full py-3.5 px-6 bg-white border border-neutral-300 text-black font-medium text-xs uppercase tracking-wider rounded-none hover:bg-neutral-100 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
                   >
                     <Mail className="w-4 h-4" />
                     <span>Enviar por Correo (info@carlotalagunas.com)</span>
@@ -287,7 +291,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
 
             <div className="space-y-4">
               {/* Address card */}
-              <div className="p-5 rounded-sm bg-neutral-50 border border-neutral-200 space-y-2">
+              <div className="p-5 rounded-none bg-neutral-50 border border-neutral-200 space-y-2">
                 <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-500">
                   <MapPin className="w-4 h-4 text-black" />
                   <span>Dirección del Estudio</span>
@@ -313,7 +317,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
 
               {/* Phone and Email cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-5 rounded-sm bg-neutral-50 border border-neutral-200 space-y-2">
+                <div className="p-5 rounded-none bg-neutral-50 border border-neutral-200 space-y-2">
                   <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-500">
                     <Phone className="w-4 h-4 text-black" />
                     <span>Teléfono & WhatsApp</span>
@@ -331,7 +335,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                   </p>
                 </div>
 
-                <div className="p-5 rounded-sm bg-neutral-50 border border-neutral-200 space-y-2">
+                <div className="p-5 rounded-none bg-neutral-50 border border-neutral-200 space-y-2">
                   <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-500">
                     <Mail className="w-4 h-4 text-black" />
                     <span>Correo Electrónico</span>
@@ -349,7 +353,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
               </div>
 
               {/* Horarios Card */}
-              <div className="p-5 rounded-sm bg-neutral-50 border border-neutral-200 space-y-2">
+              <div className="p-5 rounded-none bg-neutral-50 border border-neutral-200 space-y-2">
                 <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-500">
                   <Clock className="w-4 h-4 text-black" />
                   <span>Horarios de Atención</span>
@@ -362,7 +366,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
             </div>
 
             {/* Styled Map Embed */}
-            <div className="relative aspect-[16/10] rounded-sm overflow-hidden bg-neutral-100 border border-neutral-200 shadow-md">
+            <div className="relative aspect-[16/10] rounded-none overflow-hidden bg-neutral-100 border border-neutral-200 shadow-md">
               <iframe
                 title="Mapa de ubicación Carlota Lagunas Fotografía en Zaragoza"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2980.528345787688!2d-0.890693523403278!3d41.666191471266014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914c62b662df9%3A0x1c8b3df9bbddf25!2sC.%20de%20Rosal%C3%ADa%20de%20Castro%2C%2015%2C%2050018%20Zaragoza!5e0!3m2!1ses!2ses!4v1710970000000!5m2!1ses!2ses"
@@ -370,7 +374,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-              <div className="absolute top-3 left-3 p-2.5 bg-white/95 backdrop-blur-sm border border-neutral-200 rounded-sm shadow-sm text-xs font-mono">
+              <div className="absolute top-3 left-3 p-2.5 bg-white/95 backdrop-blur-sm border border-neutral-200 rounded-none shadow-sm text-xs font-mono">
                 <div className="font-semibold text-black">Carlota Lagunas Fotografía</div>
                 <div className="text-[10px] text-neutral-500">Actur · Zaragoza</div>
               </div>

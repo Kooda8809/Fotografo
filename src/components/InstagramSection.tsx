@@ -4,19 +4,19 @@ import { ArrowUpRight, Instagram } from 'lucide-react';
 export const InstagramSection: React.FC = () => {
   const instagramImages = [
     {
-      url: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80',
+      url: '/images/real/session-17.webp',
       caption: 'Sesión de embarazo al atardecer en Zaragoza'
     },
     {
-      url: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80',
+      url: '/images/real/session-42.webp',
       caption: 'Pequeños detalles que enamoran en el estudio'
     },
     {
-      url: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80',
+      url: '/images/real/session-44.webp',
       caption: 'Celebrando su primer añito con Smash Cake'
     },
     {
-      url: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80',
+      url: '/images/real/session-45.webp',
       caption: 'Pura magia e ilusión en su Primera Comunión'
     }
   ];
@@ -40,7 +40,7 @@ export const InstagramSection: React.FC = () => {
               href="https://www.instagram.com/carlotalagunasfotografia/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-100 hover:bg-black hover:text-white border border-neutral-200 rounded-full text-xs font-mono uppercase tracking-wider text-black transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-100 hover:bg-black hover:text-white border border-neutral-200 rounded-none text-xs font-mono uppercase tracking-wider text-black transition-colors cursor-pointer"
             >
               <span>@carlotalagunasfotografia</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -56,7 +56,7 @@ export const InstagramSection: React.FC = () => {
               href="https://www.instagram.com/carlotalagunasfotografia/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative aspect-square overflow-hidden rounded-sm bg-neutral-100 border border-neutral-200 shadow-xs"
+              className="group relative aspect-square overflow-hidden rounded-none bg-neutral-100 border border-neutral-200 shadow-xs"
             >
               <img
                 src={post.url}

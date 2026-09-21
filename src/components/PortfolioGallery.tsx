@@ -62,10 +62,10 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 text-xs sm:text-[13px] tracking-wider uppercase transition-all duration-200 rounded-full font-medium cursor-pointer ${
+                  className={`px-4 py-2 text-xs sm:text-[13px] tracking-wider uppercase transition-all duration-200 rounded-none font-medium cursor-pointer ${
                     isActive
                       ? 'bg-white text-black font-semibold'
-                      : 'bg-white/5 text-neutral-400 hover:text-white hover:bg-white/10 border border-white/5'
+                      : 'bg-white/5 text-neutral-400 hover:text-white hover:bg-white/10 border border-white/10'
                   }`}
                 >
                   {cat}
@@ -92,7 +92,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
             return (
               <article
                 key={photo.id}
-                className={`${colSpan} group cursor-pointer relative overflow-hidden bg-neutral-900 border border-white/5 rounded-sm`}
+                className={`${colSpan} group cursor-pointer relative overflow-hidden bg-neutral-900 border border-white/5 rounded-none`}
                 onClick={() => onPhotoClick(filteredPhotos, index)}
               >
                 <div className={`relative w-full ${photo.aspectRatio} overflow-hidden`}>
