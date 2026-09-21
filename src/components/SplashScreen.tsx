@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { BrandLogo } from './BrandLogo';
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -207,12 +208,8 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
 
       {/* Top Header Bar */}
       <header className="relative z-20 w-full px-8 sm:px-14 pt-8 sm:pt-10 flex items-center justify-between">
-        <div
-          className={`text-sm sm:text-base tracking-[0.25em] font-editorial uppercase transition-colors duration-150 ${
-            isRed ? 'text-black font-bold' : 'text-black font-medium'
-          }`}
-        >
-          CARLOTA LAGUNAS
+        <div className="flex items-center">
+          <BrandLogo className="h-9 sm:h-11 w-auto" />
         </div>
 
         {/* 3-bar hamburger icon */}
@@ -239,42 +236,50 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
       </header>
 
       {/* Center Content Section */}
-      <main className="relative z-20 flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto my-auto space-y-6 sm:space-y-7">
+      <main className="relative z-20 flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto my-auto space-y-5 sm:space-y-6">
         
-        {/* Main Hero Title */}
+        {/* Emblem Monogram */}
+        <BrandLogo
+          variant="icon"
+          className="h-14 sm:h-20 w-auto mb-1 opacity-90 transition-transform duration-300"
+        />
+
+        {/* Main Hero Title - Harmonized with Hero (Cormorant Garamond) */}
         <h1
-          className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.03em] font-sans font-extrabold uppercase transition-colors duration-150 leading-[0.95] ${
-            isRed ? 'text-black' : 'text-black'
-          }`}
+          className="font-serif font-normal tracking-tight text-black text-center leading-[0.92] select-none transition-colors duration-150"
+          style={{
+            fontSize: 'clamp(3rem, 10vw, 7.5rem)'
+          }}
         >
-          CARLOTA LAGUNAS
-          <br />
-          FOTOGRAFÍA
+          Carlota Lagunas
+          <span className="block font-serif text-[0.42em] sm:text-[0.45em] font-light italic tracking-normal text-neutral-600 mt-1">
+            Fotografía Infantil & Familiar
+          </span>
         </h1>
 
         {/* Thin Divider Line */}
         <div
-          className={`w-10 sm:w-12 h-[1.5px] my-1 transition-colors duration-150 ${
-            isRed ? 'bg-black' : 'bg-black'
+          className={`w-10 sm:w-12 h-[1px] my-1 transition-colors duration-150 ${
+            isRed ? 'bg-black' : 'bg-neutral-300'
           }`}
         />
 
-        {/* Subtitle */}
+        {/* Subtitle in Montserrat */}
         <p
-          className={`text-xs sm:text-sm md:text-base uppercase tracking-[0.25em] font-sans transition-colors duration-150 ${
-            isRed ? 'text-black font-semibold' : 'text-black/85 font-medium'
+          className={`text-xs sm:text-sm uppercase tracking-[0.25em] font-sans transition-colors duration-150 ${
+            isRed ? 'text-black font-semibold' : 'text-neutral-500 font-medium'
           }`}
         >
-          INFANTIL, NEWBORN Y FAMILIA · ZARAGOZA
+          ZARAGOZA · ESTUDIO EN ACTUR
         </p>
 
         {/* CTA Button */}
-        <div className="pt-3 sm:pt-5">
+        <div className="pt-3 sm:pt-4">
           <button
             id="splash-cta-btn"
             onClick={handleCtaClick}
             disabled={isRed}
-            className={`px-10 sm:px-14 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm font-sans tracking-[0.2em] uppercase transition-all duration-150 cursor-pointer shadow-sm ${
+            className={`px-10 sm:px-14 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm font-sans font-medium tracking-[0.2em] uppercase transition-all duration-150 cursor-pointer shadow-sm ${
               isRed
                 ? 'bg-black text-white border border-black scale-[0.98]'
                 : 'bg-transparent text-black border border-black hover:bg-black/5 active:scale-95'
