@@ -289,9 +289,9 @@ const AnimatedPhotoItem: React.FC<AnimatedPhotoItemProps> = ({ photo, onClick })
           <span className="inline-block px-2 py-0.5 rounded-none bg-white/20 backdrop-blur-sm text-[9px] font-mono uppercase tracking-wider mb-1">
             {photo.category}
           </span>
-          <h4 className="font-serif font-normal text-sm leading-tight mb-0.5 text-white line-clamp-1">
+          <h2 className="font-serif font-normal text-sm leading-tight mb-0.5 text-white line-clamp-1">
             {photo.title}
-          </h4>
+          </h2>
           <div className="flex items-center gap-1 text-[10px] text-neutral-300">
             <MapPin className="w-3 h-3 text-neutral-400" />
             <span>{photo.location}</span>

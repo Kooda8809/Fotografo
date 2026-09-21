@@ -1,28 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Navigation, ArrowUpRight } from 'lucide-react';
 
 export const StudioMapSection: React.FC = () => {
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
   const directionsUrl =
     'https://www.google.com/maps/dir/?api=1&destination=Carlota+Lagunas+Fotografia+Zaragoza&destination_place_id=ChIJgZyvymkUWQ0RXo7wXg0HbkE';
 
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '500px 0px' }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       aria-label="Mapa de localización Carlota Lagunas Fotografía"
       className="relative w-full border-t border-neutral-200 bg-neutral-100 p-0 m-0 leading-none overflow-hidden group"
     >
       {/* Full-bleed infinite horizontal map */}
       <div className="relative w-full h-[260px] sm:h-[300px] md:h-[340px] lg:h-[360px] overflow-hidden">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23844.265485381125!2d-0.889848!3d41.66582700000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914cb9caf2981%3A0x416e070d5ef0825e!2sCarlota%20Lagunas%20Fotografia!5e0!3m2!1ses!2ses!4v1790013846364!5m2!1ses!2ses"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="strict-origin-when-cross-origin"
-          title="Mapa de localización Carlota Lagunas Fotografía en Zaragoza"
-          className="w-full h-full border-0 block filter grayscale contrast-[1.12] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out"
-        />
+        {isInView ? (
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23844.265485381125!2d-0.889848!3d41.66582700000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914cb9caf2981%3A0x416e070d5ef0825e!2sCarlota%20Lagunas%20Fotografia!5e0!3m2!1ses!2ses!4v1790013846364!5m2!1ses!2ses"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+            title="Mapa de localización Carlota Lagunas Fotografía en Zaragoza"
+            className="w-full h-full border-0 block filter grayscale contrast-[1.12] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out"
+          />
+        ) : (
+          <div className="w-full h-full bg-neutral-200/80" />
+        )}
 
         {/* Floating Atelier Badge (Top Left) */}
         <div className="absolute top-4 left-4 sm:left-8 p-2.5 sm:p-3 bg-white/95 backdrop-blur-md border border-neutral-200 rounded-none shadow-md text-xs font-mono pointer-events-none hidden sm:block select-none">

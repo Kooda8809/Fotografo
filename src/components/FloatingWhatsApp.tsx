@@ -3,10 +3,7 @@ import { MessageSquare } from 'lucide-react';
 
 export const FloatingWhatsApp: React.FC = () => {
   return (
-    <aside
-      aria-label="Acceso directo a WhatsApp"
-      className="fixed bottom-6 right-6 z-30 sm:hidden"
-    >
+    <aside className="fixed bottom-6 right-6 z-30 sm:hidden">
       <a
         href="https://wa.me/34687707029?text=Hola%20Carlota,%20me%20gustar%C3%ADa%20consultar%20disponibilidad%20para%20una%20sesi%C3%B3n%20en%20Zaragoza"
         target="_blank"

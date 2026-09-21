@@ -40,11 +40,30 @@ import { portfolioPhotos } from './data/portfolio';
 import { servicesList } from './data/services';
 
 export default function App() {
-  const [showSplash, setShowSplash] = useState(true);
   const [currentPath, setCurrentPath] = useState(() => {
     const p = window.location.pathname.replace(/^\/+|\/+$/g, '');
     return p ? `/${p}` : '/';
   });
+
+  const [showSplash, setShowSplash] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    const p = window.location.pathname.replace(/^\/+|\/+$/g, '');
+    return !p || p === 'inicio';
+  });
+
+  const [contentMounted, setContentMounted] = useState(!showSplash);
+
+  useEffect(() => {
+    if (!showSplash) {
+      setContentMounted(true);
+      return;
+    }
+    // Defer loading heavy gallery & background elements until after initial paint
+    const timer = setTimeout(() => {
+      setContentMounted(true);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [showSplash]);
 
   const [activeModalSection, setActiveModalSection] = useState<ActiveModalSection>(null);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
@@ -279,30 +298,39 @@ export default function App() {
     <div className={`min-h-screen bg-white text-[#111111] font-sans selection:bg-neutral-800 selection:text-white flex flex-col ${showSplash ? 'h-screen overflow-hidden max-h-screen' : ''}`}>
       {/* Optional Interactive Entry Splash Screen */}
       {showSplash && (
-        <SplashScreen onComplete={() => setShowSplash(false)} />
+        <SplashScreen
+          onComplete={() => {
+            setContentMounted(true);
+            setShowSplash(false);
+          }}
+        />
       )}
 
-      {/* Header with brand links and navigation */}
-      <Navbar
-        onOpenQuoteModal={() => handleOpenQuoteModal()}
-        onNavigate={handleNavigate}
-        activeSection={currentPath.replace('/', '') || 'hero'}
-      />
+      {contentMounted && (
+        <>
+          {/* Header with brand links and navigation */}
+          <Navbar
+            onOpenQuoteModal={() => handleOpenQuoteModal()}
+            onNavigate={handleNavigate}
+            activeSection={currentPath.replace('/', '') || 'hero'}
+          />
 
-      {/* Main Content Area */}
-      <Suspense fallback={<div className="min-h-screen bg-white" />}>
-        {renderMainContent()}
-      </Suspense>
+          {/* Main Content Area */}
+          <Suspense fallback={<div className="min-h-screen bg-white" />}>
+            {renderMainContent()}
+          </Suspense>
 
-      {/* Studio Location Map above Footer adapted to Visual Identity */}
-      {currentPath !== '/404' && <StudioMapSection />}
+          {/* Studio Location Map above Footer adapted to Visual Identity */}
+          {currentPath !== '/404' && <StudioMapSection />}
 
-      {/* Editorial Footer */}
-      <Footer
-        onNavigate={handleNavigate}
-        onOpenLegal={(type) => setLegalDoc(type)}
-        onReplaySplash={() => setShowSplash(true)}
-      />
+          {/* Editorial Footer */}
+          <Footer
+            onNavigate={handleNavigate}
+            onOpenLegal={(type) => setLegalDoc(type)}
+            onReplaySplash={() => setShowSplash(true)}
+          />
+        </>
+      )}
 
       {/* Fullscreen Section Modal for Quick Nav */}
       {activeModalSection && (

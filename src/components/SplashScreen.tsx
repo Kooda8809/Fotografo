@@ -189,42 +189,34 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
 
         @keyframes paintBlobWobble1 {
           0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
-            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
           }
           33% {
-            transform: translate(30px, -20px) scale(1.15) rotate(40deg);
-            border-radius: 58% 42% 38% 62% / 55% 65% 35% 45%;
+            transform: translate3d(30px, -20px, 0) scale(1.15) rotate(40deg);
           }
           66% {
-            transform: translate(-25px, 25px) scale(0.95) rotate(-30deg);
-            border-radius: 35% 65% 60% 40% / 60% 30% 70% 40%;
+            transform: translate3d(-25px, 25px, 0) scale(0.95) rotate(-30deg);
           }
         }
 
         @keyframes paintBlobWobble2 {
           0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
           }
           33% {
-            transform: translate(-35px, 20px) scale(1.1) rotate(-50deg);
-            border-radius: 40% 60% 70% 30% / 40% 40% 60% 60%;
+            transform: translate3d(-35px, 20px, 0) scale(1.1) rotate(-50deg);
           }
           66% {
-            transform: translate(25px, -30px) scale(1.05) rotate(35deg);
-            border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+            transform: translate3d(25px, -30px, 0) scale(1.05) rotate(35deg);
           }
         }
 
         @keyframes paintBlobWobble3 {
           0%, 100% {
-            transform: translate(0, 0) scale(1);
-            border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
+            transform: translate3d(0, 0, 0) scale(1);
           }
           50% {
-            transform: translate(20px, 30px) scale(1.2);
-            border-radius: 65% 35% 60% 40% / 50% 40% 60% 50%;
+            transform: translate3d(20px, 30px, 0) scale(1.2);
           }
         }
 
@@ -265,12 +257,14 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
       `}</style>
 
       {/* SVG Liquid Filter for organic marbled paint distortion */}
-      <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
-        <filter id="paint-bucket-filter" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.012 0.016" numOctaves="3" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="46" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </svg>
+      {isPaint && (
+        <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
+          <filter id="paint-bucket-filter" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.016" numOctaves="3" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="46" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
+      )}
 
       {/* 
         ESTADO 1: Imagens Abstratas Coloridas com Forte Efeito de Desfoque (Blur) e Parallax Suave.
@@ -381,14 +375,15 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         </div>
 
         {/* 3-bar hamburger icon */}
-        <div
-          className="flex flex-col gap-1.5 cursor-pointer p-2 transition-colors duration-150"
-          aria-label="Menu"
+        <button
+          type="button"
+          className="flex flex-col gap-1.5 cursor-pointer p-2 transition-colors duration-150 border-0 bg-transparent"
+          aria-label="Menú de navegación"
         >
           <span className="block w-6 h-[2px] bg-black transition-colors duration-150" />
           <span className="block w-6 h-[2px] bg-black transition-colors duration-150" />
           <span className="block w-6 h-[2px] bg-black transition-colors duration-150" />
-        </div>
+        </button>
       </header>
 
       {/* Center Content Section - Clean, without white card window and without center logo */}
