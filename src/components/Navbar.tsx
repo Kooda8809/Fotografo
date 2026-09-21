@@ -34,6 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'portfolio', label: 'Galería' },
     { id: 'servicios', label: 'Especialidades' },
     { id: 'precios', label: 'Precios' },
+    { id: 'regalar-sesion', label: 'Tarjetas Regalo' },
     { id: 'sobre-mi', label: 'Sobre Mí' },
     { id: 'contacto', label: 'Contacto' }
   ];

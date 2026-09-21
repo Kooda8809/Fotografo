@@ -41,6 +41,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
       tag: 'Packs digitales, madera y álbumes'
     },
     {
+      id: 'regalar-sesion',
+      label: 'Gift Voucher',
+      image: '/images/real/session-real-008.webp',
+      tag: 'El regalo que dura para siempre'
+    },
+    {
       id: 'sobre-mi',
       label: 'About',
       image: '/images/real/carlota-perfil.webp',
