@@ -18,22 +18,35 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
   // Monitor scroll position within section to calculate smooth continuous progress
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (isClickingRef.current || !sectionRef.current) return;
+      if (isClickingRef.current || !sectionRef.current || ticking) return;
 
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const totalScrollable = rect.height - windowHeight;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        if (!sectionRef.current) return;
 
-      if (totalScrollable <= 0) return;
+        const rect = sectionRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
 
-      // Distance scrolled from top of section
-      const scrolled = -rect.top;
-      const rawProgress = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
+        // Skip recalculation if the section is not in or near viewport
+        if (rect.bottom < -100 || rect.top > windowHeight + 100) return;
 
-      // Continuous float index from 0 to (servicesList.length - 1)
-      const currentFloatIndex = rawProgress * (servicesList.length - 1);
-      setContinuousProgress(currentFloatIndex);
+        const totalScrollable = rect.height - windowHeight;
+        if (totalScrollable <= 0) return;
+
+        // Distance scrolled from top of section
+        const scrolled = -rect.top;
+        const rawProgress = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
+
+        // Continuous float index from 0 to (servicesList.length - 1)
+        const currentFloatIndex = rawProgress * (servicesList.length - 1);
+        setContinuousProgress((prev) => {
+          if (Math.abs(currentFloatIndex - prev) < 0.02) return prev;
+          return currentFloatIndex;
+        });
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

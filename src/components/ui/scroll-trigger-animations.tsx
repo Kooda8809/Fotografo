@@ -36,6 +36,19 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
   const lenisRef = React.useRef<Lenis | null>(null);
 
   React.useEffect(() => {
+    // Mobile and touch devices have hardware-accelerated compositor scrolling.
+    // Hijacking scroll via JS on mobile causes heavy frame drops and touch latency.
+    const isTouch =
+      typeof window !== 'undefined' &&
+      ('ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(pointer: coarse)').matches ||
+        window.innerWidth < 768);
+
+    if (isTouch) {
+      return;
+    }
+
     const mergedOptions = { ...defaultOptions, ...options };
 
     try {

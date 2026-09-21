@@ -1,13 +1,11 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { SplashScreen } from './components/SplashScreen';
 import { Navbar } from './components/Navbar';
 import { IntegratedHeroPortfolio } from './components/IntegratedHeroPortfolio';
 import { AboutADP } from './components/AboutADP';
-import { MenuSectionModal, ActiveModalSection } from './components/MenuSectionModal';
+import type { ActiveModalSection } from './components/MenuSectionModal';
 import { Footer } from './components/Footer';
-import { Lightbox } from './components/Lightbox';
-import { QuoteModal } from './components/QuoteModal';
-import { LegalModal, LegalDocType } from './components/LegalModal';
+import type { LegalDocType } from './components/LegalModal';
 import { CookieBanner } from './components/CookieBanner';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { NotFoundView } from './components/NotFoundView';
@@ -21,15 +19,21 @@ import { InstagramSection } from './components/InstagramSection';
 import { HomeClosingCTA } from './components/HomeClosingCTA';
 import { StudioMapSection } from './components/StudioMapSection';
 
-// Dedicated Sub-Pages
-import { PortfolioPage } from './components/pages/PortfolioPage';
-import { ServiceDetailPage } from './components/pages/ServiceDetailPage';
-import { AboutPage } from './components/pages/AboutPage';
-import { ContactPage } from './components/pages/ContactPage';
-import { QuotePage } from './components/pages/QuotePage';
-import { BlogPage } from './components/pages/BlogPage';
-import { PricingPage } from './components/pages/PricingPage';
-import { GiftSessionPage } from './components/pages/GiftSessionPage';
+// Code-split secondary sub-pages with React.lazy
+const PortfolioPage = lazy(() => import('./components/pages/PortfolioPage').then((m) => ({ default: m.PortfolioPage })));
+const ServiceDetailPage = lazy(() => import('./components/pages/ServiceDetailPage').then((m) => ({ default: m.ServiceDetailPage })));
+const AboutPage = lazy(() => import('./components/pages/AboutPage').then((m) => ({ default: m.AboutPage })));
+const ContactPage = lazy(() => import('./components/pages/ContactPage').then((m) => ({ default: m.ContactPage })));
+const QuotePage = lazy(() => import('./components/pages/QuotePage').then((m) => ({ default: m.QuotePage })));
+const BlogPage = lazy(() => import('./components/pages/BlogPage').then((m) => ({ default: m.BlogPage })));
+const PricingPage = lazy(() => import('./components/pages/PricingPage').then((m) => ({ default: m.PricingPage })));
+const GiftSessionPage = lazy(() => import('./components/pages/GiftSessionPage').then((m) => ({ default: m.GiftSessionPage })));
+
+// Code-split heavy interactive modals
+const MenuSectionModal = lazy(() => import('./components/MenuSectionModal').then((m) => ({ default: m.MenuSectionModal })));
+const Lightbox = lazy(() => import('./components/Lightbox').then((m) => ({ default: m.Lightbox })));
+const QuoteModal = lazy(() => import('./components/QuoteModal').then((m) => ({ default: m.QuoteModal })));
+const LegalModal = lazy(() => import('./components/LegalModal').then((m) => ({ default: m.LegalModal })));
 
 import { PhotoItem } from './types';
 import { portfolioPhotos } from './data/portfolio';
@@ -286,7 +290,9 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      {renderMainContent()}
+      <Suspense fallback={<div className="min-h-screen bg-white" />}>
+        {renderMainContent()}
+      </Suspense>
 
       {/* Studio Location Map above Footer adapted to Visual Identity */}
       {currentPath !== '/404' && <StudioMapSection />}
@@ -299,35 +305,51 @@ export default function App() {
       />
 
       {/* Fullscreen Section Modal for Quick Nav */}
-      <MenuSectionModal
-        activeModalSection={activeModalSection}
-        onClose={() => setActiveModalSection(null)}
-        onOpenQuoteModal={handleOpenQuoteModal}
-        onOpenLightboxWithUrls={handleOpenLightboxWithUrls}
-        onNavigate={handleNavigate}
-      />
+      {activeModalSection && (
+        <Suspense fallback={null}>
+          <MenuSectionModal
+            activeModalSection={activeModalSection}
+            onClose={() => setActiveModalSection(null)}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onOpenLightboxWithUrls={handleOpenLightboxWithUrls}
+            onNavigate={handleNavigate}
+          />
+        </Suspense>
+      )}
 
       {/* Interactive Lightbox for High-Res inspection */}
-      <Lightbox
-        isOpen={isLightboxOpen}
-        photos={lightboxPhotos}
-        currentIndex={lightboxIndex}
-        onClose={() => setIsLightboxOpen(false)}
-        onNavigate={(index) => setLightboxIndex(index)}
-      />
+      {isLightboxOpen && (
+        <Suspense fallback={null}>
+          <Lightbox
+            isOpen={isLightboxOpen}
+            photos={lightboxPhotos}
+            currentIndex={lightboxIndex}
+            onClose={() => setIsLightboxOpen(false)}
+            onNavigate={(index) => setLightboxIndex(index)}
+          />
+        </Suspense>
+      )}
 
       {/* Quote Request Modal */}
-      <QuoteModal
-        isOpen={isQuoteOpen}
-        onClose={() => setIsQuoteOpen(false)}
-        preselectedService={quoteService}
-      />
+      {isQuoteOpen && (
+        <Suspense fallback={null}>
+          <QuoteModal
+            isOpen={isQuoteOpen}
+            onClose={() => setIsQuoteOpen(false)}
+            preselectedService={quoteService}
+          />
+        </Suspense>
+      )}
 
       {/* Legal & Compliance Modal */}
-      <LegalModal
-        docType={legalDoc}
-        onClose={() => setLegalDoc(null)}
-      />
+      {legalDoc && (
+        <Suspense fallback={null}>
+          <LegalModal
+            docType={legalDoc}
+            onClose={() => setLegalDoc(null)}
+          />
+        </Suspense>
+      )}
 
       {/* RGPD Cookie Banner */}
       <CookieBanner onOpenCookiesPolicy={() => setLegalDoc('cookies')} />

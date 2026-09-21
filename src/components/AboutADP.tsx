@@ -21,6 +21,14 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
+      // Skip heavy calculation and state updates if section is outside viewport
+      if (rect.bottom < -100 || rect.top > windowHeight + 100) {
+        ticking = false;
+        return;
+      }
+
+      const isMobile = window.innerWidth < 768;
+
       // 1. Entrance phase: from when section top touches bottom of viewport to when it is comfortably in view
       const enterRange = windowHeight * 0.6;
       const rawEnter = (windowHeight - rect.top) / enterRange;
@@ -37,15 +45,18 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
       const fadeOut = exitProgress;
       const opacity = Math.min(fadeIn, fadeOut);
 
-      // Slide to left for title:
-      // Starts shifted 150px to the right, glides left to 0px on enter, and continues slightly left (-50px) on exit
-      const titleSlideX = (1 - enterProgress) * 150 + (1 - exitProgress) * -50;
+      // Slide to left for title (moderate on mobile to prevent touch scroll jitter)
+      const maxSlide = isMobile ? 30 : 150;
+      const exitSlide = isMobile ? -15 : -50;
+      const titleSlideX = (1 - enterProgress) * maxSlide + (1 - exitProgress) * exitSlide;
 
-      // Slide to left for bio text block (layered slightly for rich editorial depth)
-      const bioSlideX = (1 - enterProgress) * 100 + (1 - exitProgress) * -35;
+      // Slide to left for bio text block
+      const maxBioSlide = isMobile ? 20 : 100;
+      const exitBioSlide = isMobile ? -10 : -35;
+      const bioSlideX = (1 - enterProgress) * maxBioSlide + (1 - exitProgress) * exitBioSlide;
 
       // Photo elevation and opacity
-      const photoY = (1 - enterProgress) * 35 + (1 - exitProgress) * -25;
+      const photoY = (1 - enterProgress) * (isMobile ? 15 : 35) + (1 - exitProgress) * -20;
 
       setTitleTransform({
         x: titleSlideX,
@@ -107,7 +118,10 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
               <img
                 src="/images/real/carlota-perfil.webp"
                 alt="Carlota Lagunas - Fotografía Infantil y Familiar en Zaragoza"
+                width={480}
+                height={600}
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover object-center filter contrast-[1.04] brightness-98 group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />

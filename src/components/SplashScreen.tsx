@@ -9,9 +9,9 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
   // States: 'white' (Estado 1 - Inicial) | 'paint' (Estado 2 - Balde de Tinta Colorida) | 'fading' (Ação Final) | 'finished'
   const [splashState, setSplashState] = useState<'white' | 'paint' | 'fading' | 'finished'>('white');
   
-  // Parallax animation state using lerp for silky smooth movement
+  // Parallax animation state using direct DOM transform to eliminate 60fps React re-renders
   const mousePosRef = useRef({ targetX: 0, targetY: 0, currentX: 0, currentY: 0 });
-  const [renderPos, setRenderPos] = useState({ x: 0, y: 0 });
+  const containerParallaxRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number | null>(null);
 
   // Lock body scroll and prevent any scroll while splash screen is active
@@ -33,33 +33,34 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
     }
   }, [splashState]);
 
-  // Smooth lerped parallax loop
+  // Smooth lerped parallax loop - only on desktop pointer devices
   useEffect(() => {
     if (splashState !== 'white') return;
 
+    const isTouch =
+      typeof window !== 'undefined' &&
+      ('ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.innerWidth < 768);
+
+    if (isTouch) return; // Save 100% CPU on mobile
+
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      mousePosRef.current.targetX = (e.clientX / innerWidth - 0.5) * 60;
-      mousePosRef.current.targetY = (e.clientY / innerHeight - 0.5) * 60;
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!e.touches[0]) return;
-      const touch = e.touches[0];
-      const { innerWidth, innerHeight } = window;
-      mousePosRef.current.targetX = (touch.clientX / innerWidth - 0.5) * 45;
-      mousePosRef.current.targetY = (touch.clientY / innerHeight - 0.5) * 45;
+      mousePosRef.current.targetX = (e.clientX / innerWidth - 0.5) * 45;
+      mousePosRef.current.targetY = (e.clientY / innerHeight - 0.5) * 45;
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     const animate = () => {
       const p = mousePosRef.current;
       p.currentX += (p.targetX - p.currentX) * 0.08;
       p.currentY += (p.targetY - p.currentY) * 0.08;
 
-      setRenderPos({ x: p.currentX, y: p.currentY });
+      if (containerParallaxRef.current) {
+        containerParallaxRef.current.style.transform = `translate3d(${p.currentX}px, ${p.currentY}px, 0)`;
+      }
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
@@ -67,7 +68,6 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
       }
@@ -277,7 +277,8 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         Desaparecem suavemente quando o clique acontece.
       */}
       <div
-        className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-200 ${
+        ref={containerParallaxRef}
+        className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-200 will-change-transform ${
           isPaint ? 'opacity-0' : 'opacity-100'
         }`}
       >
@@ -286,22 +287,23 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
             key={block.id}
             className={`absolute ${block.className} rounded-none overflow-hidden`}
             style={{
-              transform: `translate3d(${renderPos.x * block.speedX}px, ${renderPos.y * block.speedY}px, 0)`,
-              filter: 'blur(34px) saturate(1.4)',
-              WebkitFilter: 'blur(34px) saturate(1.4)',
-              willChange: 'transform'
+              filter: 'blur(30px) saturate(1.3)',
+              WebkitFilter: 'blur(30px) saturate(1.3)',
             }}
           >
             <img
               src={block.src}
               alt=""
+              width="360"
+              height="450"
               className="w-full h-full object-cover brightness-100"
-              loading="eager"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         ))}
-        {/* Soft atmospheric white veil for pristine contrast */}
-        <div className="absolute inset-0 bg-white/35 backdrop-blur-[4px]" />
+        {/* Soft atmospheric white veil for pristine contrast without stacked backdrop blur */}
+        <div className="absolute inset-0 bg-white/40" />
       </div>
 
       {/* 

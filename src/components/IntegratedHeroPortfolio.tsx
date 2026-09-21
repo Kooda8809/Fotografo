@@ -24,10 +24,17 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
 
   // Track global scroll for background typography scaling and translation to the left
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const progress = Math.min(Math.max(scrollY / 450, 0), 1);
-      setScrollProgress(progress);
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          const scrollY = window.scrollY;
+          const progress = Math.min(Math.max(scrollY / 450, 0), 1);
+          setScrollProgress((prev) => (Math.abs(progress - prev) < 0.01 ? prev : progress));
+        });
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -263,6 +270,8 @@ const AnimatedPhotoItem: React.FC<AnimatedPhotoItemProps> = ({ photo, onClick })
       <img
         src={photo.imageUrl}
         alt={photo.title}
+        width={400}
+        height={300}
         loading="lazy"
         decoding="async"
         className="aspect-[4/3] sm:aspect-[4/3.2] inline-block align-middle h-auto max-h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out rounded-none"

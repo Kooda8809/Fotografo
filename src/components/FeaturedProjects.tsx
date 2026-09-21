@@ -57,7 +57,10 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                 <img
                   src={project.coverImage}
                   alt={project.title}
+                  width={600}
+                  height={375}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-between text-white pointer-events-none">
