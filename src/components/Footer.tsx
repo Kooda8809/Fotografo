@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { LegalDocType } from './LegalModal';
 import { Instagram, MessageCircle, Phone, Mail, ArrowUpRight, AtSign } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -122,13 +123,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
         {/* 4-COLUMN GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           
-          {/* COLUMN 1: Brand & Newsletter */}
+          {/* COLUMN 1: Brand & Description */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="space-y-1">
-              <span className="font-editorial text-2xl tracking-tight text-black block">
-                carlota lagunas
-              </span>
-              <h3 className="text-sm font-mono uppercase tracking-widest text-neutral-500">
+            <div className="space-y-3">
+              <button
+                onClick={() => onNavigate('hero')}
+                className="text-left cursor-pointer focus:outline-none block"
+                aria-label="Ir al inicio"
+              >
+                <BrandLogo className="h-14 sm:h-16 w-auto" />
+              </button>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-neutral-500">
                 Fotografía Infantil y Familiar en Zaragoza
               </h3>
             </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioPhotos } from '../data/portfolio';
+import { BrandLogo } from './BrandLogo';
 
 interface HeroProps {
   onScrollToPortfolio: () => void;
@@ -49,15 +50,21 @@ export const Hero: React.FC<HeroProps> = ({
             transformOrigin: 'center center'
           }}
         >
-          <h1
-            className="font-serif font-normal tracking-tight text-black text-center whitespace-nowrap transition-all duration-300"
-            style={{
-              fontSize: 'clamp(3rem, 11vw, 9.5rem)',
-              lineHeight: 0.9
-            }}
-          >
-            Carlota Lagunas
-          </h1>
+          <div className="flex flex-col items-center select-none">
+            <BrandLogo
+              variant="icon"
+              className="h-12 sm:h-16 md:h-20 w-auto mb-2 opacity-90 transition-transform duration-300"
+            />
+            <h1
+              className="font-serif font-normal tracking-tight text-black text-center whitespace-nowrap transition-all duration-300"
+              style={{
+                fontSize: 'clamp(2.8rem, 10.5vw, 9rem)',
+                lineHeight: 0.95
+              }}
+            >
+              Carlota Lagunas
+            </h1>
+          </div>
         </div>
 
         <div

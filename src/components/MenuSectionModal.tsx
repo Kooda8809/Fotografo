@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, ArrowUpRight } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 import { ServicesSection } from './ServicesSection';
 import { FeaturedProjects } from './FeaturedProjects';
 import { AboutADP } from './AboutADP';
@@ -36,8 +37,8 @@ export const MenuSectionModal: React.FC<MenuSectionModalProps> = ({
     >
       {/* Top Floating Control Bar */}
       <div className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-neutral-200 px-6 sm:px-12 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="font-editorial text-2xl tracking-tight text-black">carlota lagunas</span>
+        <div className="flex items-center gap-4">
+          <BrandLogo className="h-8 sm:h-9 w-auto" />
           <span className="text-xs uppercase tracking-[0.2em] text-neutral-500 font-mono hidden sm:inline-block">
             {activeModalSection === 'proyectos' && '· Historias de Familia'}
             {activeModalSection === 'servicios' && '· Especialidades de Estudio'}

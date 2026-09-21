@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, ArrowUpRight, Phone, Mail } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 interface NavbarProps {
   onOpenQuoteModal: (initialService?: string) => void;
@@ -13,30 +14,29 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeSection
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Monitor scroll position to transform text header into hamburger menu when leaving hero
+  // Monitor overall window scroll for sticky navbar styles
   useEffect(() => {
     const handleScroll = () => {
-      const scrolled = window.scrollY > 80;
-      setIsScrolledPastHero(scrolled);
+      setScrolled(window.scrollY > 50);
     };
-
-    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isHeroMode = (activeSection === 'hero' || activeSection === '') && !isScrolledPastHero;
+  // Determine if we are at the Hero section
+  const isHeroMode = activeSection === 'hero' && !scrolled;
 
   const navItems = [
-    { label: 'Inicio', id: 'hero' },
-    { label: 'Galería', id: 'portfolio' },
-    { label: 'Especialidades', id: 'servicios' },
-    { label: 'Precios', id: 'precios' },
-    { label: 'Regalar Sesión', id: 'regalar-sesion' },
-    { label: 'Sobre Mí', id: 'sobre-mi' },
-    { label: 'Contacto', id: 'contacto' }
+    { id: 'hero', label: 'Inicio' },
+    { id: 'galeria', label: 'Galería' },
+    { id: 'servicios', label: 'Especialidades' },
+    { id: 'precios', label: 'Precios' },
+    { id: 'tarjetas-regalo', label: 'Regalar Sesión' },
+    { id: 'sobre-mi', label: 'Sobre Mí' },
+    { id: 'contacto', label: 'Contacto' }
   ];
 
   const handleLinkClick = (id: string) => {
@@ -53,8 +53,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           isHeroMode ? 'py-6 sm:py-8' : 'py-4 sm:py-5'
         }`}
       >
-        {/* Left header space (Clean and empty) */}
-        <div />
+        {/* Brand Official Logo 'Carlota Lagunas' (Visible outside of Hero & on subpages) */}
+        <button
+          onClick={() => handleLinkClick('hero')}
+          className={`group text-left focus:outline-none cursor-pointer transition-all duration-300 ${
+            !isHeroMode
+              ? 'opacity-100 translate-y-0 pointer-events-auto'
+              : 'opacity-0 -translate-y-2 pointer-events-none'
+          }`}
+          aria-label="Ir al inicio"
+        >
+          <BrandLogo className="h-10 sm:h-12 w-auto group-hover:opacity-85" />
+        </button>
 
         {/* Right side container: Either Hero Text Navigation or Compact Hamburger */}
         <div className="flex items-start gap-8 sm:gap-12 relative">
@@ -137,9 +147,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center justify-between border-b border-neutral-200 pb-6">
             <button
               onClick={() => handleLinkClick('hero')}
-              className="font-editorial text-2xl sm:text-3xl tracking-tight text-black text-left cursor-pointer"
+              className="text-left cursor-pointer focus:outline-none"
+              aria-label="Ir al inicio"
             >
-              carlota lagunas
+              <BrandLogo className="h-10 sm:h-12 w-auto" />
             </button>
             <button
               onClick={() => setMenuOpen(false)}
