@@ -160,10 +160,10 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onOpenQuoteMod
             <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:h-full min-h-[380px] rounded-none overflow-hidden bg-neutral-900 border border-neutral-200 shadow-md">
               <iframe
                 title="Ubicación Carlota Lagunas Fotografía en Zaragoza"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2980.528345787688!2d-0.890693523403278!3d41.666191471266014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914c62b662df9%3A0x1c8b3df9bbddf25!2sC.%20de%20Rosal%C3%ADa%20de%20Castro%2C%2015%2C%2050018%20Zaragoza!5e0!3m2!1ses!2ses!4v1710970000000!5m2!1ses!2ses"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23844.265485381125!2d-0.889848!3d41.66582700000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914cb9caf2981%3A0x416e070d5ef0825e!2sCarlota%20Lagunas%20Fotografia!5e0!3m2!1ses!2ses!4v1790013846364!5m2!1ses!2ses"
                 className="w-full h-full border-0 grayscale contrast-125 opacity-90 hover:opacity-100 transition-opacity"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                referrerPolicy="strict-origin-when-cross-origin"
               />
               
               {/* Studio Corner Badge */}

@@ -19,6 +19,7 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { LocationSection } from './components/LocationSection';
 import { InstagramSection } from './components/InstagramSection';
 import { HomeClosingCTA } from './components/HomeClosingCTA';
+import { StudioMapSection } from './components/StudioMapSection';
 
 // Dedicated Sub-Pages
 import { PortfolioPage } from './components/pages/PortfolioPage';
@@ -286,6 +287,9 @@ export default function App() {
 
       {/* Main Content Area */}
       {renderMainContent()}
+
+      {/* Studio Location Map above Footer adapted to Visual Identity */}
+      {currentPath !== '/404' && <StudioMapSection />}
 
       {/* Editorial Footer */}
       <Footer
