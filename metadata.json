@@ -1,0 +1,6 @@
+{
+  "name": "ADP — Fotógrafo de Interiores Madrid",
+  "description": "Fotografía profesional de interiores, inmobiliaria, arquitectura, hoteles y espacios en Madrid. Portafolio de Adri ADP.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
