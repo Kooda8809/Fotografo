@@ -16,6 +16,7 @@ export const HomeClosingCTA: React.FC<HomeClosingCTAProps> = ({
   return (
     <section
       id="reserva-cta"
+      data-lenis-prevent="true"
       className="relative py-20 sm:py-28 lg:py-32 bg-[#111111] text-white overflow-hidden border-t border-neutral-800"
       aria-label="Reserva de sesión fotográfica con Carlota Lagunas"
     >

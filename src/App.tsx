@@ -36,11 +36,9 @@ const LegalModal = lazy(() => import('./components/LegalModal').then((m) => ({ d
 import { PhotoItem } from './types';
 import { portfolioPhotos } from './data/portfolio';
 import { servicesList } from './data/services';
-import { useSmoothScroll, getGlobalLenis } from './components/ui/scroll-trigger-animations';
+import { getGlobalLenis } from './components/ui/scroll-trigger-animations';
 
 export default function App() {
-  // Global smooth slow momentum scroll across PC and Android
-  useSmoothScroll();
 
   const [currentPath, setCurrentPath] = useState(() => {
     const p = window.location.pathname.replace(/^\/+|\/+$/g, '');

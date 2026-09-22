@@ -26,6 +26,7 @@ export const StudioMapSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
+      data-lenis-prevent="true"
       aria-label="Mapa de localización Carlota Lagunas Fotografía"
       className="relative w-full border-t border-neutral-200 bg-neutral-100 p-0 m-0 leading-none overflow-hidden group"
     >
