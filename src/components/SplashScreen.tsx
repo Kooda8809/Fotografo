@@ -299,7 +299,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartT
               className="w-full h-full object-cover brightness-100"
               loading="eager"
               decoding="async"
-              fetchPriority={(block.id === 1 || block.id === 2 || block.id === 4) ? 'high' : 'auto'}
+              fetchPriority="high"
             />
           </div>
         ))}

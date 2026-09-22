@@ -1,11 +1,24 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import {defineConfig, type Plugin} from 'vite';
+
+function asyncCssPlugin(): Plugin {
+  return {
+    name: 'async-css-plugin',
+    enforce: 'post',
+    transformIndexHtml(html: string) {
+      return html.replace(
+        /<link rel="stylesheet" crossorigin href="([^"]+\.css)">/g,
+        `<link rel="preload" as="style" href="$1" /><link rel="stylesheet" href="$1" media="print" onload="this.media='all';this.onload=null;"><noscript><link rel="stylesheet" href="$1"></noscript>`
+      );
+    },
+  };
+}
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), asyncCssPlugin()],
     resolve: {
       alias: {
         '@': path.resolve('.'),
@@ -21,32 +34,9 @@ export default defineConfig(() => {
     },
     build: {
       target: 'esnext',
-      minify: 'esbuild',
+      minify: 'esbuild' as const,
       cssCodeSplit: true,
       modulePreload: false,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            const normalized = id.replace(/\\/g, '/');
-            if (
-              normalized.includes('/node_modules/react/') ||
-              normalized.includes('/node_modules/react-dom/') ||
-              normalized.includes('/node_modules/scheduler/')
-            ) {
-              return 'vendor-react';
-            }
-            if (normalized.includes('/node_modules/lucide-react/')) {
-              return 'vendor-lucide';
-            }
-            if (
-              normalized.includes('/node_modules/motion/') ||
-              normalized.includes('/node_modules/lenis/')
-            ) {
-              return 'vendor-motion';
-            }
-          },
-        },
-      },
     },
   };
 });

@@ -53,10 +53,39 @@
       />
     </noscript>
 
+    <!-- Inline Critical Splash CSS: Guarantees zero FOUC while main stylesheet loads asynchronously -->
+    <style id="critical-splash-css">
+      body { margin: 0; background-color: #ffffff; }
+      #splash-screen-overlay {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        user-select: none;
+        overflow: hidden;
+        background-color: #ffffff;
+        touch-action: none;
+      }
+      .font-serif {
+        font-family: "Cormorant Garamond", Georgia, serif;
+      }
+      .font-sans {
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      .font-mono {
+        font-family: "Montserrat", monospace, sans-serif;
+      }
+    </style>
+
     <!-- Preload Splash LCP & Brand Logo for Instant Visual Anchor -->
     <link rel="preload" as="image" href="/images/splash/splash-01.webp" type="image/webp" fetchpriority="high" />
     <link rel="preload" as="image" href="/images/splash/splash-02.webp" type="image/webp" fetchpriority="high" />
     <link rel="preload" as="image" href="/images/splash/splash-04.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/splash/splash-05.webp" type="image/webp" fetchpriority="high" />
     <link rel="preload" as="image" href="/carlota-lagunas-logo-trim.webp" type="image/webp" fetchpriority="high" />
 
     <!-- JSON-LD Structured Data for LocalBusiness / Photographer in Zaragoza -->
