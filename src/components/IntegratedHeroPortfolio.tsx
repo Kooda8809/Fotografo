@@ -22,8 +22,15 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
 }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Track global scroll for background typography scaling and translation to the left
+  // Track global scroll for background typography scaling and translation to the left (desktop only)
   useEffect(() => {
+    const isMobile =
+      typeof window !== 'undefined' &&
+      (window.matchMedia?.('(max-width: 767px)').matches ||
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0);
+    if (isMobile) return;
+
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -71,8 +78,8 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
       className="relative w-full bg-white text-black min-h-screen select-none overflow-hidden"
     >
       
-      {/* 1. HERO TYPOGRAPHY LAYER (z-0: BEHIND IMAGES, translates to top-left on scroll matching "The Studio" reference) */}
-      <div className="fixed inset-x-0 top-0 h-[65vh] pointer-events-none z-0 overflow-hidden flex flex-col items-center justify-center pt-8 sm:pt-12 px-6">
+      {/* 1. HERO TYPOGRAPHY LAYER - DESKTOP ONLY (z-0: BEHIND IMAGES, translates to top-left on scroll matching "The Studio" reference) */}
+      <div className="hidden sm:flex fixed inset-x-0 top-0 h-[65vh] pointer-events-none z-0 overflow-hidden flex-col items-center justify-center pt-8 sm:pt-12 px-6">
         <div
           className="flex flex-col items-center will-change-transform"
           style={{
@@ -92,24 +99,40 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
           >
             Carlota Lagunas
           </h1>
-          <p className="mt-4 sm:mt-6 text-xs sm:text-sm font-sans tracking-wide text-neutral-600 max-w-xl text-center font-light leading-relaxed hidden sm:block">
+          <p className="mt-4 sm:mt-6 text-xs sm:text-sm font-sans tracking-wide text-neutral-600 max-w-xl text-center font-light leading-relaxed">
             Creamos recuerdos naturales, delicados y eternos de los primeros días, el embarazo y la infancia de tus hijos en nuestro estudio de Zaragoza.
           </p>
         </div>
       </div>
 
-      {/* 2. FOREGROUND CONTINUOUS PHOTO GALLERY (z-10: IN FRONT OF LETTERS)
-          - Invades the bottom of the hero title with staggered, non-aligned tops matching reference.
-          - Edge-to-edge full width (filling the lateral whitespace as an infinite wall).
-          - Rectilinear photo windows (rounded-none, no rounded corners).
+      {/* 2. FOREGROUND PHOTO GALLERY & HERO CONTENT
+          - Mobile: Native, static, responsive 2-column layout (no parallax lag, no clipping through title)
+          - Desktop: Full parallax scroll animation with staggered columns
       */}
-      <div className="relative z-10 w-full pt-[44vh] sm:pt-[48vh] md:pt-[50vh]">
+      <div className="relative z-10 w-full pt-8 sm:pt-[48vh] md:pt-[50vh]">
         
-        {/* Quick Hero Floating CTAs before the stream */}
-        <div className="max-w-4xl mx-auto px-6 mb-8 sm:mb-12 flex flex-col items-center text-center space-y-4">
-          <p className="sm:hidden text-xs text-neutral-600 font-light leading-relaxed">
-            Fotografía infantil y familiar en Zaragoza. Recuerdos naturales y eternos.
+        {/* Mobile Static Hero Header (Clean, elegant, non-overlapping, natural scroll) */}
+        <div className="sm:hidden max-w-md mx-auto px-6 text-center mb-6">
+          <h1
+            className="font-serif font-normal tracking-tight text-black text-center select-none"
+            style={{
+              fontSize: 'clamp(2.6rem, 11vw, 3.8rem)',
+              lineHeight: 0.92
+            }}
+          >
+            Carlota Lagunas
+          </h1>
+          <p className="mt-2 text-xs font-serif italic text-neutral-600">
+            Fotografía Infantil & Familiar · Zaragoza
           </p>
+          <div className="w-10 h-[1px] my-3 mx-auto bg-neutral-300" />
+          <p className="text-xs font-sans text-neutral-600 font-light leading-relaxed">
+            Creamos recuerdos naturales, delicados y eternos de los primeros días, el embarazo y la infancia de tus hijos.
+          </p>
+        </div>
+
+        {/* Quick Hero Floating CTAs before the stream */}
+        <div className="max-w-4xl mx-auto px-6 mb-6 sm:mb-12 flex flex-col items-center text-center space-y-4">
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <button
               onClick={onOpenQuoteModal}
@@ -127,111 +150,143 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
           </div>
         </div>
 
-        {/* Scroll-Triggered Parallax Animation */}
-        <ContainerScrollAnimation className="w-full overflow-hidden" spacerClass="h-[25vh]">
-          <ContainerScrollTranslate className="min-h-screen relative">
-            <ContainerScrollInsetX className="h-full relative" insetRange={[16, 0]}>
-              <ContainerScrollScale scaleRange={[1.06, 1]} className="w-full px-1 sm:px-2 md:px-3">
-                
-                {/* 5 Full-Bleed Columns: Staggered tops invading the Hero, unaligned between them */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-2.5 md:gap-3 items-start w-full">
+        {/* MOBILE PHOTO GALLERY: 100% Native, Static 2-Column Grid (Zero Scroll Lag, Zero Clipping) */}
+        <div className="sm:hidden w-full px-2 mb-8">
+          <div className="grid grid-cols-2 gap-2 w-full">
+            <div className="flex flex-col gap-2">
+              {col1.concat(col3).slice(0, 10).map((photo, index) => (
+                <AnimatedPhotoItem
+                  key={photo.id}
+                  photo={photo}
+                  onClick={() => {
+                    const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
+                    onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
+                  }}
+                />
+              ))}
+            </div>
+            <div className="flex flex-col gap-2 pt-4">
+              {col2.concat(col4).slice(0, 10).map((photo, index) => (
+                <AnimatedPhotoItem
+                  key={photo.id}
+                  photo={photo}
+                  onClick={() => {
+                    const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
+                    onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* DESKTOP PHOTO GALLERY: Scroll-Triggered Parallax Animation (Preserved 100% Intact) */}
+        <div className="hidden sm:block">
+          <ContainerScrollAnimation className="w-full overflow-hidden" spacerClass="h-[25vh]">
+            <ContainerScrollTranslate className="min-h-screen relative">
+              <ContainerScrollInsetX className="h-full relative" insetRange={[16, 0]}>
+                <ContainerScrollScale scaleRange={[1.06, 1]} className="w-full px-1 sm:px-2 md:px-3">
                   
-                  {/* Column 1: Lower top offset, moderate negative parallax */}
-                  <ContainerScrollTranslate
-                    yRange={['0%', '-10%']}
-                    className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-12 sm:pt-16 md:pt-20"
-                  >
-                    {col1.map((photo, index) => (
-                      <AnimatedPhotoItem
-                        key={photo.id}
-                        photo={photo}
-                        onClick={() => {
-                          const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
-                          onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
-                        }}
-                      />
-                    ))}
-                  </ContainerScrollTranslate>
+                  {/* 5 Full-Bleed Columns: Staggered tops invading the Hero, unaligned between them */}
+                  <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-2.5 md:gap-3 items-start w-full">
+                    
+                    {/* Column 1: Lower top offset, moderate negative parallax */}
+                    <ContainerScrollTranslate
+                      yRange={['0%', '-10%']}
+                      className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-16 md:pt-20"
+                    >
+                      {col1.map((photo, index) => (
+                        <AnimatedPhotoItem
+                          key={photo.id}
+                          photo={photo}
+                          onClick={() => {
+                            const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
+                            onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
+                          }}
+                        />
+                      ))}
+                    </ContainerScrollTranslate>
 
-                  {/* Column 2: Highest top, aggressively invading the bottom of "Carlota" */}
-                  <ContainerScrollTranslate
-                    yRange={['0%', '14%']}
-                    className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-0 sm:pt-2 md:pt-3"
-                  >
-                    {col2.map((photo, index) => (
-                      <AnimatedPhotoItem
-                        key={photo.id}
-                        photo={photo}
-                        onClick={() => {
-                          const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
-                          onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
-                        }}
-                      />
-                    ))}
-                  </ContainerScrollTranslate>
+                    {/* Column 2: Highest top, aggressively invading the bottom of "Carlota" */}
+                    <ContainerScrollTranslate
+                      yRange={['0%', '14%']}
+                      className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-2 md:pt-3"
+                    >
+                      {col2.map((photo, index) => (
+                        <AnimatedPhotoItem
+                          key={photo.id}
+                          photo={photo}
+                          onClick={() => {
+                            const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
+                            onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
+                          }}
+                        />
+                      ))}
+                    </ContainerScrollTranslate>
 
-                  {/* Column 3: Lower top offset, creating breathing room under the center letters */}
-                  <ContainerScrollTranslate
-                    yRange={['0%', '-8%']}
-                    className="hidden sm:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-16 sm:pt-22 md:pt-28"
-                  >
-                    {col3.map((photo, index) => (
-                      <AnimatedPhotoItem
-                        key={photo.id}
-                        photo={photo}
-                        onClick={() => {
-                          const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
-                          onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
-                        }}
-                      />
-                    ))}
-                  </ContainerScrollTranslate>
+                    {/* Column 3: Lower top offset, creating breathing room under the center letters */}
+                    <ContainerScrollTranslate
+                      yRange={['0%', '-8%']}
+                      className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-22 md:pt-28"
+                    >
+                      {col3.map((photo, index) => (
+                        <AnimatedPhotoItem
+                          key={photo.id}
+                          photo={photo}
+                          onClick={() => {
+                            const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
+                            onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
+                          }}
+                        />
+                      ))}
+                    </ContainerScrollTranslate>
 
-                  {/* Column 4: High top, invading into the bottom of "Lagunas" */}
-                  <ContainerScrollTranslate
-                    yRange={['0%', '12%']}
-                    className="hidden md:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-2 sm:pt-4 md:pt-6"
-                  >
-                    {col4.map((photo, index) => (
-                      <AnimatedPhotoItem
-                        key={photo.id}
-                        photo={photo}
-                        onClick={() => {
-                          const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
-                          onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
-                        }}
-                      />
-                    ))}
-                  </ContainerScrollTranslate>
+                    {/* Column 4: High top, invading into the bottom of "Lagunas" */}
+                    <ContainerScrollTranslate
+                      yRange={['0%', '12%']}
+                      className="hidden md:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-4 md:pt-6"
+                    >
+                      {col4.map((photo, index) => (
+                        <AnimatedPhotoItem
+                          key={photo.id}
+                          photo={photo}
+                          onClick={() => {
+                            const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
+                            onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
+                          }}
+                        />
+                      ))}
+                    </ContainerScrollTranslate>
 
-                  {/* Column 5: Intermediate height offset on far right edge */}
-                  <ContainerScrollTranslate
-                    yRange={['0%', '-10%']}
-                    className="hidden lg:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-10 sm:pt-14 md:pt-18"
-                  >
-                    {col5.map((photo, index) => (
-                      <AnimatedPhotoItem
-                        key={photo.id}
-                        photo={photo}
-                        onClick={() => {
-                          const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
-                          onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
-                        }}
-                      />
-                    ))}
-                  </ContainerScrollTranslate>
+                    {/* Column 5: Intermediate height offset on far right edge */}
+                    <ContainerScrollTranslate
+                      yRange={['0%', '-10%']}
+                      className="hidden lg:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-14 md:pt-18"
+                    >
+                      {col5.map((photo, index) => (
+                        <AnimatedPhotoItem
+                          key={photo.id}
+                          photo={photo}
+                          onClick={() => {
+                            const originalIndex = portfolioPhotos.findIndex((p) => p.id === photo.id);
+                            onPhotoClick(portfolioPhotos, originalIndex >= 0 ? originalIndex : index);
+                          }}
+                        />
+                      ))}
+                    </ContainerScrollTranslate>
 
-                </div>
+                  </div>
 
-              </ContainerScrollScale>
-            </ContainerScrollInsetX>
-          </ContainerScrollTranslate>
-        </ContainerScrollAnimation>
+                </ContainerScrollScale>
+              </ContainerScrollInsetX>
+            </ContainerScrollTranslate>
+          </ContainerScrollAnimation>
+        </div>
 
         {/* 3. GRADIENT FADE-OUT & DUAL CTA BUTTONS
             Straight, horizontal level finish that smoothly dissolves all columns into white.
         */}
-        <div className="relative -mt-36 sm:-mt-48 md:-mt-56 pt-44 pb-20 z-20 flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-white/85 to-white text-center px-6">
+        <div className="relative -mt-16 sm:-mt-48 md:-mt-56 pt-20 sm:pt-44 pb-20 z-20 flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-white/85 to-white text-center px-6">
           <p className="text-xs sm:text-sm text-neutral-600 font-light mb-6 max-w-md">
             Sesiones cuidadas, sin prisas y con una sensibilidad única en el Barrio del Actur, Zaragoza.
           </p>
@@ -255,7 +310,6 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
           </div>
         </div>
       </div>
-
     </div>
   );
 };
@@ -269,7 +323,7 @@ const AnimatedPhotoItem: React.FC<AnimatedPhotoItemProps> = ({ photo, onClick })
   return (
     <div
       onClick={onClick}
-      className="group relative cursor-pointer overflow-hidden rounded-none bg-neutral-900 shadow-sm hover:shadow-2xl transition-all duration-300"
+      className="group relative cursor-pointer overflow-hidden rounded-none bg-neutral-900 shadow-xs sm:hover:shadow-2xl transition-shadow sm:transition-all duration-300"
     >
       <img
         src={photo.imageUrl}
@@ -278,11 +332,11 @@ const AnimatedPhotoItem: React.FC<AnimatedPhotoItemProps> = ({ photo, onClick })
         height={300}
         loading="lazy"
         decoding="async"
-        className="aspect-[4/3] sm:aspect-[4/3.2] inline-block align-middle h-auto max-h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out rounded-none"
+        className="aspect-[4/3] sm:aspect-[4/3.2] inline-block align-middle h-auto max-h-full w-full object-cover sm:group-hover:scale-105 sm:transition-transform sm:duration-700 sm:ease-out rounded-none"
       />
 
-      {/* Sleek rectilineal editorial hover overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 flex flex-col justify-between text-white pointer-events-none rounded-none">
+      {/* Sleek rectilineal editorial hover overlay - Desktop only */}
+      <div className="hidden sm:flex absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 flex-col justify-between text-white pointer-events-none rounded-none">
         <div className="flex justify-end">
           <span className="p-1 rounded-none bg-white/20 backdrop-blur-sm text-white">
             <Maximize2 className="w-3.5 h-3.5" />
