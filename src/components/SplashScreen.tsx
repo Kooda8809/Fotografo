@@ -42,14 +42,16 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartT
       typeof window !== 'undefined' &&
       ('ontouchstart' in window ||
         navigator.maxTouchPoints > 0 ||
-        window.innerWidth < 768);
+        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+        (window.matchMedia && window.matchMedia('(max-width: 767px)').matches));
 
     if (isTouch) return; // Save 100% CPU on mobile
 
     const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      mousePosRef.current.targetX = (e.clientX / innerWidth - 0.5) * 45;
-      mousePosRef.current.targetY = (e.clientY / innerHeight - 0.5) * 45;
+      const w = window.innerWidth || 1920;
+      const h = window.innerHeight || 1080;
+      mousePosRef.current.targetX = (e.clientX / w - 0.5) * 45;
+      mousePosRef.current.targetY = (e.clientY / h - 0.5) * 45;
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -101,61 +103,61 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartT
   const isPaint = splashState === 'paint' || splashState === 'fading';
   const isFading = splashState === 'fading';
 
-  // Colorful abstract image blocks matching the initial blurred state
+  // Colorful abstract image blocks with harmonious mobile-first & desktop positioning
   const blurredBlocks = [
     {
       id: 1,
       src: '/images/splash/splash-01.webp',
-      className: 'top-[-5%] left-[2%] w-[32vw] max-w-[380px] h-[46vh]',
+      className: 'top-[-4%] left-[-4%] w-[52vw] h-[34vh] sm:top-[-5%] sm:left-[2%] sm:w-[32vw] sm:max-w-[380px] sm:h-[46vh]',
       speedX: 1.3,
       speedY: 1.1
     },
     {
       id: 2,
       src: '/images/splash/splash-02.webp',
-      className: 'top-[2%] left-[34%] w-[30vw] max-w-[360px] h-[48vh]',
+      className: 'top-[-3%] right-[-4%] w-[52vw] h-[36vh] sm:top-[2%] sm:left-[34%] sm:w-[30vw] sm:max-w-[360px] sm:h-[48vh]',
       speedX: 0.7,
       speedY: 0.9
     },
     {
       id: 3,
       src: '/images/splash/splash-03.webp',
-      className: 'top-[4%] right-[2%] w-[28vw] max-w-[350px] h-[42vh]',
+      className: 'top-[26%] left-[-5%] w-[48vw] h-[34vh] sm:top-[4%] sm:right-[2%] sm:w-[28vw] sm:max-w-[350px] sm:h-[42vh]',
       speedX: 1.4,
       speedY: 1.2
     },
     {
       id: 4,
       src: '/images/splash/splash-04.webp',
-      className: 'top-[36%] left-[8%] w-[26vw] max-w-[320px] h-[48vh]',
+      className: 'top-[25%] right-[-5%] w-[48vw] h-[35vh] sm:top-[36%] sm:left-[8%] sm:w-[26vw] sm:max-w-[320px] sm:h-[48vh]',
       speedX: 1.5,
       speedY: 0.8
     },
     {
       id: 5,
       src: '/images/splash/splash-05.webp',
-      className: 'top-[34%] left-[37%] w-[28vw] max-w-[340px] h-[52vh]',
+      className: 'top-[52%] left-[-4%] w-[50vw] h-[32vh] sm:top-[34%] sm:left-[37%] sm:w-[28vw] sm:max-w-[340px] sm:h-[52vh]',
       speedX: 0.8,
       speedY: 1.3
     },
     {
       id: 6,
       src: '/images/splash/splash-06.webp',
-      className: 'top-[32%] right-[4%] w-[26vw] max-w-[320px] h-[50vh]',
+      className: 'top-[50%] right-[-4%] w-[50vw] h-[32vh] sm:top-[32%] sm:right-[4%] sm:w-[26vw] sm:max-w-[320px] sm:h-[50vh]',
       speedX: 1.2,
       speedY: 1.4
     },
     {
       id: 7,
       src: '/images/splash/splash-07.webp',
-      className: 'bottom-[-6%] left-[12%] w-[28vw] max-w-[340px] h-[35vh]',
+      className: 'bottom-[-5%] left-[-4%] w-[52vw] h-[30vh] sm:bottom-[-6%] sm:left-[12%] sm:w-[28vw] sm:max-w-[340px] sm:h-[35vh]',
       speedX: 1.1,
       speedY: 1.0
     },
     {
       id: 8,
       src: '/images/splash/splash-08.webp',
-      className: 'bottom-[-6%] left-[45%] w-[27vw] max-w-[330px] h-[36vh]',
+      className: 'bottom-[-5%] right-[-4%] w-[52vw] h-[30vh] sm:bottom-[-6%] sm:left-[45%] sm:w-[27vw] sm:max-w-[330px] sm:h-[36vh]',
       speedX: 0.6,
       speedY: 0.9
     }
@@ -280,10 +282,10 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartT
           isPaint ? 'opacity-0' : 'opacity-100'
         }`}
       >
-        {blurredBlocks.map((block, idx) => (
+        {blurredBlocks.map((block) => (
           <div
             key={block.id}
-            className={`absolute ${block.className} rounded-none overflow-hidden ${idx >= 4 ? 'hidden sm:block' : ''}`}
+            className={`absolute ${block.className} rounded-none overflow-hidden`}
             style={{
               filter: 'blur(30px) saturate(1.3)',
               WebkitFilter: 'blur(30px) saturate(1.3)',
@@ -297,7 +299,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartT
               className="w-full h-full object-cover brightness-100"
               loading="eager"
               decoding="async"
-              fetchPriority={idx === 1 ? "high" : "auto"}
+              fetchPriority={(block.id === 1 || block.id === 2 || block.id === 4) ? 'high' : 'auto'}
             />
           </div>
         ))}
@@ -331,28 +333,28 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartT
           }}
         >
           {/* Cor 1: Magenta / Rosa Choque */}
-          <div className="absolute top-[8%] left-[12%] w-[48vw] h-[48vw] rounded-full bg-[#ec4899] mix-blend-multiply opacity-95 animate-paint-blob-1" />
+          <div className="absolute top-[8%] left-[12%] w-[55vmin] h-[55vmin] sm:w-[48vw] sm:h-[48vw] rounded-full bg-[#ec4899] mix-blend-multiply opacity-95 animate-paint-blob-1" />
           
           {/* Cor 2: Azul Cobalto & Ciano Elétrico */}
-          <div className="absolute top-[15%] right-[10%] w-[45vw] h-[45vw] rounded-full bg-[#00d2ff] mix-blend-multiply opacity-90 animate-paint-blob-2" />
+          <div className="absolute top-[15%] right-[10%] w-[52vmin] h-[52vmin] sm:w-[45vw] sm:h-[45vw] rounded-full bg-[#00d2ff] mix-blend-multiply opacity-90 animate-paint-blob-2" />
           
           {/* Cor 3: Amarelo Solar & Ouro */}
-          <div className="absolute bottom-[10%] left-[15%] w-[44vw] h-[44vw] rounded-full bg-[#facc15] mix-blend-multiply opacity-95 animate-paint-blob-3" />
+          <div className="absolute bottom-[10%] left-[15%] w-[52vmin] h-[52vmin] sm:w-[44vw] sm:h-[44vw] rounded-full bg-[#facc15] mix-blend-multiply opacity-95 animate-paint-blob-3" />
           
           {/* Cor 4: Roxo Real / Violeta */}
-          <div className="absolute bottom-[12%] right-[15%] w-[50vw] h-[50vw] rounded-full bg-[#7c3aed] mix-blend-multiply opacity-90 animate-paint-blob-1" />
+          <div className="absolute bottom-[12%] right-[15%] w-[56vmin] h-[56vmin] sm:w-[50vw] sm:h-[50vw] rounded-full bg-[#7c3aed] mix-blend-multiply opacity-90 animate-paint-blob-1" />
           
           {/* Cor 5: Laranja Tangerina Vivo */}
-          <div className="absolute top-[32%] left-[28%] w-[40vw] h-[40vw] rounded-full bg-[#ff5400] mix-blend-multiply opacity-90 animate-paint-blob-2" />
+          <div className="absolute top-[32%] left-[28%] w-[48vmin] h-[48vmin] sm:w-[40vw] sm:h-[40vw] rounded-full bg-[#ff5400] mix-blend-multiply opacity-90 animate-paint-blob-2" />
           
           {/* Cor 6: Verde Esmeralda & Menta */}
-          <div className="absolute top-[36%] right-[25%] w-[38vw] h-[38vw] rounded-full bg-[#10b981] mix-blend-multiply opacity-90 animate-paint-blob-3" />
+          <div className="absolute top-[36%] right-[25%] w-[46vmin] h-[46vmin] sm:w-[38vw] sm:h-[38vw] rounded-full bg-[#10b981] mix-blend-multiply opacity-90 animate-paint-blob-3" />
           
           {/* Cor 7: Vermelho Coral & Carmim (no centro como gota principal) */}
-          <div className="absolute top-[24%] left-[22%] w-[54vw] h-[54vw] rounded-full bg-[#e11d48] mix-blend-multiply opacity-85 animate-paint-blob-1" />
+          <div className="absolute top-[24%] left-[22%] w-[60vmin] h-[60vmin] sm:w-[54vw] sm:h-[54vw] rounded-full bg-[#e11d48] mix-blend-multiply opacity-85 animate-paint-blob-1" />
 
           {/* Cor 8: Turquesa Tropical */}
-          <div className="absolute bottom-[28%] left-[35%] w-[42vw] h-[42vw] rounded-full bg-[#06b6d4] mix-blend-multiply opacity-90 animate-paint-blob-2" />
+          <div className="absolute bottom-[28%] left-[35%] w-[50vmin] h-[50vmin] sm:w-[42vw] sm:h-[42vw] rounded-full bg-[#06b6d4] mix-blend-multiply opacity-90 animate-paint-blob-2" />
         </div>
 
         {/* Conic marble paint swirl for authentic vortex mixing texture */}

@@ -2,9 +2,6 @@ import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { SplashScreen } from './components/SplashScreen';
 import type { ActiveModalSection } from './components/MenuSectionModal';
 import type { LegalDocType } from './components/LegalModal';
-import { CookieBanner } from './components/CookieBanner';
-import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { NotFoundView } from './components/NotFoundView';
 
 // Code-split primary layout and homepage components for minimal initial splash bundle
 const Navbar = lazy(() => import('./components/Navbar').then((m) => ({ default: m.Navbar })));
@@ -27,16 +24,18 @@ const BlogPage = lazy(() => import('./components/pages/BlogPage').then((m) => ({
 const PricingPage = lazy(() => import('./components/pages/PricingPage').then((m) => ({ default: m.PricingPage })));
 const GiftSessionPage = lazy(() => import('./components/pages/GiftSessionPage').then((m) => ({ default: m.GiftSessionPage })));
 
-// Code-split heavy interactive modals
+// Code-split heavy interactive modals and accessory widgets
 const MenuSectionModal = lazy(() => import('./components/MenuSectionModal').then((m) => ({ default: m.MenuSectionModal })));
 const Lightbox = lazy(() => import('./components/Lightbox').then((m) => ({ default: m.Lightbox })));
 const QuoteModal = lazy(() => import('./components/QuoteModal').then((m) => ({ default: m.QuoteModal })));
 const LegalModal = lazy(() => import('./components/LegalModal').then((m) => ({ default: m.LegalModal })));
+const CookieBanner = lazy(() => import('./components/CookieBanner').then((m) => ({ default: m.CookieBanner })));
+const FloatingWhatsApp = lazy(() => import('./components/FloatingWhatsApp').then((m) => ({ default: m.FloatingWhatsApp })));
+const NotFoundView = lazy(() => import('./components/NotFoundView').then((m) => ({ default: m.NotFoundView })));
 
 import { PhotoItem } from './types';
-import { portfolioPhotos } from './data/portfolio';
 import { servicesList } from './data/services';
-import { getGlobalLenis } from './components/ui/scroll-trigger-animations';
+import { getGlobalLenis } from './lib/lenis-store';
 
 export default function App() {
 
@@ -53,25 +52,19 @@ export default function App() {
 
   const [contentMounted, setContentMounted] = useState(!showSplash);
 
+  const handleStartTransition = useCallback(() => {
+    setContentMounted(true);
+    // Prefetch main components immediately when user clicks enter
+    import('./components/Navbar');
+    import('./components/IntegratedHeroPortfolio');
+    import('./components/AboutADP');
+    import('./components/HomeClosingCTA');
+    import('./components/Footer');
+  }, []);
+
   useEffect(() => {
     if (!showSplash) {
       setContentMounted(true);
-      return;
-    }
-
-    // Preload background chunks on idle without choking the main thread or 4G bandwidth
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      const handle = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
-        () => {
-          import('./components/Navbar');
-          import('./components/IntegratedHeroPortfolio');
-          import('./components/AboutADP');
-          import('./components/HomeClosingCTA');
-          import('./components/Footer');
-        },
-        { timeout: 4000 }
-      );
-      return () => (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(handle);
     }
   }, [showSplash]);
 
@@ -81,7 +74,7 @@ export default function App() {
   const [legalDoc, setLegalDoc] = useState<LegalDocType>(null);
 
   // Lightbox state
-  const [lightboxPhotos, setLightboxPhotos] = useState<PhotoItem[]>(portfolioPhotos);
+  const [lightboxPhotos, setLightboxPhotos] = useState<PhotoItem[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
@@ -329,7 +322,7 @@ export default function App() {
       {/* Optional Interactive Entry Splash Screen */}
       {showSplash && (
         <SplashScreen
-          onStartTransition={() => setContentMounted(true)}
+          onStartTransition={handleStartTransition}
           onComplete={() => {
             setContentMounted(true);
             setShowSplash(false);

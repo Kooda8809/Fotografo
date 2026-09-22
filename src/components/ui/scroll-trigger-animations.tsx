@@ -10,6 +10,8 @@ import {
   useTransform,
 } from 'motion/react';
 import Lenis from 'lenis';
+import { setGlobalLenis, getGlobalLenis } from '../../lib/lenis-store';
+export { getGlobalLenis };
 
 export interface UseSmoothScrollOptions {
   duration?: number;
@@ -79,9 +81,6 @@ export function isScrollAnimationSectionActive(event?: WheelEvent | TouchEvent):
   return rect.top <= 100 && rect.bottom > 140;
 }
 
-export function getGlobalLenis(): Lenis | null {
-  return globalLenis;
-}
 
 export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
   const [lenisInstance, setLenisInstance] = React.useState<Lenis | null>(globalLenis);
@@ -138,6 +137,7 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
             );
           },
         });
+        setGlobalLenis(globalLenis);
         startGlobalRaf();
       } catch (err) {
         console.warn('Failed to initialize Lenis smooth scroll:', err);
@@ -153,6 +153,7 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
         stopGlobalRaf();
         globalLenis?.destroy();
         globalLenis = null;
+        setGlobalLenis(null);
       }
     };
   }, []);

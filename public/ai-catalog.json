@@ -2,13 +2,14 @@
   "specVersion": "1.0",
   "host": {
     "displayName": "Carlota Lagunas Fotografía",
-    "url": "https://carlotalagunas.com"
+    "documentationUrl": "https://carlotalagunas.com/llms.txt",
+    "logoUrl": "https://carlotalagunas.com/carlota-lagunas-logo-trim.webp"
   },
   "entries": [
     {
-      "identifier": "urn:ai:carlotalagunas.com:services:catalog",
+      "identifier": "urn:air:carlotalagunas.com:services:catalog",
       "displayName": "Catálogo de Servicios y Sesiones Fotográficas",
-      "type": "text/markdown",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
       "url": "https://carlotalagunas.com/llms.txt",
       "description": "Especificación completa y estructurada de las especialidades del estudio Carlota Lagunas en Zaragoza: Newborn (recién nacidos), Embarazo, Smash Cake, Comuniones y Familias, incluyendo tarifas, preparación y condiciones.",
       "representativeQueries": [
@@ -20,9 +21,9 @@
       ]
     },
     {
-      "identifier": "urn:ai:carlotalagunas.com:business:contact",
+      "identifier": "urn:air:carlotalagunas.com:business:contact",
       "displayName": "Información del Estudio, Contacto y Cita Previa",
-      "type": "application/ld+json",
+      "type": "application/agent-card+json",
       "url": "https://carlotalagunas.com/",
       "description": "Localización física en Calle Rosalía de Castro 15, Actur, Zaragoza, canales de atención por WhatsApp, teléfono, horarios y políticas de reserva.",
       "representativeQueries": [
