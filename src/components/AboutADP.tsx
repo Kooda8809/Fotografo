@@ -97,7 +97,6 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
     <section
       ref={sectionRef}
       id="sobre-adp"
-      data-lenis-prevent="true"
       className="relative py-24 sm:py-32 lg:py-36 bg-white text-black overflow-hidden border-t border-neutral-200"
       aria-label="Perfil profesional de Carlota Lagunas"
     >

@@ -89,7 +89,6 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
     <section
       id="servicios"
       ref={sectionRef}
-      data-lenis-prevent="true"
       className="relative bg-white text-black border-t border-neutral-200"
       style={{
         // Height allows ample scroll room for smooth orbital transitions

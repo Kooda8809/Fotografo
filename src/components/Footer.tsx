@@ -74,7 +74,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
     <footer
       ref={footerRef}
       id="main-footer"
-      data-lenis-prevent="true"
       onMouseMove={handleMouseMove}
       className="relative bg-white text-black border-t border-neutral-200/90 pt-16 sm:pt-20 pb-4 sm:pb-6 overflow-hidden select-none"
       aria-label="Pie de página de navegación"

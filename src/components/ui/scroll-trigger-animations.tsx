@@ -68,40 +68,15 @@ function stopGlobalRaf() {
 export function isScrollAnimationSectionActive(event?: WheelEvent | TouchEvent): boolean {
   if (typeof window === 'undefined' || typeof document === 'undefined') return false;
 
-  // 1. Direct hit / ancestor exclusion check:
-  // If the event target is explicitly inside a section marked for native scroll (e.g. About, CTA, Map, Footer):
-  if (event && 'target' in event && event.target instanceof Element) {
-    if (
-      event.target.closest('[data-lenis-prevent]') ||
-      event.target.closest('.lenis-prevent') ||
-      event.target.closest('#sobre-adp') ||
-      event.target.closest('#reserva-cta') ||
-      event.target.closest('#main-footer') ||
-      event.target.closest('footer')
-    ) {
-      return false;
-    }
+  const hero = document.getElementById('hero');
+  if (!hero) return false;
 
-    // If cursor or finger is directly on the animated container
-    if (event.target.closest('[data-scroll-animation="true"]') || event.target.closest('#hero')) {
-      return true;
-    }
-  }
-
-  // 2. Viewport boundary check:
-  // Locate the hero scroll animation container
-  const heroAnimated =
-    document.querySelector<HTMLElement>('#hero [data-scroll-animation="true"]') ||
-    document.getElementById('hero') ||
-    document.querySelector<HTMLElement>('[data-scroll-animation="true"]');
-
-  if (!heroAnimated) return false;
-
-  const rect = heroAnimated.getBoundingClientRect();
+  const rect = hero.getBoundingClientRect();
   const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
-  // Active only while the animated container is in view and hasn't scrolled past the viewport
-  return rect.top < windowHeight && rect.bottom > 80;
+  // The hero parallax animation is active while the hero gallery is inside the viewport.
+  // Once the user reaches the bottom dual CTAs and About section, rect.bottom drops near or below the viewport.
+  return rect.top <= 100 && rect.bottom > 140;
 }
 
 export function getGlobalLenis(): Lenis | null {
@@ -134,27 +109,33 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
           easing: mergedOptions.easing,
           autoToggle: mergedOptions.autoToggle,
           virtualScroll: (data) => {
-            // Only engage slow smooth scroll in sections with scroll animations.
-            // Sections without scroll animations preserve standard, normal browser scroll.
-            const shouldSmooth = isScrollAnimationSectionActive(data.event);
-            if (!shouldSmooth) {
-              if (globalLenis && (globalLenis.isScrolling === 'smooth' || globalLenis.isScrolling === true)) {
-                (globalLenis as unknown as { reset?: () => void }).reset?.();
-              }
-              return false; // Native browser scroll (normal speed and momentum)
+            if (!globalLenis) return true;
+
+            // Dynamically adapt scroll profile:
+            // Slow, luxurious smooth glide strictly within the hero animation section.
+            // Standard, fast, and responsive normal scroll in all other sections.
+            const isHeroActive = isScrollAnimationSectionActive(data.event);
+
+            if (isHeroActive) {
+              globalLenis.options.duration = 1.35;
+              globalLenis.options.lerp = 0.08;
+              globalLenis.options.wheelMultiplier = 0.88;
+              globalLenis.options.syncTouchLerp = 0.075;
+            } else {
+              globalLenis.options.duration = 0.16;
+              globalLenis.options.lerp = 0.55;
+              globalLenis.options.wheelMultiplier = 1.15;
+              globalLenis.options.syncTouchLerp = 0.35;
             }
-            return true; // Lenis slow smooth scroll
+
+            return true;
           },
           prevent: (node) => {
             if (options.prevent && options.prevent(node)) return true;
-            if (
+            return (
               Boolean(node.closest?.('[data-lenis-prevent]')) ||
               Boolean(node.closest?.('.lenis-prevent'))
-            ) {
-              return true;
-            }
-            // If the animated section is not active, let native scroll handle it
-            return !isScrollAnimationSectionActive();
+            );
           },
         });
         startGlobalRaf();
