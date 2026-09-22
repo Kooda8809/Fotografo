@@ -1,23 +1,21 @@
 import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { SplashScreen } from './components/SplashScreen';
-import { Navbar } from './components/Navbar';
-import { IntegratedHeroPortfolio } from './components/IntegratedHeroPortfolio';
-import { AboutADP } from './components/AboutADP';
 import type { ActiveModalSection } from './components/MenuSectionModal';
-import { Footer } from './components/Footer';
 import type { LegalDocType } from './components/LegalModal';
 import { CookieBanner } from './components/CookieBanner';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { NotFoundView } from './components/NotFoundView';
-import { ServicesSection } from './components/ServicesSection';
-import { ProcessSection } from './components/ProcessSection';
-import { WhyADP } from './components/WhyADP';
-import { PricingNotice } from './components/PricingNotice';
-import { TestimonialsSection } from './components/TestimonialsSection';
-import { LocationSection } from './components/LocationSection';
-import { InstagramSection } from './components/InstagramSection';
-import { HomeClosingCTA } from './components/HomeClosingCTA';
-import { StudioMapSection } from './components/StudioMapSection';
+
+// Code-split primary layout and homepage components for minimal initial splash bundle
+const Navbar = lazy(() => import('./components/Navbar').then((m) => ({ default: m.Navbar })));
+const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })));
+const IntegratedHeroPortfolio = lazy(() => import('./components/IntegratedHeroPortfolio').then((m) => ({ default: m.IntegratedHeroPortfolio })));
+const AboutADP = lazy(() => import('./components/AboutADP').then((m) => ({ default: m.AboutADP })));
+const HomeClosingCTA = lazy(() => import('./components/HomeClosingCTA').then((m) => ({ default: m.HomeClosingCTA })));
+const StudioMapSection = lazy(() => import('./components/StudioMapSection').then((m) => ({ default: m.StudioMapSection })));
+const ServicesSection = lazy(() => import('./components/ServicesSection').then((m) => ({ default: m.ServicesSection })));
+const ProcessSection = lazy(() => import('./components/ProcessSection').then((m) => ({ default: m.ProcessSection })));
+const WhyADP = lazy(() => import('./components/WhyADP').then((m) => ({ default: m.WhyADP })));
 
 // Code-split secondary sub-pages with React.lazy
 const PortfolioPage = lazy(() => import('./components/pages/PortfolioPage').then((m) => ({ default: m.PortfolioPage })));
@@ -58,11 +56,21 @@ export default function App() {
       setContentMounted(true);
       return;
     }
-    // Defer loading heavy gallery & background elements until after initial paint
-    const timer = setTimeout(() => {
-      setContentMounted(true);
-    }, 1200);
-    return () => clearTimeout(timer);
+
+    // Preload background chunks on idle without choking the main thread or 4G bandwidth
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const handle = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
+        () => {
+          import('./components/Navbar');
+          import('./components/IntegratedHeroPortfolio');
+          import('./components/AboutADP');
+          import('./components/HomeClosingCTA');
+          import('./components/Footer');
+        },
+        { timeout: 4000 }
+      );
+      return () => (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(handle);
+    }
   }, [showSplash]);
 
   const [activeModalSection, setActiveModalSection] = useState<ActiveModalSection>(null);
@@ -276,7 +284,7 @@ export default function App() {
 
     // Default: Home Page
     return (
-      <main className="flex-1">
+      <>
         <IntegratedHeroPortfolio
           onPhotoClick={handleOpenLightbox}
           onOpenQuoteModal={() => handleOpenQuoteModal()}
@@ -290,7 +298,7 @@ export default function App() {
           onOpenQuoteModal={() => handleOpenQuoteModal('Reserva')}
           onNavigate={handleNavigate}
         />
-      </main>
+      </>
     );
   };
 
@@ -299,6 +307,7 @@ export default function App() {
       {/* Optional Interactive Entry Splash Screen */}
       {showSplash && (
         <SplashScreen
+          onStartTransition={() => setContentMounted(true)}
           onComplete={() => {
             setContentMounted(true);
             setShowSplash(false);
@@ -307,7 +316,7 @@ export default function App() {
       )}
 
       {contentMounted && (
-        <>
+        <Suspense fallback={<div className="min-h-screen bg-white" />}>
           {/* Header with brand links and navigation */}
           <Navbar
             onOpenQuoteModal={() => handleOpenQuoteModal()}
@@ -316,9 +325,9 @@ export default function App() {
           />
 
           {/* Main Content Area */}
-          <Suspense fallback={<div className="min-h-screen bg-white" />}>
+          <main className="flex-1">
             {renderMainContent()}
-          </Suspense>
+          </main>
 
           {/* Studio Location Map above Footer adapted to Visual Identity */}
           {currentPath !== '/404' && <StudioMapSection />}
@@ -329,7 +338,13 @@ export default function App() {
             onOpenLegal={(type) => setLegalDoc(type)}
             onReplaySplash={() => setShowSplash(true)}
           />
-        </>
+
+          {/* RGPD Cookie Banner */}
+          <CookieBanner onOpenCookiesPolicy={() => setLegalDoc('cookies')} />
+
+          {/* Direct WhatsApp Contact Button */}
+          <FloatingWhatsApp />
+        </Suspense>
       )}
 
       {/* Fullscreen Section Modal for Quick Nav */}
@@ -378,12 +393,6 @@ export default function App() {
           />
         </Suspense>
       )}
-
-      {/* RGPD Cookie Banner */}
-      <CookieBanner onOpenCookiesPolicy={() => setLegalDoc('cookies')} />
-
-      {/* Direct WhatsApp Contact Button */}
-      <FloatingWhatsApp />
     </div>
   );
 }

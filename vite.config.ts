@@ -23,16 +23,25 @@ export default defineConfig(() => {
       target: 'esnext',
       minify: 'esbuild',
       cssCodeSplit: true,
+      modulePreload: false,
       rollupOptions: {
         output: {
           manualChunks(id) {
-            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            const normalized = id.replace(/\\/g, '/');
+            if (
+              normalized.includes('/node_modules/react/') ||
+              normalized.includes('/node_modules/react-dom/') ||
+              normalized.includes('/node_modules/scheduler/')
+            ) {
               return 'vendor-react';
             }
-            if (id.includes('node_modules/lucide-react')) {
+            if (normalized.includes('/node_modules/lucide-react/')) {
               return 'vendor-lucide';
             }
-            if (id.includes('node_modules/motion') || id.includes('node_modules/lenis')) {
+            if (
+              normalized.includes('/node_modules/motion/') ||
+              normalized.includes('/node_modules/lenis/')
+            ) {
               return 'vendor-motion';
             }
           },

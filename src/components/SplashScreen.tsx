@@ -3,9 +3,10 @@ import { BrandLogo } from './BrandLogo';
 
 interface SplashScreenProps {
   onComplete: () => void;
+  onStartTransition?: () => void;
 }
 
-export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
+export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartTransition }) => {
   // States: 'white' (Estado 1 - Inicial) | 'paint' (Estado 2 - Balde de Tinta Colorida) | 'fading' (Ação Final) | 'finished'
   const [splashState, setSplashState] = useState<'white' | 'paint' | 'fading' | 'finished'>('white');
   
@@ -76,6 +77,9 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
 
   const handleCtaClick = () => {
     if (splashState !== 'white') return;
+
+    // Immediately trigger mounting background route components so they render during transition
+    onStartTransition?.();
 
     // Estado 2 (Ação de Clique - Balde de Tinta Colorida):
     // As cores se misturam como tintas líquidas derramadas em um balde
@@ -276,10 +280,10 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           isPaint ? 'opacity-0' : 'opacity-100'
         }`}
       >
-        {blurredBlocks.map((block) => (
+        {blurredBlocks.map((block, idx) => (
           <div
             key={block.id}
-            className={`absolute ${block.className} rounded-none overflow-hidden`}
+            className={`absolute ${block.className} rounded-none overflow-hidden ${idx >= 4 ? 'hidden sm:block' : ''}`}
             style={{
               filter: 'blur(30px) saturate(1.3)',
               WebkitFilter: 'blur(30px) saturate(1.3)',
@@ -288,8 +292,8 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
             <img
               src={block.src}
               alt=""
-              width="360"
-              height="450"
+              width={360}
+              height={450}
               className="w-full h-full object-cover brightness-100"
               loading="lazy"
               decoding="async"

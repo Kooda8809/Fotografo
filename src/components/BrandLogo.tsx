@@ -15,10 +15,15 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     ? '/carlota-lagunas-icon.png' 
     : '/carlota-lagunas-logo-trim.png';
 
+  const width = variant === 'icon' ? 306 : 972;
+  const height = variant === 'icon' ? 305 : 537;
+
   return (
     <img
       src={src}
       alt={alt}
+      width={width}
+      height={height}
       className={`object-contain transition-opacity ${className}`}
       loading="eager"
       decoding="async"

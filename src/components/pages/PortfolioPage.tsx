@@ -115,9 +115,9 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
                     <span className="inline-block px-2 py-0.5 rounded-none bg-white/20 backdrop-blur-sm text-[9px] font-mono uppercase tracking-wider mb-1 text-white">
                       {photo.category}
                     </span>
-                    <h3 className="font-editorial text-sm sm:text-base text-white font-normal line-clamp-1 leading-snug">
+                    <p className="font-editorial text-sm sm:text-base text-white font-normal line-clamp-1 leading-snug">
                       {photo.title}
-                    </h3>
+                    </p>
                     <div className="flex items-center gap-1 text-[10px] text-neutral-300 font-sans mt-0.5">
                       <MapPin className="w-3 h-3 text-neutral-300" />
                       <span>{photo.location}</span>
