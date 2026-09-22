@@ -135,9 +135,6 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
           <div className="space-y-6 pt-6 border-t border-neutral-200">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div>
-                <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">
-                  Galería de Muestra
-                </span>
                 <h3 className="font-editorial text-2xl sm:text-3xl text-black font-normal mt-1">
                   Momentos Capturados en Zaragoza
                 </h3>
@@ -176,9 +173,6 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
 
         {/* Other services switcher bar */}
         <div className="pt-12 border-t border-neutral-200">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-400 block mb-4">
-            Explorar Otras Especialidades
-          </span>
           <div className="flex flex-wrap gap-2.5">
             {servicesList
               .filter((s) => s.slug !== service.slug)

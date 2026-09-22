@@ -39,9 +39,6 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
         {/* Editorial Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-neutral-200">
           <div className="space-y-4 max-w-3xl">
-            <span className="text-[11px] uppercase tracking-[0.25em] text-neutral-500 font-sans font-medium">
-              Portfolio Fotográfico · Zaragoza
-            </span>
             <h1 className="font-editorial text-4xl sm:text-6xl lg:text-7xl text-black font-normal tracking-tight leading-[0.95]">
               Galería Completa
             </h1>

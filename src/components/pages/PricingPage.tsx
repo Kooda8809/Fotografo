@@ -31,7 +31,6 @@ export const PricingPage: React.FC<PricingPageProps> = ({
         <section className="space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-neutral-100 pb-4">
             <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">01 / DULCE ESPERA</span>
               <h2 className="font-editorial text-3xl sm:text-4xl text-black font-normal">
                 Sesiones de Embarazo
               </h2>
@@ -99,7 +98,6 @@ export const PricingPage: React.FC<PricingPageProps> = ({
         <section className="space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-neutral-100 pb-4">
             <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">02 / PRIMEROS DÍAS</span>
               <h2 className="font-editorial text-3xl sm:text-4xl text-black font-normal">
                 Sesiones Newborn (Recién Nacido)
               </h2>
@@ -166,10 +164,6 @@ export const PricingPage: React.FC<PricingPageProps> = ({
         {/* Caja Marco Addon Banner */}
         <div className="p-8 sm:p-10 rounded-none bg-neutral-50 border border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-600">
-              <Sparkles className="w-4 h-4 text-black" />
-              <span>Complemento Exclusivo</span>
-            </div>
             <h3 className="font-editorial text-2xl sm:text-3xl text-black">
               {CAJA_MARCO_ADDON.name} — {CAJA_MARCO_ADDON.price}
             </h3>
@@ -207,9 +201,6 @@ export const PricingPage: React.FC<PricingPageProps> = ({
         {/* Banner otras sesiones */}
         <div className="p-8 sm:p-12 rounded-none bg-black text-white flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="space-y-2 max-w-xl">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-              SMASH CAKE · INFANTIL · FAMILIA · COMUNIONES · FINE ART
-            </span>
             <h3 className="font-editorial text-2xl sm:text-4xl font-normal">
               ¿Deseas información para otra sesión?
             </h3>

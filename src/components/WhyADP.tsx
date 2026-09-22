@@ -47,9 +47,6 @@ export const WhyADP: React.FC = () => {
         {/* Editorial Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-14 border-b border-neutral-200">
           <div className="space-y-3 max-w-2xl">
-            <span className="text-[11px] uppercase tracking-[0.25em] text-neutral-500 font-sans font-medium">
-              Filosofía & Valores · Carlota Lagunas
-            </span>
             <h2 className="font-editorial text-3xl sm:text-5xl lg:text-6xl text-black font-normal tracking-tight leading-[0.95]">
               Por Qué Elegir Nuestro Estudio
             </h2>

@@ -126,11 +126,6 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
         
         {/* Editorial Hero Header */}
         <div className="border-b border-neutral-200 pb-12 sm:pb-16 space-y-6 max-w-4xl">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-neutral-400">
-            <Gift className="w-3.5 h-3.5 text-black shrink-0" />
-            <span>Tarjetas Regalo · Zaragoza</span>
-          </div>
-
           <div className="space-y-2">
             <h1 className="font-editorial text-3xl sm:text-5xl lg:text-6xl text-black font-normal tracking-tight leading-[1.05]">
               Regalar una sesión de fotos en Zaragoza:
@@ -167,9 +162,6 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
         <section className="space-y-10">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-neutral-100 pb-6">
             <div className="space-y-1">
-              <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-                VARIEDAD DE REPORTAJES
-              </span>
               <h2 className="font-editorial text-3xl sm:text-4xl text-black font-normal">
                 Un vale regalo para cada momento especial
               </h2>
@@ -224,10 +216,7 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
 
         {/* Section: Pasos a seguir (1, 2, 3) */}
         <section className="space-y-10">
-          <div className="space-y-1 border-b border-neutral-100 pb-6">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-              CÓMO TRAMITARLO
-            </span>
+          <div className="border-b border-neutral-100 pb-6">
             <h2 className="font-editorial text-3xl sm:text-4xl text-black font-normal">
               Pasos a seguir
             </h2>
@@ -295,10 +284,7 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
 
         {/* Section: Preguntas frecuentes */}
         <section className="space-y-8">
-          <div className="space-y-1 border-b border-neutral-100 pb-6">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-              RESOLVEMOS TUS DUDAS
-            </span>
+          <div className="border-b border-neutral-100 pb-6">
             <h2 className="font-editorial text-3xl sm:text-4xl text-black font-normal">
               Preguntas frecuentes
             </h2>
@@ -340,10 +326,6 @@ export const GiftSessionPage: React.FC<GiftSessionPageProps> = ({
         {/* Direct Atelier & Instagram Contact Block */}
         <div className="p-8 sm:p-12 rounded-none bg-neutral-900 text-white flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div className="space-y-3 max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-400">
-              <Sparkles className="w-4 h-4 text-white" />
-              <span>Carlota Lagunas Fotografía · Zaragoza</span>
-            </div>
             <h3 className="font-editorial text-2xl sm:text-4xl font-normal">
               ¿Quieres preparar tu tarjeta regalo hoy?
             </h3>

@@ -85,9 +85,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPrivacyModal }) 
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium">
-                    FORMULARIO DIRECTO
-                  </span>
                   <h2 className="font-editorial text-2xl sm:text-3xl text-black font-normal">
                     Consultar Disponibilidad
                   </h2>
