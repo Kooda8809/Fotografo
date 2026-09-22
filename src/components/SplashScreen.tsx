@@ -105,56 +105,56 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartT
   const blurredBlocks = [
     {
       id: 1,
-      src: '/images/real/session-01.webp',
+      src: '/images/splash/splash-01.webp',
       className: 'top-[-5%] left-[2%] w-[32vw] max-w-[380px] h-[46vh]',
       speedX: 1.3,
       speedY: 1.1
     },
     {
       id: 2,
-      src: '/images/real/session-02.webp',
+      src: '/images/splash/splash-02.webp',
       className: 'top-[2%] left-[34%] w-[30vw] max-w-[360px] h-[48vh]',
       speedX: 0.7,
       speedY: 0.9
     },
     {
       id: 3,
-      src: '/images/real/session-03.webp',
+      src: '/images/splash/splash-03.webp',
       className: 'top-[4%] right-[2%] w-[28vw] max-w-[350px] h-[42vh]',
       speedX: 1.4,
       speedY: 1.2
     },
     {
       id: 4,
-      src: '/images/real/session-04.webp',
+      src: '/images/splash/splash-04.webp',
       className: 'top-[36%] left-[8%] w-[26vw] max-w-[320px] h-[48vh]',
       speedX: 1.5,
       speedY: 0.8
     },
     {
       id: 5,
-      src: '/images/real/session-05.webp',
+      src: '/images/splash/splash-05.webp',
       className: 'top-[34%] left-[37%] w-[28vw] max-w-[340px] h-[52vh]',
       speedX: 0.8,
       speedY: 1.3
     },
     {
       id: 6,
-      src: '/images/real/session-06.webp',
+      src: '/images/splash/splash-06.webp',
       className: 'top-[32%] right-[4%] w-[26vw] max-w-[320px] h-[50vh]',
       speedX: 1.2,
       speedY: 1.4
     },
     {
       id: 7,
-      src: '/images/real/session-07.webp',
+      src: '/images/splash/splash-07.webp',
       className: 'bottom-[-6%] left-[12%] w-[28vw] max-w-[340px] h-[35vh]',
       speedX: 1.1,
       speedY: 1.0
     },
     {
       id: 8,
-      src: '/images/real/session-08.webp',
+      src: '/images/splash/splash-08.webp',
       className: 'bottom-[-6%] left-[45%] w-[27vw] max-w-[330px] h-[36vh]',
       speedX: 0.6,
       speedY: 0.9
@@ -292,11 +292,12 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onStartT
             <img
               src={block.src}
               alt=""
-              width={360}
-              height={450}
+              width={220}
+              height={275}
               className="w-full h-full object-cover brightness-100"
-              loading="lazy"
+              loading="eager"
               decoding="async"
+              fetchPriority={idx === 1 ? "high" : "auto"}
             />
           </div>
         ))}

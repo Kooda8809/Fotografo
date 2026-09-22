@@ -13,10 +13,10 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 }) => {
   const src = variant === 'icon' 
     ? '/carlota-lagunas-icon.png' 
-    : '/carlota-lagunas-logo-trim.png';
+    : '/carlota-lagunas-logo-trim.webp';
 
-  const width = variant === 'icon' ? 306 : 972;
-  const height = variant === 'icon' ? 305 : 537;
+  const width = variant === 'icon' ? 120 : 160;
+  const height = variant === 'icon' ? 120 : 88;
 
   return (
     <img
@@ -27,6 +27,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       className={`object-contain transition-opacity ${className}`}
       loading="eager"
       decoding="async"
+      fetchPriority="high"
     />
   );
 };

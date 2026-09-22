@@ -1,0 +1,36 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Carlota Lagunas Fotografía",
+    "url": "https://carlotalagunas.com"
+  },
+  "entries": [
+    {
+      "identifier": "urn:ai:carlotalagunas.com:services:catalog",
+      "displayName": "Catálogo de Servicios y Sesiones Fotográficas",
+      "type": "text/markdown",
+      "url": "https://carlotalagunas.com/llms.txt",
+      "description": "Especificación completa y estructurada de las especialidades del estudio Carlota Lagunas en Zaragoza: Newborn (recién nacidos), Embarazo, Smash Cake, Comuniones y Familias, incluyendo tarifas, preparación y condiciones.",
+      "representativeQueries": [
+        "precios sesiones de fotos recién nacidos zaragoza",
+        "fotógrafo recién nacidos actur zaragoza",
+        "reservar reportaje comunión zaragoza",
+        "sesión smash cake zaragoza primer cumpleaños",
+        "fotografía embarazo maternidad zaragoza"
+      ]
+    },
+    {
+      "identifier": "urn:ai:carlotalagunas.com:business:contact",
+      "displayName": "Información del Estudio, Contacto y Cita Previa",
+      "type": "application/ld+json",
+      "url": "https://carlotalagunas.com/",
+      "description": "Localización física en Calle Rosalía de Castro 15, Actur, Zaragoza, canales de atención por WhatsApp, teléfono, horarios y políticas de reserva.",
+      "representativeQueries": [
+        "dónde está el estudio de carlota lagunas en zaragoza",
+        "cómo llegar estudio fotografía actur zaragoza",
+        "contacto whatsapp carlota lagunas fotografía",
+        "teléfono reservas estudio fotográfico zaragoza"
+      ]
+    }
+  ]
+}
