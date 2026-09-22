@@ -65,6 +65,34 @@ function stopGlobalRaf() {
   }
 }
 
+export function isScrollAnimationSectionActive(event?: WheelEvent | TouchEvent): boolean {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
+
+  // 1. Direct hit check (cursor or finger directly on animated container or its descendants)
+  if (event && 'target' in event && event.target instanceof Element) {
+    if (event.target.closest('[data-scroll-animation="true"]')) {
+      return true;
+    }
+  }
+
+  // 2. Viewport visibility check: is any section with scroll animations currently visible?
+  const animatedSections = document.querySelectorAll<HTMLElement>('[data-scroll-animation="true"]');
+  if (!animatedSections.length) return false;
+
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+  for (let i = 0; i < animatedSections.length; i++) {
+    const el = animatedSections[i];
+    const rect = el.getBoundingClientRect();
+    // Active if the animated section is in view
+    if (rect.bottom > -30 && rect.top < windowHeight + 30) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export function getGlobalLenis(): Lenis | null {
   return globalLenis;
 }
@@ -94,6 +122,18 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
           gestureOrientation: mergedOptions.gestureOrientation,
           easing: mergedOptions.easing,
           autoToggle: mergedOptions.autoToggle,
+          virtualScroll: (data) => {
+            // Only engage slow smooth scroll in sections with scroll animations.
+            // Sections without scroll animations preserve standard, normal browser scroll.
+            const shouldSmooth = isScrollAnimationSectionActive(data.event);
+            if (!shouldSmooth) {
+              if (globalLenis && (globalLenis.isScrolling === 'smooth' || globalLenis.isScrolling === true)) {
+                globalLenis.scrollTo(globalLenis.actualScroll, { immediate: true });
+              }
+              return false; // Native browser scroll (normal speed and momentum)
+            }
+            return true; // Lenis slow smooth scroll
+          },
           prevent: (node) => {
             if (options.prevent && options.prevent(node)) return true;
             return (
@@ -156,7 +196,7 @@ export function ContainerScrollAnimation({
   });
   return (
     <ContainerScrollAnimationContext.Provider value={{ scrollYProgress }}>
-      <div ref={scrollRef} className={cn('relative', className)} {...props}>
+      <div ref={scrollRef} data-scroll-animation="true" className={cn('relative', className)} {...props}>
         {children}
         <div className={cn('w-full h-96', spacerClass)} />
       </div>

@@ -65,7 +65,11 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
   }, []);
 
   return (
-    <div id="hero" className="relative w-full bg-white text-black min-h-screen select-none overflow-hidden">
+    <div
+      id="hero"
+      data-scroll-animation="true"
+      className="relative w-full bg-white text-black min-h-screen select-none overflow-hidden"
+    >
       
       {/* 1. HERO TYPOGRAPHY LAYER (z-0: BEHIND IMAGES, translates to top-left on scroll matching "The Studio" reference) */}
       <div className="fixed inset-x-0 top-0 h-[65vh] pointer-events-none z-0 overflow-hidden flex flex-col items-center justify-center pt-8 sm:pt-12 px-6">
