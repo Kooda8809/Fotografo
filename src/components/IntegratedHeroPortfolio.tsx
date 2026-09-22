@@ -22,15 +22,8 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
 }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Track global scroll for background typography scaling and translation to the left (desktop only)
+  // Track global scroll for background typography scaling and translation to the left
   useEffect(() => {
-    const isMobile =
-      typeof window !== 'undefined' &&
-      (window.matchMedia?.('(max-width: 767px)').matches ||
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0);
-    if (isMobile) return;
-
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -78,8 +71,8 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
       className="relative w-full bg-white text-black min-h-screen select-none overflow-hidden"
     >
       
-      {/* 1. HERO TYPOGRAPHY LAYER - DESKTOP ONLY (z-0: BEHIND IMAGES, translates to top-left on scroll matching "The Studio" reference) */}
-      <div className="hidden sm:flex fixed inset-x-0 top-0 h-[65vh] pointer-events-none z-0 overflow-hidden flex-col items-center justify-center pt-8 sm:pt-12 px-6">
+      {/* 1. HERO TYPOGRAPHY LAYER (z-0: BEHIND IMAGES, translates to top-left on scroll matching "The Studio" reference) */}
+      <div className="fixed inset-x-0 top-0 h-[65vh] pointer-events-none z-0 overflow-hidden flex flex-col items-center justify-center pt-8 sm:pt-12 px-6">
         <div
           className="flex flex-col items-center will-change-transform"
           style={{
@@ -93,46 +86,29 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
           <h1
             className="font-serif font-normal tracking-tight text-black text-center whitespace-nowrap select-none"
             style={{
-              fontSize: 'clamp(3rem, 11vw, 10rem)',
+              fontSize: 'clamp(2.4rem, 11vw, 10rem)',
               lineHeight: 0.88
             }}
           >
             Carlota Lagunas
           </h1>
-          <p className="mt-4 sm:mt-6 text-xs sm:text-sm font-sans tracking-wide text-neutral-600 max-w-xl text-center font-light leading-relaxed">
+          <p className="mt-4 sm:mt-6 text-xs sm:text-sm font-sans tracking-wide text-neutral-600 max-w-xl text-center font-light leading-relaxed hidden sm:block">
             Creamos recuerdos naturales, delicados y eternos de los primeros días, el embarazo y la infancia de tus hijos en nuestro estudio de Zaragoza.
           </p>
         </div>
       </div>
 
-      {/* 2. FOREGROUND PHOTO GALLERY & HERO CONTENT
-          - Mobile: Native, static, responsive 2-column layout (no parallax lag, no clipping through title)
-          - Desktop: Full parallax scroll animation with staggered columns
+      {/* 2. FOREGROUND CONTINUOUS PHOTO GALLERY (z-10: IN FRONT OF LETTERS)
+          - Invades the bottom of the hero title with staggered, non-aligned tops matching reference.
+          - Edge-to-edge full width.
       */}
-      <div className="relative z-10 w-full pt-8 sm:pt-[48vh] md:pt-[50vh]">
+      <div className="relative z-10 w-full pt-[44vh] sm:pt-[48vh] md:pt-[50vh]">
         
-        {/* Mobile Static Hero Header (Clean, elegant, non-overlapping, natural scroll) */}
-        <div className="sm:hidden max-w-md mx-auto px-6 text-center mb-6">
-          <h1
-            className="font-serif font-normal tracking-tight text-black text-center select-none"
-            style={{
-              fontSize: 'clamp(2.6rem, 11vw, 3.8rem)',
-              lineHeight: 0.92
-            }}
-          >
-            Carlota Lagunas
-          </h1>
-          <p className="mt-2 text-xs font-serif italic text-neutral-600">
-            Fotografía Infantil & Familiar · Zaragoza
-          </p>
-          <div className="w-10 h-[1px] my-3 mx-auto bg-neutral-300" />
-          <p className="text-xs font-sans text-neutral-600 font-light leading-relaxed">
-            Creamos recuerdos naturales, delicados y eternos de los primeros días, el embarazo y la infancia de tus hijos.
-          </p>
-        </div>
-
         {/* Quick Hero Floating CTAs before the stream */}
-        <div className="max-w-4xl mx-auto px-6 mb-6 sm:mb-12 flex flex-col items-center text-center space-y-4">
+        <div className="max-w-4xl mx-auto px-6 mb-8 sm:mb-12 flex flex-col items-center text-center space-y-4">
+          <p className="sm:hidden text-xs text-neutral-600 font-light leading-relaxed">
+            Fotografía infantil y familiar en Zaragoza. Recuerdos naturales y eternos.
+          </p>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <button
               onClick={onOpenQuoteModal}
@@ -188,12 +164,12 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
                 <ContainerScrollScale scaleRange={[1.06, 1]} className="w-full px-1 sm:px-2 md:px-3">
                   
                   {/* 5 Full-Bleed Columns: Staggered tops invading the Hero, unaligned between them */}
-                  <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-2.5 md:gap-3 items-start w-full">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-2.5 md:gap-3 items-start w-full">
                     
                     {/* Column 1: Lower top offset, moderate negative parallax */}
                     <ContainerScrollTranslate
                       yRange={['0%', '-10%']}
-                      className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-16 md:pt-20"
+                      className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-12 sm:pt-16 md:pt-20"
                     >
                       {col1.map((photo, index) => (
                         <AnimatedPhotoItem
@@ -210,7 +186,7 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
                     {/* Column 2: Highest top, aggressively invading the bottom of "Carlota" */}
                     <ContainerScrollTranslate
                       yRange={['0%', '14%']}
-                      className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-2 md:pt-3"
+                      className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-0 sm:pt-2 md:pt-3"
                     >
                       {col2.map((photo, index) => (
                         <AnimatedPhotoItem
@@ -227,7 +203,7 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
                     {/* Column 3: Lower top offset, creating breathing room under the center letters */}
                     <ContainerScrollTranslate
                       yRange={['0%', '-8%']}
-                      className="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-22 md:pt-28"
+                      className="hidden sm:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-16 sm:pt-22 md:pt-28"
                     >
                       {col3.map((photo, index) => (
                         <AnimatedPhotoItem
@@ -244,7 +220,7 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
                     {/* Column 4: High top, invading into the bottom of "Lagunas" */}
                     <ContainerScrollTranslate
                       yRange={['0%', '12%']}
-                      className="hidden md:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-4 md:pt-6"
+                      className="hidden md:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-2 sm:pt-4 md:pt-6"
                     >
                       {col4.map((photo, index) => (
                         <AnimatedPhotoItem
@@ -261,7 +237,7 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
                     {/* Column 5: Intermediate height offset on far right edge */}
                     <ContainerScrollTranslate
                       yRange={['0%', '-10%']}
-                      className="hidden lg:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-14 md:pt-18"
+                      className="hidden lg:flex flex-col gap-2 sm:gap-2.5 md:gap-3 pt-10 sm:pt-14 md:pt-18"
                     >
                       {col5.map((photo, index) => (
                         <AnimatedPhotoItem
@@ -286,7 +262,7 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
         {/* 3. GRADIENT FADE-OUT & DUAL CTA BUTTONS
             Straight, horizontal level finish that smoothly dissolves all columns into white.
         */}
-        <div className="relative -mt-16 sm:-mt-48 md:-mt-56 pt-20 sm:pt-44 pb-20 z-20 flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-white/85 to-white text-center px-6">
+        <div className="relative -mt-24 sm:-mt-48 md:-mt-56 pt-28 sm:pt-44 pb-20 z-20 flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-white/85 to-white text-center px-6">
           <p className="text-xs sm:text-sm text-neutral-600 font-light mb-6 max-w-md">
             Sesiones cuidadas, sin prisas y con una sensibilidad única en el Barrio del Actur, Zaragoza.
           </p>

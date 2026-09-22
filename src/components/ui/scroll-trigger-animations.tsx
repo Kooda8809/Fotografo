@@ -35,9 +35,9 @@ export const defaultOptions: UseSmoothScrollOptions = {
   lerp: 0.08,
   smoothWheel: true,
   wheelMultiplier: 0.88, // Gentle wheel scroll step
-  syncTouch: false, // Never intercept touch on mobile - native scroll only
-  syncTouchLerp: 0.075,
-  touchMultiplier: 1.0,
+  syncTouch: true, // Smooth inertia on touch devices
+  syncTouchLerp: 0.075, // Silky deceleration when finger lifts
+  touchMultiplier: 1.0, // 1:1 direct tracking while touching
   touchInertiaExponent: 1.65, // Natural glide decay
   infinite: false,
   orientation: 'vertical',
@@ -88,14 +88,10 @@ export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Do NOT hijack scroll on mobile/touch screens! Keep mobile 100% native, instant, and 120Hz fast.
-    const isTouchOrMobile =
-      'ontouchstart' in window ||
-      navigator.maxTouchPoints > 0 ||
-      (window.matchMedia && window.matchMedia('(max-width: 767px)').matches) ||
-      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
-
-    if (isTouchOrMobile) {
+    // Keep mobile phones native and fast on narrow screens (< 768px).
+    // Never test maxTouchPoints or ontouchstart because Windows desktop/laptops report touchpoints!
+    const isMobileWidth = window.innerWidth < 768;
+    if (isMobileWidth) {
       return;
     }
 
