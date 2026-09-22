@@ -24,37 +24,37 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
   const quickLinks: FooterNavItem[] = [
     {
       id: 'portfolio',
-      label: 'Projects',
+      label: 'Galería',
       image: '/images/real/session-10.webp',
       tag: 'Galería & Reportajes en Zaragoza'
     },
     {
       id: 'servicios',
-      label: 'Services',
+      label: 'Especialidades',
       image: '/images/real/session-22.webp',
       tag: 'Newborn, Embarazo, Smash Cake, Familia'
     },
     {
       id: 'precios',
-      label: 'Pricing',
+      label: 'Tarifas',
       image: '/images/real/session-32.webp',
       tag: 'Packs digitales, madera y álbumes'
     },
     {
       id: 'regalar-sesion',
-      label: 'Gift Voucher',
+      label: 'Tarjetas Regalo',
       image: '/images/real/session-real-008.webp',
       tag: 'El regalo que dura para siempre'
     },
     {
       id: 'sobre-mi',
-      label: 'About',
+      label: 'Sobre Mí',
       image: '/images/real/carlota-perfil.webp',
       tag: 'Conoce a Carlota Lagunas'
     },
     {
       id: 'contacto',
-      label: 'Contact',
+      label: 'Contacto',
       image: '/images/real/session-15.webp',
       tag: 'Estudio en Actur, Zaragoza'
     }
@@ -131,7 +131,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
             {/* COLUMN 1: LOCATION */}
             <div className="space-y-3">
               <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-neutral-400 font-medium">
-                LOCATION
+                UBICACIÓN
               </h4>
               <div className="text-xs sm:text-sm text-neutral-700 font-normal leading-relaxed space-y-1">
                 <p className="font-medium text-black">Zaragoza, Aragón</p>
@@ -143,7 +143,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
             {/* COLUMN 2: GALLERY (WITH PRESERVED THUMBNAIL HOVER) */}
             <div className="space-y-3">
               <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-neutral-400 font-medium">
-                GALLERY
+                SECCIONES
               </h4>
               <nav className="flex flex-col space-y-2">
                 {quickLinks.map((link) => (
@@ -166,7 +166,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
             {/* COLUMN 3: CONTACT */}
             <div className="space-y-3">
               <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-neutral-400 font-medium">
-                CONTACT
+                CONTACTO
               </h4>
               <div className="text-xs sm:text-sm text-neutral-700 font-normal leading-relaxed space-y-2">
                 <a
@@ -201,7 +201,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal, onRepla
               </h4>
               <div className="text-xs sm:text-sm text-neutral-700 font-normal leading-relaxed space-y-2">
                 <p className="text-neutral-500">
-                  © 2026 All Rights Reserved
+                  © 2026 Todos los derechos reservados
                 </p>
                 <div className="flex flex-col space-y-1.5 pt-1">
                   <button

@@ -23,7 +23,7 @@ export const blogPosts: BlogPostItem[] = [
     image: '/images/real/session-16.webp',
     excerpt: 'Descubre por qué entre las semanas 28 y 32 de gestación se produce el equilibrio perfecto entre la redondez de la barriguita y tu bienestar físico.',
     content: [
-      'El embarazo es uma etapa de transformación única, cargada de ilusión y emociones compartidas. Muchas futuras mamás se preguntan en qué mes o semana es conveniente concertar la cita para su reportaje de maternidad.',
+      'El embarazo es una etapa de transformación única, cargada de ilusión y emociones compartidas. Muchas futuras mamás se preguntan en qué mes o semana es conveniente concertar la cita para su reportaje de maternidad.',
       'La recomendación profesional es agendar la sesión entre las semanas 28 y 32 de gestación. En este periodo la tripita ya luce una forma redonda y bien definida, mientras que la mamá suele conservar una energía excelente y movilidad cómoda para disfrutar de la experiencia.',
       'Tanto si prefieres la intimidad cálida y minimalista de nuestro estudio en Zaragoza como la magia de la luz dorada al atardecer en los Sotos del Ebro o el Parque del Agua, te guiaremos en cada postura para que te sientas hermosa y relajada.',
       'Además, ponemos a tu disposición una cuidada colección de vestidos vaporosos, kimonos y tejidos nobles, y por supuesto animamos a la pareja y a los hermanitos mayores a sumarse para crear recuerdos familiares eternos.'

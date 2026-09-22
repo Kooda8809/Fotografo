@@ -179,7 +179,7 @@ export const AboutADP: React.FC<AboutADPProps> = ({ onOpenQuoteModal, onNavigate
 
               <div className="space-y-4 text-sm sm:text-base text-neutral-700 font-light leading-relaxed max-w-xl">
                 <p>
-                  Especializada en capturar con ternura, naturalidad y elegancia los momentos más puros e irrepetibles de la vida: la dulce espera del embarazo, los primeiros días del recién nacido y el crecimiento feliz de tus hijos en Zaragoza.
+                  Especializada en capturar con ternura, naturalidad y elegancia los momentos más puros e irrepetibles de la vida: la dulce espera del embarazo, los primeros días del recién nacido y el crecimiento feliz de tus hijos en Zaragoza.
                 </p>
                 <p className="text-neutral-500 text-xs sm:text-sm">
                   Desde nuestro estudio climatizado y adaptado en el Barrio del Actur, cuidamos la seguridad neonatal y trabajamos a su propio ritmo para que vuestra única preocupación sea disfrutar del momento en familia.

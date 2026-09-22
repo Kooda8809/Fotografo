@@ -48,7 +48,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ docType, onClose }) => {
               Propiedad Intelectual e Industrial
             </h3>
             <p>
-              Todas las fotografías de bebés, familias y niños, textos, logotipos y designs exhibidos en este sitio web son propiedad exclusiva de CARLOTA LAGUNAS FOTOGRAFIA SL y están protegidos por la legislación española e internacional sobre propiedad intelectual. Queda expresamente prohibida su copia, distribución, reproducción o uso comercial o publicitario no autorizado sin el consentimiento expreso y por escrito de su autora y de los tutores legales de los menores.
+              Todas las fotografías de bebés, familias y niños, textos, logotipos y diseños exhibidos en este sitio web son propiedad exclusiva de CARLOTA LAGUNAS FOTOGRAFIA SL y están protegidos por la legislación española e internacional sobre propiedad intelectual. Queda expresamente prohibida su copia, distribución, reproducción o uso comercial o publicitario no autorizado sin el consentimiento expreso y por escrito de su autora y de los tutores legales de los menores.
             </p>
           </div>
         )}

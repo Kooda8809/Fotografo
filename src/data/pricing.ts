@@ -26,7 +26,7 @@ export const PRICING_EMBARAZO: PricingItem[] = [
     price: '270 €',
     highlight: true,
     features: [
-      '20 fotografías digitales en alta resolução',
+      '20 fotografías digitales en alta resolución',
       'Caja de madera personalizada y grabada',
       '20 copias impresas 15x20 en papel algodón Fine Art',
       'Hasta 3 cambios de vestuario y atrezzo exclusivo',
