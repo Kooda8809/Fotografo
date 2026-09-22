@@ -36,8 +36,12 @@ const LegalModal = lazy(() => import('./components/LegalModal').then((m) => ({ d
 import { PhotoItem } from './types';
 import { portfolioPhotos } from './data/portfolio';
 import { servicesList } from './data/services';
+import { useSmoothScroll, getGlobalLenis } from './components/ui/scroll-trigger-animations';
 
 export default function App() {
+  // Global smooth slow momentum scroll across PC and Android
+  useSmoothScroll();
+
   const [currentPath, setCurrentPath] = useState(() => {
     const p = window.location.pathname.replace(/^\/+|\/+$/g, '');
     return p ? `/${p}` : '/';
@@ -88,7 +92,12 @@ export default function App() {
     const handlePopState = () => {
       const p = window.location.pathname.replace(/^\/+|\/+$/g, '');
       setCurrentPath(p ? `/${p}` : '/');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const lenis = getGlobalLenis();
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -135,13 +144,23 @@ export default function App() {
         window.history.pushState(null, '', target);
       }
       setCurrentPath(target);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const lenis = getGlobalLenis();
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
     } else {
       // If navigating to an on-page section while on home
       if (currentPath === '/') {
         const el = document.getElementById(routeOrId.replace('/', ''));
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
+          const lenis = getGlobalLenis();
+          if (lenis) {
+            lenis.scrollTo(el, { offset: -60, duration: 1.25 });
+          } else {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
           return;
         }
       }
@@ -152,7 +171,12 @@ export default function App() {
         // Fallback to 404
         window.history.pushState(null, '', target);
         setCurrentPath('/404');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const lenis = getGlobalLenis();
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
       }
     }
   }, [currentPath]);

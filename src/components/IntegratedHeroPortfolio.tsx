@@ -32,7 +32,7 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
           ticking = false;
           const scrollY = window.scrollY;
           const progress = Math.min(Math.max(scrollY / 450, 0), 1);
-          setScrollProgress((prev) => (Math.abs(progress - prev) < 0.01 ? prev : progress));
+          setScrollProgress((prev) => (Math.abs(progress - prev) < 0.001 ? prev : progress));
         });
       }
     };
@@ -70,7 +70,7 @@ export const IntegratedHeroPortfolio: React.FC<IntegratedHeroPortfolioProps> = (
       {/* 1. HERO TYPOGRAPHY LAYER (z-0: BEHIND IMAGES, translates to top-left on scroll matching "The Studio" reference) */}
       <div className="fixed inset-x-0 top-0 h-[65vh] pointer-events-none z-0 overflow-hidden flex flex-col items-center justify-center pt-8 sm:pt-12 px-6">
         <div
-          className="transition-transform duration-100 ease-out flex flex-col items-center"
+          className="flex flex-col items-center will-change-transform"
           style={{
             transform: `translate3d(${-scrollProgress * 36}vw, ${-scrollProgress * 28}vh, 0) scale(${
               1 - scrollProgress * 0.45

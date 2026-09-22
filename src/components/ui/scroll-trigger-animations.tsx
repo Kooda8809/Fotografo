@@ -11,78 +11,118 @@ import {
 } from 'motion/react';
 import Lenis from 'lenis';
 
-interface UseSmoothScrollOptions {
+export interface UseSmoothScrollOptions {
   duration?: number;
   lerp?: number;
   smoothWheel?: boolean;
+  wheelMultiplier?: number;
+  syncTouch?: boolean;
+  syncTouchLerp?: number;
   touchMultiplier?: number;
+  touchInertiaExponent?: number;
   infinite?: boolean;
   orientation?: 'vertical' | 'horizontal';
   gestureOrientation?: 'vertical' | 'horizontal';
   easing?: (t: number) => number;
+  autoToggle?: boolean;
+  prevent?: (node: HTMLElement) => boolean;
 }
-const defaultOptions: UseSmoothScrollOptions = {
-  duration: 0.08,
-  lerp: 0.1,
+
+export const defaultOptions: UseSmoothScrollOptions = {
+  duration: 1.35, // Slow, elegant glide for PC wheel scroll
+  lerp: 0.08,
   smoothWheel: true,
-  touchMultiplier: 2,
+  wheelMultiplier: 0.88, // Gentle wheel scroll step
+  syncTouch: true, // Smooth inertia on Android & mobile touch
+  syncTouchLerp: 0.075, // Silky deceleration when finger lifts
+  touchMultiplier: 1.0, // 1:1 direct tracking while touching
+  touchInertiaExponent: 1.65, // Natural glide decay
   infinite: false,
   orientation: 'vertical',
   gestureOrientation: 'vertical',
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  autoToggle: true,
 };
 
+// Singleton Lenis manager to ensure a single, consistent smooth-scroll engine
+let globalLenis: Lenis | null = null;
+let subscribersCount = 0;
+let rafId: number | null = null;
+
+function startGlobalRaf() {
+  if (rafId !== null) return;
+  function loop(time: number) {
+    globalLenis?.raf(time);
+    rafId = requestAnimationFrame(loop);
+  }
+  rafId = requestAnimationFrame(loop);
+}
+
+function stopGlobalRaf() {
+  if (rafId !== null) {
+    cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+}
+
+export function getGlobalLenis(): Lenis | null {
+  return globalLenis;
+}
+
 export function useSmoothScroll(options: UseSmoothScrollOptions = {}) {
-  const lenisRef = React.useRef<Lenis | null>(null);
+  const [lenisInstance, setLenisInstance] = React.useState<Lenis | null>(globalLenis);
 
   React.useEffect(() => {
-    // Mobile and touch devices have hardware-accelerated compositor scrolling.
-    // Hijacking scroll via JS on mobile causes heavy frame drops and touch latency.
-    const isTouch =
-      typeof window !== 'undefined' &&
-      ('ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        window.matchMedia('(pointer: coarse)').matches ||
-        window.innerWidth < 768);
+    if (typeof window === 'undefined') return;
 
-    if (isTouch) {
-      return;
+    subscribersCount++;
+
+    if (!globalLenis) {
+      const mergedOptions = { ...defaultOptions, ...options };
+      try {
+        globalLenis = new Lenis({
+          duration: mergedOptions.duration,
+          lerp: mergedOptions.lerp,
+          smoothWheel: mergedOptions.smoothWheel,
+          wheelMultiplier: mergedOptions.wheelMultiplier,
+          syncTouch: mergedOptions.syncTouch,
+          syncTouchLerp: mergedOptions.syncTouchLerp,
+          touchMultiplier: mergedOptions.touchMultiplier,
+          touchInertiaExponent: mergedOptions.touchInertiaExponent,
+          infinite: mergedOptions.infinite,
+          orientation: mergedOptions.orientation,
+          gestureOrientation: mergedOptions.gestureOrientation,
+          easing: mergedOptions.easing,
+          autoToggle: mergedOptions.autoToggle,
+          prevent: (node) => {
+            if (options.prevent && options.prevent(node)) return true;
+            return (
+              Boolean(node.closest?.('[data-lenis-prevent]')) ||
+              Boolean(node.closest?.('.lenis-prevent'))
+            );
+          },
+        });
+        startGlobalRaf();
+      } catch (err) {
+        console.warn('Failed to initialize Lenis smooth scroll:', err);
+      }
     }
 
-    const mergedOptions = { ...defaultOptions, ...options };
-
-    try {
-      lenisRef.current = new Lenis({
-        duration: mergedOptions.duration,
-        lerp: mergedOptions.lerp,
-        smoothWheel: mergedOptions.smoothWheel,
-        touchMultiplier: mergedOptions.touchMultiplier,
-        infinite: mergedOptions.infinite,
-        orientation: mergedOptions.orientation,
-        gestureOrientation: mergedOptions.gestureOrientation,
-        easing: mergedOptions.easing,
-      });
-    } catch {
-      // Graceful fallback for headless or non-standard environments
-    }
-
-    let rafId: number;
-    function raf(time: number) {
-      lenisRef.current?.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-
-    rafId = requestAnimationFrame(raf);
+    setLenisInstance(globalLenis);
 
     return () => {
-      cancelAnimationFrame(rafId);
-      lenisRef.current?.destroy();
-      lenisRef.current = null;
+      subscribersCount--;
+      if (subscribersCount <= 0) {
+        subscribersCount = 0;
+        stopGlobalRaf();
+        globalLenis?.destroy();
+        globalLenis = null;
+      }
     };
   }, []);
 
   return {
-    lenis: lenisRef.current,
+    lenis: lenisInstance,
   };
 }
 

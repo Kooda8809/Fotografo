@@ -33,6 +33,7 @@ export const MenuSectionModal: React.FC<MenuSectionModalProps> = ({
     <div
       role="dialog"
       aria-modal="true"
+      data-lenis-prevent
       className="fixed inset-0 z-50 bg-white text-neutral-900 overflow-y-auto animate-in fade-in zoom-in-95 duration-200"
     >
       {/* Top Floating Control Bar */}

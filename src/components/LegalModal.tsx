@@ -15,9 +15,10 @@ export const LegalModal: React.FC<LegalModalProps> = ({ docType, onClose }) => {
     <div
       role="dialog"
       aria-modal="true"
+      data-lenis-prevent
       className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
     >
-      <div className="bg-white border border-neutral-200 rounded-none w-full max-w-3xl max-h-[85vh] overflow-y-auto p-6 sm:p-10 shadow-2xl relative text-neutral-700 font-light text-xs sm:text-sm leading-relaxed space-y-6">
+      <div data-lenis-prevent className="bg-white border border-neutral-200 rounded-none w-full max-w-3xl max-h-[85vh] overflow-y-auto p-6 sm:p-10 shadow-2xl relative text-neutral-700 font-light text-xs sm:text-sm leading-relaxed space-y-6">
         <button
           onClick={onClose}
           className="absolute top-6 right-6 p-2 text-neutral-500 hover:text-black bg-neutral-100 hover:bg-neutral-200 rounded-none transition-colors focus:outline-none cursor-pointer border border-neutral-200"
